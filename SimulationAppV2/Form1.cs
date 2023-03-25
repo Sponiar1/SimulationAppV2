@@ -18,5 +18,11 @@ namespace SimulationAppV2
             FormNewspaper formNewspaper = new FormNewspaper();
             formNewspaper.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            FormSTK formStk = new FormSTK();
+            formStk.Show();
+        }
     }
 }

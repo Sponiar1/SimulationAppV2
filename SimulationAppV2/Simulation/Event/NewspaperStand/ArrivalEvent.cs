@@ -32,7 +32,7 @@ namespace SimulationAppV2.Simulation.Event.NewspaperStand
                 myCore.addEvent(serviceEvent);
                 myCore.ServiceWorking = true;
             }
-            SimObject.Customer newCustomer = new SimObject.Customer();
+            Customer newCustomer = new Customer();
             this.customer = newCustomer;
         }
     }
