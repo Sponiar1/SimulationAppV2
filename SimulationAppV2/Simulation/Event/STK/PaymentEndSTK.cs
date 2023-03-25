@@ -14,7 +14,22 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
-
+            if(myCore.PaymentQueue.Count > 0)
+            {
+                PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, myCore.PaymentQueue.Dequeue());
+                paymentStartSTK.Time = this.Time;
+                myCore.addEvent(paymentStartSTK);
+            }
+            else if (myCore.Customers.Count > 0 && myCore.ControlWaiting.Count() < 5)
+            {
+                TakeOverStartSTK takeOverStartSTK = new TakeOverStartSTK(myCore,myCore.Customers.Dequeue());
+                takeOverStartSTK.Time = this.Time;
+                myCore.addEvent(takeOverStartSTK);
+            }
+            else
+            {
+                myCore.Cashiers++;
+            }
         }
     }
 }

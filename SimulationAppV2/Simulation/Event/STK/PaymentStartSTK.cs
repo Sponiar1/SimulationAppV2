@@ -14,7 +14,9 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
-
+            PaymentEndSTK paymentEndSTK = new PaymentEndSTK(myCore, customer);
+            paymentEndSTK.Time = myCore.CurrentTime + myCore.getshopPaymentTime();
+            myCore.addEvent(paymentEndSTK);
         }
     }
 }
