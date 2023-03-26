@@ -46,6 +46,7 @@ namespace SimulationAppV2.Simulation
         {
             get { return controlWaiting; }
         }
+        public double RefreshTime { get; set; }
         public SimSTK()
         {
             
@@ -60,6 +61,7 @@ namespace SimulationAppV2.Simulation
             personalCarProb = new Discrete(31, 45, new Random(seedGen.Next()));
             vanProb = new Empiric(vanTime, vanTimeProb, new Random(seedGen.Next()));
             truckProb = new Empiric(truckTime, truckTimeProb, new Random(seedGen.Next()));
+            RefreshTime = 600;
         }
 
         public override void BeforeReplication()
