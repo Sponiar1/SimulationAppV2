@@ -9,24 +9,43 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SimulationAppV2
 {
     public partial class FormSTK : Form
     {
         CancellationTokenSource cts = new CancellationTokenSource();
-        SimSTK simSTK = new SimSTK();
+        SimSTK simSTK;
+        String label1Text;
         public FormSTK()
         {
             InitializeComponent();
+            simSTK = new SimSTK();
+            simSTK.SimulationTime += SimulationTimeHandler;
+            label3.Text = "Otvárací čas: " + (simSTK.STKDetails.Opening / 60) + ":" + (simSTK.STKDetails.Opening % 60);
+            label4.Text = "Zatvára sa o: " + (simSTK.STKDetails.Closing / 60) + ":" + (simSTK.STKDetails.Closing % 60);
+        }
+
+        private void SimulationTimeHandler(object? sender, SimulationTimeEventArgs e)
+        {
+
+            label1Text =  "Aktuálny čas: " + (int)e.Time / 60 + ":" + e.Time % 60;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             cts = new CancellationTokenSource();
-            SimSTK simSTK2 = new SimSTK();
-            simSTK.Simulate(1, cts.Token);
-            label1.Text = "Done";
+            label2.Text = "Working";
+            timer1.Enabled = true;
+            //simSTK.Simulate(1, cts.Token);
+            Task.Run(() => simSTK.Simulate(1, cts.Token));
+            //label1.Text = "Done";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = label1Text;
         }
     }
 }

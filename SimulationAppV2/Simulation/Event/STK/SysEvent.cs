@@ -17,9 +17,13 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
-            Thread.Sleep(350);
+            Thread.Sleep(100);
             this.Time = myCore.RefreshTime + myCore.CurrentTime;
             myCore.addEvent(this);
+            if (!myCore.Turbo)
+            {
+                myCore.sendTimeToGui();
+            }
         }
     }
 }

@@ -40,9 +40,13 @@ namespace SimulationAppV2.Simulation
         }
         public double RefreshTime { get; set; }
         public STKDetails STKDetails { get; set; }
+
+        public Boolean Turbo { get; set; }
+        public event EventHandler<SimulationTimeEventArgs> SimulationTime;
         public SimSTK()
         {
             STKDetails = new STKDetails();
+            Turbo = false;
         }
 
         public override void BeforeSimulation()
@@ -54,7 +58,7 @@ namespace SimulationAppV2.Simulation
             personalCarProb = new Discrete(31, 45, new Random(seedGen.Next()));
             vanProb = new Empiric(STKDetails.VanTime, STKDetails.VanTimeProb, new Random(seedGen.Next()));
             truckProb = new Empiric(STKDetails.TruckTime, STKDetails.TruckTimeProb, new Random(seedGen.Next()));
-            RefreshTime = 600;
+            RefreshTime = 10;
             CurrentTime = STKDetails.Heating;
             MaxTime = STKDetails.Closing;
         }
@@ -137,5 +141,24 @@ namespace SimulationAppV2.Simulation
             }
         }
 
+        public void sendTimeToGui()
+        {
+            SimulationTime?.Invoke(this, new SimulationTimeEventArgs(this.CurrentTime));
+        }
+
+        public void switchTurbo()
+        {
+            Turbo = (Turbo == false) ? Turbo = true : Turbo = false;
+        }
+    }
+
+    public class SimulationTimeEventArgs : EventArgs
+    {
+        public double Time { get; set; }
+
+        public SimulationTimeEventArgs(double time)
+        {
+            Time = time;
+        }
     }
 }
