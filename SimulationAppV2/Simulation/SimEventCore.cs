@@ -10,15 +10,15 @@ namespace SimulationAppV2.Simulation
     {
         PriorityQueue<Event.Event, double> timeline = new PriorityQueue<Event.Event, double>();
         public double CurrentTime { get; set; }
-
-        public void Simulate(double maxTime)
+        public double MaxTime { get; set; }
+        public override void Replication()
         {
             Event.Event helpEvent;
-            while (timeline.Count != 0 || CurrentTime > maxTime)
+            while (timeline.Count != 0 || CurrentTime > MaxTime)
             {
                 helpEvent = timeline.Dequeue();
                 CurrentTime = helpEvent.Time;
-                if (CurrentTime > maxTime)
+                if (CurrentTime > MaxTime)
                 {
                     break;
                 }
@@ -26,7 +26,6 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        //dorobiť výnimku
         public void addEvent(Event.Event e)
         {
             if (CurrentTime <= e.Time)

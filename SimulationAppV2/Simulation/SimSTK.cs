@@ -15,21 +15,13 @@ namespace SimulationAppV2.Simulation
         Probability arrivalProb;
         Probability shopParkingProb;
         Probability paymentProb;
-        double opening = 9 * 60;
-        double closing = 17 * 60;
-        double stopAccepting = 15 * 60 + 45;
-        double heating = 8 * 60;
+
         Random carType;
         Probability personalCarProb;
         Empiric vanProb;
-        int[] vanTime = { 35, 37, 38, 40, 41, 47, 48, 52 };
-        double[] vanTimeProb = { 0.2, 0.35, 0.3, 0.15 };
         Empiric truckProb;
-        int[] truckTime = { 37, 42, 43, 45, 46, 47, 48, 51, 52, 55, 56, 65 };
-        double[] truckTimeProb = { 0.05, 0.1, 0.15, 0.4, 0.25, 0.05 };
-        //Queue<int> cashiers = new Queue<int>();
+
         Queue<Customer> customers = new Queue<Customer>(); // rada na prevzatie
-        //Queue<int> technicians = new Queue<int>();
         Queue<Customer> paymentQueue = new Queue<Customer>(); //rada na zaplatenie po kontrole
         Queue<Customer> controlWaiting = new Queue<Customer>(); // rada na kontrolu
         public int Cashiers { get; set; } //pracovnici 1
@@ -47,29 +39,37 @@ namespace SimulationAppV2.Simulation
             get { return controlWaiting; }
         }
         public double RefreshTime { get; set; }
+        public STKDetails STKDetails { get; set; }
         public SimSTK()
         {
-            
+            STKDetails = new STKDetails();
         }
 
         public override void BeforeSimulation()
         {
             arrivalProb = new Exponential(60 / 23, new Random(seedGen.Next()));
-            shopParkingProb = new Triangular(180, 695, 431, new Random(seedGen.Next()));
+            shopParkingProb = new Triangular(180 / 60, 695 / 60, 431 / 60, new Random(seedGen.Next()));
             paymentProb = new Continuous(65, 177, new Random(seedGen.Next()));
             carType = new Random(seedGen.Next());
             personalCarProb = new Discrete(31, 45, new Random(seedGen.Next()));
-            vanProb = new Empiric(vanTime, vanTimeProb, new Random(seedGen.Next()));
-            truckProb = new Empiric(truckTime, truckTimeProb, new Random(seedGen.Next()));
+            vanProb = new Empiric(STKDetails.VanTime, STKDetails.VanTimeProb, new Random(seedGen.Next()));
+            truckProb = new Empiric(STKDetails.TruckTime, STKDetails.TruckTimeProb, new Random(seedGen.Next()));
             RefreshTime = 600;
+            CurrentTime = STKDetails.Heating;
+            MaxTime = STKDetails.Closing;
         }
 
         public override void BeforeReplication()
         {
             Event.Event helpEvent;
             helpEvent = new ArrivalSTK(this, new Customer());
-            helpEvent.Time = 0;
+            helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
+            Event.Event sysEvent = new SysEvent(this);
+            sysEvent.Time = CurrentTime;
+            addEvent(sysEvent);
+            Cashiers = 5;
+            Technicians = 10;
         }
 
         public void addCustomerToQueue(Customer customer)
@@ -136,5 +136,6 @@ namespace SimulationAppV2.Simulation
                 return getTruckTime();
             }
         }
+
     }
 }

@@ -16,16 +16,27 @@ namespace SimulationAppV2.Simulation.Event.STK
         public override void Exec()
         {
             Time = myCore.CurrentTime + myCore.getArrivalTime();
-            myCore.addEvent(this);
+            if (Time < myCore.STKDetails.StopAccepting)
+            {
+                myCore.addEvent(this);
+            }
 
-            if(myCore.Cashiers == 0 || myCore.Customers.Count != 0 || myCore.ControlWaiting.Count() >= 5)
+            //   neni volny pokladnik    stoja v rade                       neni miesto pred kontrolou              neni otvorene
+            if(myCore.Cashiers == 0 || myCore.Customers.Count() != 0 || myCore.ControlWaiting.Count() >= 5 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
             {
                 myCore.addCustomerToQueue(customer);
             }
             else
             {
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, customer);
-                takeOver.Time = myCore.CurrentTime;
+                if(myCore.CurrentTime >= myCore.STKDetails.Opening)
+                {
+                    takeOver.Time = myCore.CurrentTime;
+                }
+                else
+                {
+                    takeOver.Time = myCore.STKDetails.Opening;
+                }
                 myCore.addEvent(takeOver);
                 myCore.Cashiers--;
                 myCore.addCustomerToControl(customer);
