@@ -9,10 +9,12 @@ namespace SimulationAppV2.Simulation
     internal class SimCore
     {
         public int NumberOfReplications { get; set; }
+        public CancellationToken CancellationToken { get; set; }
         public SimCore() { }
         public async Task Simulate(int replications, CancellationToken cancelToken)
         {
             NumberOfReplications = replications;
+            CancellationToken = cancelToken;
             BeforeSimulation();
             for (int i = 0; i < NumberOfReplications; i++)
             {

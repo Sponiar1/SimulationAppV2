@@ -11,6 +11,8 @@ namespace SimulationAppV2.Simulation
         PriorityQueue<Event.Event, double> timeline = new PriorityQueue<Event.Event, double>();
         public double CurrentTime { get; set; }
         public double MaxTime { get; set; }
+        public Boolean Pause { get; set; }
+        public Boolean Turbo { get; set; }
         public override void Replication()
         {
             Event.Event helpEvent;
@@ -18,7 +20,11 @@ namespace SimulationAppV2.Simulation
             {
                 helpEvent = timeline.Dequeue();
                 CurrentTime = helpEvent.Time;
-                if (CurrentTime > MaxTime)
+                while(Pause)
+                {
+                    Thread.Sleep(350);
+                }
+                if (CurrentTime > MaxTime || base.CancellationToken.IsCancellationRequested)
                 {
                     break;
                 }
@@ -36,6 +42,16 @@ namespace SimulationAppV2.Simulation
             {
                 throw new Exception("Záporný čas");
             }
+        }
+
+        public void switchTurbo()
+        {
+            Turbo = (Turbo == false) ? Turbo = true : Turbo = false;
+        }
+
+        public void switchPause()
+        {
+            Pause = (Pause == false) ? Pause = true : Pause = false;
         }
     }
 }

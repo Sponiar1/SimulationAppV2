@@ -41,12 +41,12 @@ namespace SimulationAppV2.Simulation
         public double RefreshTime { get; set; }
         public STKDetails STKDetails { get; set; }
 
-        public Boolean Turbo { get; set; }
         public event EventHandler<SimulationTimeEventArgs> SimulationTime;
         public SimSTK()
         {
             STKDetails = new STKDetails();
             Turbo = false;
+            Pause = false;
         }
 
         public override void BeforeSimulation()
@@ -146,10 +146,6 @@ namespace SimulationAppV2.Simulation
             SimulationTime?.Invoke(this, new SimulationTimeEventArgs(this.CurrentTime));
         }
 
-        public void switchTurbo()
-        {
-            Turbo = (Turbo == false) ? Turbo = true : Turbo = false;
-        }
     }
 
     public class SimulationTimeEventArgs : EventArgs

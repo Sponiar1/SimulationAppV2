@@ -30,7 +30,7 @@ namespace SimulationAppV2
         private void SimulationTimeHandler(object? sender, SimulationTimeEventArgs e)
         {
 
-            label1Text =  "Aktuálny čas: " + (int)e.Time / 60 + ":" + e.Time % 60;
+            label1Text = "Aktuálny čas: " + (int)e.Time / 60 + ":" + e.Time % 60;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,14 +38,27 @@ namespace SimulationAppV2
             cts = new CancellationTokenSource();
             label2.Text = "Working";
             timer1.Enabled = true;
-            //simSTK.Simulate(1, cts.Token);
             Task.Run(() => simSTK.Simulate(1, cts.Token));
-            //label1.Text = "Done";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             label1.Text = label1Text;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            simSTK.switchPause();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            simSTK.switchTurbo();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            cts?.Cancel();
         }
     }
 }
