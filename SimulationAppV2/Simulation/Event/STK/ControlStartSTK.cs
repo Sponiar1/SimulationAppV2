@@ -15,7 +15,7 @@ namespace SimulationAppV2.Simulation.Event.STK
         public override void Exec()
         {
             ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer);
-            controlEndSTK.Time = myCore.CurrentTime + myCore.getCarType();
+            controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime();
             myCore.addEvent(controlEndSTK);
         }
     }

@@ -76,23 +76,6 @@ namespace SimulationAppV2.Simulation
             Technicians = 10;
         }
 
-        public void addCustomerToQueue(Customer customer)
-        {
-            customers.Enqueue(customer);
-        }
-
-        public void addCustomerToPayment(Customer customer)
-        {
-            paymentQueue.Enqueue(customer);
-        }
-        public void addCustomerToControl(Customer customer)
-        {
-            controlWaiting.Enqueue(customer);
-        }
-        public Customer getCustomerFromQueue()
-        {
-            return customers.Dequeue();
-        }
         
         public double getArrivalTime()
         {
@@ -109,35 +92,20 @@ namespace SimulationAppV2.Simulation
             return paymentProb.getValue();
         }
 
-        public double getPersonalCarTime()
-        {
-            return personalCarProb.getValue();
-        }
-
-        public double getVanTime()
-        {
-            return vanProb.getDiscreteEmpiricProbability();
-        }
-
-        public double getTruckTime()
-        {
-            return truckProb.getDiscreteEmpiricProbability();
-        }
-
-        public double getCarType() 
+        public double getCarTime() 
         {
             double p = carType.NextDouble();
             if(p <= 0.65) 
             { 
-                return getPersonalCarTime();
+                return personalCarProb.getValue();
             }
             else if (p <= 0.86)
             {
-                return getVanTime();
+                return vanProb.getDiscreteEmpiricProbability();
             }
             else
             {
-                return getTruckTime();
+                return truckProb.getDiscreteEmpiricProbability();
             }
         }
 
@@ -146,6 +114,10 @@ namespace SimulationAppV2.Simulation
             SimulationTime?.Invoke(this, new SimulationTimeEventArgs(this.CurrentTime));
         }
 
+        public override void refreshGui()
+        {
+            
+        }
     }
 
     public class SimulationTimeEventArgs : EventArgs

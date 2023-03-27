@@ -29,6 +29,7 @@ namespace SimulationAppV2.Simulation
                     break;
                 }
                 helpEvent.Exec();
+                refreshGui();
             }
         }
 
@@ -52,6 +53,11 @@ namespace SimulationAppV2.Simulation
         public void switchPause()
         {
             Pause = (Pause == false) ? Pause = true : Pause = false;
+        }
+
+        public virtual void refreshGui()
+        {
+
         }
     }
 }

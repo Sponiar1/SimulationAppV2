@@ -34,7 +34,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                myCore.addCustomerToPayment(customer);
+                myCore.PaymentQueue.Enqueue(customer);
             }
         }
     }

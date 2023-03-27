@@ -24,7 +24,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             //   neni volny pokladnik    stoja v rade                       neni miesto pred kontrolou              neni otvorene
             if(myCore.Cashiers == 0 || myCore.Customers.Count() != 0 || myCore.ControlWaiting.Count() >= 5 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
             {
-                myCore.addCustomerToQueue(customer);
+                myCore.Customers.Enqueue(customer);
             }
             else
             {
@@ -39,7 +39,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 }
                 myCore.addEvent(takeOver);
                 myCore.Cashiers--;
-                myCore.addCustomerToControl(customer);
+                myCore.ControlWaiting.Enqueue(customer);
             }
             Customer newCustomer = new Customer();
             this.customer = newCustomer;
