@@ -41,7 +41,7 @@ namespace SimulationAppV2.Simulation
         public double RefreshTime { get; set; }
         public STKDetails STKDetails { get; set; }
 
-        public event EventHandler<SimulationTimeEventArgs> SimulationTime;
+        public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
         public SimSTK()
         {
             STKDetails = new STKDetails();
@@ -109,9 +109,14 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        public void sendTimeToGui()
+        public void sendDetailsToGui()
         {
-            SimulationTime?.Invoke(this, new SimulationTimeEventArgs(this.CurrentTime));
+            SimulationDetails?.Invoke(this, new SimulationDetailsEventArgs(this.CurrentTime, 
+                                                                    Customers.Count(), 
+                                                                    ControlWaiting.Count(), 
+                                                                    PaymentQueue.Count(),
+                                                                    Cashiers,
+                                                                    Technicians));
         }
 
         public override void refreshGui()
@@ -120,13 +125,22 @@ namespace SimulationAppV2.Simulation
         }
     }
 
-    public class SimulationTimeEventArgs : EventArgs
+    public class SimulationDetailsEventArgs : EventArgs
     {
         public double Time { get; set; }
-
-        public SimulationTimeEventArgs(double time)
+        public int CheckInQueue { get; set; }
+        public int InspectionParkingLot { get; set; }
+        public int PaymentQueue { get; set; }
+        public int FreeCashiers { get; set; }
+        public int FreeTechnicians { get; set; }
+        public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician)
         {
             Time = time;
+            CheckInQueue = checkInQueue;
+            InspectionParkingLot = inspectionParkingLot;
+            PaymentQueue = paymentQueue;
+            FreeCashiers = freeCashiers;
+            FreeTechnicians = freeTechnician;
         }
     }
 }

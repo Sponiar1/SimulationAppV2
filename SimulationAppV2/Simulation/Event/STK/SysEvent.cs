@@ -22,7 +22,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             myCore.addEvent(this);
             if (!myCore.Turbo)
             {
-                myCore.sendTimeToGui();
+                myCore.sendDetailsToGui();
             }
         }
     }

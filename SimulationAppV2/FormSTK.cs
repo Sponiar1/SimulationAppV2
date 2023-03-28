@@ -22,12 +22,12 @@ namespace SimulationAppV2
         {
             InitializeComponent();
             simSTK = new SimSTK();
-            simSTK.SimulationTime += SimulationTimeHandler;
+            simSTK.SimulationDetails += SimulationTimeHandler;
             label3.Text = "Otvárací čas: " + (simSTK.STKDetails.Opening / 60) + ":" + (simSTK.STKDetails.Opening % 60);
             label4.Text = "Zatvára sa o: " + (simSTK.STKDetails.Closing / 60) + ":" + (simSTK.STKDetails.Closing % 60);
         }
 
-        private void SimulationTimeHandler(object? sender, SimulationTimeEventArgs e)
+        private void SimulationTimeHandler(object? sender, SimulationDetailsEventArgs e)
         {
 
             label1Text = "Aktuálny čas: " + (int)e.Time / 60 + ":" + e.Time % 60;
