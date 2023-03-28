@@ -53,7 +53,7 @@ namespace SimulationAppV2.Simulation
         {
             arrivalProb = new Exponential(60 / 23, new Random(seedGen.Next()));
             shopParkingProb = new Triangular(180 / 60, 695 / 60, 431 / 60, new Random(seedGen.Next()));
-            paymentProb = new Continuous(65, 177, new Random(seedGen.Next()));
+            paymentProb = new Continuous(65 / 60, 177 / 60, new Random(seedGen.Next()));
             carType = new Random(seedGen.Next());
             personalCarProb = new Discrete(31, 45, new Random(seedGen.Next()));
             vanProb = new Empiric(STKDetails.VanTime, STKDetails.VanTimeProb, new Random(seedGen.Next()));
@@ -72,8 +72,8 @@ namespace SimulationAppV2.Simulation
             Event.Event sysEvent = new SysEvent(this);
             sysEvent.Time = CurrentTime;
             addEvent(sysEvent);
-            Cashiers = 5;
-            Technicians = 10;
+            Cashiers = 10;
+            Technicians = 15;
         }
 
         

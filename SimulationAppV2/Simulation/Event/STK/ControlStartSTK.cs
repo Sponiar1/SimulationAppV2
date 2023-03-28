@@ -22,6 +22,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             {
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
+                myCore.Cashiers--;
                 myCore.addEvent(takeOver);
             }
         }

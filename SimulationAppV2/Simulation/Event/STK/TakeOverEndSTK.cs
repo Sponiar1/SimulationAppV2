@@ -39,10 +39,6 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.addEvent(controlStartSTK);
                 myCore.Technicians--;
             }
-            else
-            {
-                myCore.ControlWaiting.Enqueue(customer);
-            }
         }
     }
 }
