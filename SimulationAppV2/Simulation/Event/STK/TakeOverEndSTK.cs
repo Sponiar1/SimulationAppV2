@@ -20,12 +20,13 @@ namespace SimulationAppV2.Simulation.Event.STK
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);
             }
-            else if(myCore.Customers.Count() > 0 && myCore.ControlWaiting.Count() < 5)
+            else if(myCore.Customers.Count() > 0 && myCore.AvailableSpots > 0)
             {
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
                 myCore.addEvent(takeOver);
-                myCore.ControlWaiting.Enqueue(customer);
+                myCore.AvailableSpots--;
+                //myCore.ControlWaiting.Enqueue(customer);
             }
             else
             {
@@ -38,6 +39,11 @@ namespace SimulationAppV2.Simulation.Event.STK
                 controlStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(controlStartSTK);
                 myCore.Technicians--;
+                myCore.AvailableSpots++;
+            }
+            else
+            {
+                myCore.ControlWaiting.Enqueue(customer);
             }
         }
     }

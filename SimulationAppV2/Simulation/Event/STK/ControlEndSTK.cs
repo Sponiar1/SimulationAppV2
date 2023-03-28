@@ -19,6 +19,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 ControlStartSTK controlStartSTK = new ControlStartSTK(myCore, myCore.ControlWaiting.Dequeue());
                 controlStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(controlStartSTK);
+                myCore.AvailableSpots++;
             }
             else
             {

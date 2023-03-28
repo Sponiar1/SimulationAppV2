@@ -17,12 +17,13 @@ namespace SimulationAppV2.Simulation.Event.STK
             ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer);
             controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime();
             myCore.addEvent(controlEndSTK);
-
+            
             if(myCore.Customers.Count() > 0 && myCore.Cashiers > 0 && myCore.PaymentQueue.Count() == 0) 
             {
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
                 myCore.Cashiers--;
+                myCore.AvailableSpots--;
                 myCore.addEvent(takeOver);
             }
         }

@@ -37,7 +37,8 @@ namespace SimulationAppV2
 
             actualTime = "Aktuálny čas: " + (int)e.Time / 60 + ":" + (int)e.Time % 60;
             checkInQueue = "Počet ľudí čakajúcich na prevzatie: " + e.CheckInQueue;
-            inspectionQueue = "Počet áut na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
+            //inspectionQueue = "Počet áut na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
+            inspectionQueue = "Počet voľných miest na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
             paymentQueue = "Počet ľudí čakajúcich na zaplatenie: " + e.PaymentQueue;
             freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): " + e.FreeCashiers;
             freeTechnician = "Počet voľných technikov(Pracovníci 2): " + e.FreeTechnicians;

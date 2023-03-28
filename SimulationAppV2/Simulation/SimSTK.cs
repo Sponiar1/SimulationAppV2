@@ -24,6 +24,7 @@ namespace SimulationAppV2.Simulation
         Queue<Customer> customers = new Queue<Customer>(); // rada na prevzatie
         Queue<Customer> paymentQueue = new Queue<Customer>(); //rada na zaplatenie po kontrole
         Queue<Customer> controlWaiting = new Queue<Customer>(); // rada na kontrolu
+        public int AvailableSpots { get; set; } //rezervácia pre check-in
         public int Cashiers { get; set; } //pracovnici 1
         public int Technicians { get; set; } //pracovnici 2
         public Queue<Customer> Customers
@@ -39,6 +40,8 @@ namespace SimulationAppV2.Simulation
             get { return controlWaiting; }
         }
         public double RefreshTime { get; set; }
+        public int Arrived { get; set; }
+        public int Left { get; set; }
         public STKDetails STKDetails { get; set; }
 
         public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
@@ -72,8 +75,14 @@ namespace SimulationAppV2.Simulation
             Event.Event sysEvent = new SysEvent(this);
             sysEvent.Time = CurrentTime;
             addEvent(sysEvent);
-            Cashiers = 10;
-            Technicians = 15;
+            Cashiers = 15;  //7
+            Technicians = 25; //10 blizko
+            AvailableSpots = 5;
+            Arrived = 0;
+            Left = 0;
+            Customers.Clear();
+            ControlWaiting.Clear();
+            PaymentQueue.Clear();
         }
 
         
@@ -116,12 +125,23 @@ namespace SimulationAppV2.Simulation
                                                                     ControlWaiting.Count(), 
                                                                     PaymentQueue.Count(),
                                                                     Cashiers,
-                                                                    Technicians));
+                                                                    Technicians
+                                                                    //Arrived,
+                                                                    //Left
+                                                                    ));
         }
 
         public override void refreshGui()
         {
-            
+            SimulationDetails?.Invoke(this, new SimulationDetailsEventArgs(this.CurrentTime,
+                                                                    Customers.Count(),
+                                                                    ControlWaiting.Count(),
+                                                                    PaymentQueue.Count(),
+                                                                    Cashiers,
+                                                                    Technicians
+                                                                    //Arrived,
+                                                                    //Left
+                                                                    ));
         }
     }
 
