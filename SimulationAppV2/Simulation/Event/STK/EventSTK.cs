@@ -9,10 +9,10 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class EventSTK : Event
     {
-        protected Customer customer;
+        protected CustomerSTK customer;
         protected SimSTK myCore;
 
-        public EventSTK(SimSTK myCore, Customer customer)
+        public EventSTK(SimSTK myCore, CustomerSTK customer)
             : base(myCore)
         {
             this.myCore = myCore;

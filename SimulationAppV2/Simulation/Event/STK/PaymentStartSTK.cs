@@ -9,7 +9,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class PaymentStartSTK : EventSTK
     {
-        public PaymentStartSTK(SimSTK sim, Customer paCustomer)
+        public PaymentStartSTK(SimSTK sim, CustomerSTK paCustomer)
             : base(sim, paCustomer) { }
 
         public override void Exec()

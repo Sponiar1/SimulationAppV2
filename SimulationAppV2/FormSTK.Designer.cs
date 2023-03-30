@@ -42,6 +42,8 @@
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
+            trackBar1 = new TrackBar();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -161,11 +163,19 @@
             label8.TabIndex = 12;
             label8.Text = "label8";
             // 
+            // trackBar1
+            // 
+            trackBar1.Location = new Point(385, 523);
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(230, 45);
+            trackBar1.TabIndex = 13;
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1045, 607);
+            Controls.Add(trackBar1);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -180,6 +190,7 @@
             Controls.Add(button1);
             Name = "FormSTK";
             Text = "FormSTK";
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -199,5 +210,6 @@
         private Label label6;
         private Label label7;
         private Label label8;
+        private TrackBar trackBar1;
     }
 }

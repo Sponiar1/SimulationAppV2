@@ -21,21 +21,21 @@ namespace SimulationAppV2.Simulation
         Empiric vanProb;
         Empiric truckProb;
 
-        Queue<Customer> customers = new Queue<Customer>(); // rada na prevzatie
-        Queue<Customer> paymentQueue = new Queue<Customer>(); //rada na zaplatenie po kontrole
-        Queue<Customer> controlWaiting = new Queue<Customer>(); // rada na kontrolu
+        Queue<CustomerSTK> customers = new Queue<CustomerSTK>(); // rada na prevzatie
+        Queue<CustomerSTK> paymentQueue = new Queue<CustomerSTK>(); //rada na zaplatenie po kontrole
+        Queue<CustomerSTK> controlWaiting = new Queue<CustomerSTK>(); // rada na kontrolu
         public int AvailableSpots { get; set; } //rezervácia pre check-in
         public int Cashiers { get; set; } //pracovnici 1
         public int Technicians { get; set; } //pracovnici 2
-        public Queue<Customer> Customers
+        public Queue<CustomerSTK> Customers
         {
             get { return customers; }
         }
-        public Queue<Customer> PaymentQueue
+        public Queue<CustomerSTK> PaymentQueue
         {
             get { return paymentQueue; }
         }
-        public Queue<Customer> ControlWaiting
+        public Queue<CustomerSTK> ControlWaiting
         {
             get { return controlWaiting; }
         }
@@ -69,14 +69,14 @@ namespace SimulationAppV2.Simulation
         public override void BeforeReplication()
         {
             Event.Event helpEvent;
-            helpEvent = new ArrivalSTK(this, new Customer());
+            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType()));
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
             Event.Event sysEvent = new SysEvent(this);
             sysEvent.Time = CurrentTime;
             addEvent(sysEvent);
-            Cashiers = 15;  //7
-            Technicians = 25; //10 blizko
+            Cashiers = 10;  //7
+            Technicians = 20; //10 blizko
             AvailableSpots = 5;
             Arrived = 0;
             Left = 0;
@@ -101,36 +101,35 @@ namespace SimulationAppV2.Simulation
             return paymentProb.getValue();
         }
 
-        public double getCarTime() 
+        public CarType getCarType() 
         {
             double p = carType.NextDouble();
             if(p <= 0.65) 
-            { 
-                return personalCarProb.getValue();
+            {
+                return CarType.PersonalCar;
             }
             else if (p <= 0.86)
             {
-                return vanProb.getDiscreteEmpiricProbability();
+                return CarType.Van;
             }
             else
             {
-                return truckProb.getDiscreteEmpiricProbability();
+                return CarType.Truck;
             }
         }
 
-        public void sendDetailsToGui()
+        public double getCarTime(CarType type)
         {
-            SimulationDetails?.Invoke(this, new SimulationDetailsEventArgs(this.CurrentTime, 
-                                                                    Customers.Count(), 
-                                                                    ControlWaiting.Count(), 
-                                                                    PaymentQueue.Count(),
-                                                                    Cashiers,
-                                                                    Technicians
-                                                                    //Arrived,
-                                                                    //Left
-                                                                    ));
+            switch(type) 
+            {
+                case CarType.PersonalCar: 
+                    return personalCarProb.getValue();
+                case CarType.Van: 
+                    return vanProb.getDiscreteEmpiricProbability();
+                default:
+                    return truckProb.getDiscreteEmpiricProbability();
+            }
         }
-
         public override void refreshGui()
         {
             SimulationDetails?.Invoke(this, new SimulationDetailsEventArgs(this.CurrentTime,

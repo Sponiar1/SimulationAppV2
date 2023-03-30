@@ -9,13 +9,13 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class ControlStartSTK : EventSTK
     {
-        public ControlStartSTK(SimSTK sim, Customer paCustomer)
+        public ControlStartSTK(SimSTK sim, CustomerSTK paCustomer)
             : base(sim, paCustomer) { }
 
         public override void Exec()
         {
             ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer);
-            controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime();
+            controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime(customer.Car);
             myCore.addEvent(controlEndSTK);
             
             if(myCore.Customers.Count() > 0 && myCore.Cashiers > 0 && myCore.PaymentQueue.Count() == 0) 

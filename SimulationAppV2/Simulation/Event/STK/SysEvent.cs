@@ -20,10 +20,6 @@ namespace SimulationAppV2.Simulation.Event.STK
             Thread.Sleep(100);
             this.Time = myCore.RefreshTime + myCore.CurrentTime;
             myCore.addEvent(this);
-            if (!myCore.Turbo)
-            {
-                myCore.sendDetailsToGui();
-            }
         }
     }
 }

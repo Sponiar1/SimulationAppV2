@@ -9,7 +9,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class TakeOverEndSTK : EventSTK
     {
-        public TakeOverEndSTK(SimSTK sim, Customer paCustomer)
+        public TakeOverEndSTK(SimSTK sim, CustomerSTK paCustomer)
             : base(sim, paCustomer) { }
 
         public override void Exec()

@@ -9,7 +9,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class ArrivalSTK : EventSTK
     {
-        public ArrivalSTK(SimSTK simCore, Customer paCustomer) 
+        public ArrivalSTK(SimSTK simCore, CustomerSTK paCustomer) 
         : base(simCore, paCustomer)
         { }
 
@@ -43,7 +43,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.AvailableSpots--;
                 //myCore.ControlWaiting.Enqueue(customer);
             }
-            Customer newCustomer = new Customer();
+            CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType());
             this.customer = newCustomer;
         }
     }

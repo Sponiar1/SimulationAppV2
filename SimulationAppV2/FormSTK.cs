@@ -42,12 +42,23 @@ namespace SimulationAppV2
             paymentQueue = "Počet ľudí čakajúcich na zaplatenie: " + e.PaymentQueue;
             freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): " + e.FreeCashiers;
             freeTechnician = "Počet voľných technikov(Pracovníci 2): " + e.FreeTechnicians;
+            this.Invoke(new Action(() => Refresh()));
+
         }
 
+        private void Refresh()
+        {
+            label1.Text = actualTime;
+            label8.Text = checkInQueue;
+            label2.Text = inspectionQueue;
+            label5.Text = paymentQueue;
+            label6.Text = freeCashiers;
+            label7.Text = freeTechnician;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             cts = new CancellationTokenSource();
-            timer1.Enabled = true;
+            //timer1.Enabled = true;
             Task.Run(() => simSTK.Simulate(1, cts.Token));
         }
 
