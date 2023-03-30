@@ -86,5 +86,10 @@ namespace SimulationAppV2
         {
             cts?.Cancel();
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            simSTK.Delay = trackBar1.Value;
+        }
     }
 }

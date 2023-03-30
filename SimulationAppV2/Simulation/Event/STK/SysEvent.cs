@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace SimulationAppV2.Simulation.Event.STK
 {
-    internal class SysEvent : EventSTK
+    internal class SysEvent : Event
     {
-        public SysEvent(SimSTK sim)
-            : base(sim, null)
+        public SysEvent(SimEventCore sim)
+            : base(sim)
         {
 
         }
 
         public override void Exec()
         {
-            Thread.Sleep(100);
-            this.Time = myCore.RefreshTime + myCore.CurrentTime;
+            Thread.Sleep(myCore.Delay);
+            this.Time = myCore.CurrentTime + myCore.RefreshTime;
             myCore.addEvent(this);
         }
     }

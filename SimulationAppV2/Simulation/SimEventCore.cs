@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimulationAppV2.Simulation.Event.STK;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,21 @@ namespace SimulationAppV2.Simulation
         public double MaxTime { get; set; }
         public Boolean Pause { get; set; }
         public Boolean Turbo { get; set; }
+        public int Delay { get; set; }
+        public double RefreshTime { get; set; }
         public override void Replication()
         {
-            Event.Event helpEvent;
+            Event.Event helpEvent; 
+            Event.Event sysEvent = new SysEvent(this);
+            sysEvent.Time = CurrentTime;
+            addEvent(sysEvent);
             while (timeline.Count != 0 || CurrentTime > MaxTime)
             {
                 helpEvent = timeline.Dequeue();
                 CurrentTime = helpEvent.Time;
                 while(Pause)
                 {
-                    Thread.Sleep(350);
+                    Thread.Sleep(500);
                 }
                 if (CurrentTime > MaxTime || base.CancellationToken.IsCancellationRequested)
                 {

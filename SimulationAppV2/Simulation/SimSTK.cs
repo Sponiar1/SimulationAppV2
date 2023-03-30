@@ -39,7 +39,6 @@ namespace SimulationAppV2.Simulation
         {
             get { return controlWaiting; }
         }
-        public double RefreshTime { get; set; }
         public int Arrived { get; set; }
         public int Left { get; set; }
         public STKDetails STKDetails { get; set; }
@@ -72,9 +71,7 @@ namespace SimulationAppV2.Simulation
             helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType()));
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
-            Event.Event sysEvent = new SysEvent(this);
-            sysEvent.Time = CurrentTime;
-            addEvent(sysEvent);
+            
             Cashiers = 10;  //7
             Technicians = 20; //10 blizko
             AvailableSpots = 5;

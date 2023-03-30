@@ -166,9 +166,11 @@
             // trackBar1
             // 
             trackBar1.Location = new Point(385, 523);
+            trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
             trackBar1.TabIndex = 13;
+            trackBar1.Scroll += trackBar1_Scroll;
             // 
             // FormSTK
             // 
