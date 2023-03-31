@@ -22,6 +22,11 @@ namespace SimulationAppV2.Simulation
         Empiric truckProb;
 
         CashierSTK[] cashiers;
+        public CashierSTK[] Cashiers { get { return cashiers; } }
+        Queue<CashierSTK> cashiersQueue = new Queue<CashierSTK>(); // zrušiť int a pýtať queue size
+        TechnicianSTK[] technicians;
+        public TechnicianSTK[] Technicians { get { return technicians; } }
+
         Queue<CustomerSTK> customers = new Queue<CustomerSTK>(); // rada na prevzatie
         Queue<CustomerSTK> paymentQueue = new Queue<CustomerSTK>(); //rada na zaplatenie po kontrole
         Queue<CustomerSTK> controlWaiting = new Queue<CustomerSTK>(); // rada na kontrolu
@@ -65,6 +70,15 @@ namespace SimulationAppV2.Simulation
             AvailableCashiers = 10;  //7
             AvailableTechnicians = 20; //10 blizko
             cashiers = new CashierSTK[AvailableCashiers];
+            for (int i = 0; i < cashiers.Length; i++)
+            {
+                cashiers[i] = new CashierSTK(i);
+            }
+            technicians = new TechnicianSTK[AvailableTechnicians];
+            for ( int i = 0;i < technicians.Length;i++)
+            {
+                technicians[i] = new TechnicianSTK(i);
+            }
         }
 
         public override void BeforeReplication()

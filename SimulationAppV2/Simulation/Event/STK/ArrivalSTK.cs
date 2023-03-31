@@ -40,6 +40,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.addEvent(takeOver);
                 myCore.AvailableCashiers--;
                 myCore.AvailableSpots--;
+
                 //myCore.ControlWaiting.Enqueue(customer);
             }
             CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType());
