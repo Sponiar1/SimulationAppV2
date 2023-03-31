@@ -33,12 +33,12 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.AvailableCashiers++;
             }
 
-            if(myCore.AvailableTechnicians > 0) 
+            if(myCore.AvailableTechnicians.Count() > 0) 
             {
-                ControlStartSTK controlStartSTK = new ControlStartSTK(myCore, customer);
+                ControlStartSTK controlStartSTK = new ControlStartSTK(myCore, customer, myCore.AvailableTechnicians.Dequeue());
                 controlStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(controlStartSTK);
-                myCore.AvailableTechnicians--;
+                //myCore.AvailableTechnicians--;
                 myCore.AvailableSpots++;
             }
             else

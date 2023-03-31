@@ -9,6 +9,6 @@ namespace SimulationAppV2.Simulation.SimObject.STK
     internal class EmployerSTK
     {
         public int ID { get; set; }
-        public EmployerSTK(int id) { }
+        public EmployerSTK(int id) { ID = id; }
     }
 }

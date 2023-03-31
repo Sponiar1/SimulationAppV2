@@ -24,15 +24,18 @@ namespace SimulationAppV2.Simulation
         CashierSTK[] cashiers;
         public CashierSTK[] Cashiers { get { return cashiers; } }
         Queue<CashierSTK> cashiersQueue = new Queue<CashierSTK>(); // zrušiť int a pýtať queue size
+
         TechnicianSTK[] technicians;
         public TechnicianSTK[] Technicians { get { return technicians; } }
+        Queue<TechnicianSTK> technicianQueue = new Queue<TechnicianSTK>();
+        public Queue<TechnicianSTK> AvailableTechnicians { get { return technicianQueue; } }
 
         Queue<CustomerSTK> customers = new Queue<CustomerSTK>(); // rada na prevzatie
         Queue<CustomerSTK> paymentQueue = new Queue<CustomerSTK>(); //rada na zaplatenie po kontrole
         Queue<CustomerSTK> controlWaiting = new Queue<CustomerSTK>(); // rada na kontrolu
         public int AvailableSpots { get; set; } //rezervácia pre check-in
         public int AvailableCashiers { get; set; } //pracovnici 1
-        public int AvailableTechnicians { get; set; } //pracovnici 2
+        //public int AvailableTechnicians { get; set; } //pracovnici 2
         public Queue<CustomerSTK> Customers
         {
             get { return customers; }
@@ -68,16 +71,17 @@ namespace SimulationAppV2.Simulation
             CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
             AvailableCashiers = 10;  //7
-            AvailableTechnicians = 20; //10 blizko
+            int Technicians = 20; //10 blizko
             cashiers = new CashierSTK[AvailableCashiers];
             for (int i = 0; i < cashiers.Length; i++)
             {
                 cashiers[i] = new CashierSTK(i);
             }
-            technicians = new TechnicianSTK[AvailableTechnicians];
+            technicians = new TechnicianSTK[Technicians];
             for ( int i = 0;i < technicians.Length;i++)
             {
                 technicians[i] = new TechnicianSTK(i);
+                AvailableTechnicians.Enqueue(technicians[i]);
             }
         }
 
@@ -89,7 +93,7 @@ namespace SimulationAppV2.Simulation
             addEvent(helpEvent);
             
             AvailableCashiers = 10;  //7
-            AvailableTechnicians = 20; //10 blizko
+            //AvailableTechnicians = 20; //10 blizko
             AvailableSpots = 5;
             Customers.Clear();
             ControlWaiting.Clear();
@@ -148,14 +152,15 @@ namespace SimulationAppV2.Simulation
                                                                     ControlWaiting.Count(),
                                                                     PaymentQueue.Count(),
                                                                     AvailableCashiers,
-                                                                    AvailableTechnicians
+                                                                    AvailableTechnicians.Count(),
+                                                                    Technicians
                                                                     //Arrived,
                                                                     //Left
                                                                     ));
         }
     }
 
-    public class SimulationDetailsEventArgs : EventArgs
+    internal class SimulationDetailsEventArgs : EventArgs
     {
         public double Time { get; set; }
         public int CheckInQueue { get; set; }
@@ -163,7 +168,8 @@ namespace SimulationAppV2.Simulation
         public int PaymentQueue { get; set; }
         public int FreeCashiers { get; set; }
         public int FreeTechnicians { get; set; }
-        public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician)
+        public TechnicianSTK[] Technicians { get; }
+        public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician, TechnicianSTK[] technicians)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -171,6 +177,7 @@ namespace SimulationAppV2.Simulation
             PaymentQueue = paymentQueue;
             FreeCashiers = freeCashiers;
             FreeTechnicians = freeTechnician;
+            Technicians = technicians;
         }
     }
 }

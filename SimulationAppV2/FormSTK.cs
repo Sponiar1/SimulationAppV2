@@ -1,4 +1,5 @@
 ﻿using SimulationAppV2.Simulation;
+using SimulationAppV2.Simulation.SimObject.STK;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,6 +24,7 @@ namespace SimulationAppV2
         String paymentQueue;
         String freeCashiers;
         String freeTechnician;
+        TechnicianSTK[] technicianSTKs;
         public FormSTK()
         {
             InitializeComponent();
@@ -42,6 +44,7 @@ namespace SimulationAppV2
             paymentQueue = "Počet ľudí čakajúcich na zaplatenie: " + e.PaymentQueue;
             freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): " + e.FreeCashiers;
             freeTechnician = "Počet voľných technikov(Pracovníci 2): " + e.FreeTechnicians;
+            technicianSTKs = e.Technicians;
             this.Invoke(new Action(() => Refresh()));
 
         }
@@ -54,6 +57,11 @@ namespace SimulationAppV2
             label5.Text = paymentQueue;
             label6.Text = freeCashiers;
             label7.Text = freeTechnician;
+            dataGridView1.Rows.Clear();
+            foreach (var worker in technicianSTKs)
+            {
+                dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar);
+            }
         }
         private void button1_Click(object sender, EventArgs e)
         {

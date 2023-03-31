@@ -9,12 +9,15 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class ControlStartSTK : EventSTK
     {
-        public ControlStartSTK(SimSTK sim, CustomerSTK paCustomer)
-            : base(sim, paCustomer) { }
+        TechnicianSTK technicianSTK;
+        public ControlStartSTK(SimSTK sim, CustomerSTK paCustomer, TechnicianSTK technician)
+            : base(sim, paCustomer) { technicianSTK = technician; }
 
         public override void Exec()
         {
-            ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer);
+            technicianSTK.WorkingOn = TechnicianWork.Controling;
+            technicianSTK.ControlledCar = customer.Car;
+            ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer, technicianSTK);
             controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime(customer.Car);
             myCore.addEvent(controlEndSTK);
             
