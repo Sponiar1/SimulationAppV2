@@ -58,6 +58,7 @@ namespace SimulationAppV2
         private void button1_Click(object sender, EventArgs e)
         {
             cts = new CancellationTokenSource();
+            RefreshTable();
             //timer1.Enabled = true;
             Task.Run(() => simSTK.Simulate(1, cts.Token));
         }
@@ -90,6 +91,13 @@ namespace SimulationAppV2
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             simSTK.Delay = trackBar1.Value;
+        }
+
+        public void RefreshTable()
+        {
+            dataGridView1.Columns.Add("TechnicianID", "Technician ID");
+            dataGridView1.Columns.Add("Status", "Status");
+            dataGridView1.Columns.Add("ControlledCar", "Controlled Car");
         }
     }
 }

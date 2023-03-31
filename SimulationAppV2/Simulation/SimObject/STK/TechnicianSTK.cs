@@ -21,6 +21,6 @@ namespace SimulationAppV2.Simulation.SimObject.STK
     enum TechnicianWork
     {
         Break,
-        Control
+        Controling
     }
 }

@@ -43,7 +43,9 @@
             label7 = new Label();
             label8 = new Label();
             trackBar1 = new TrackBar();
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -172,11 +174,21 @@
             trackBar1.TabIndex = 13;
             trackBar1.Scroll += trackBar1_Scroll;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(680, 12);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(358, 217);
+            dataGridView1.TabIndex = 14;
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1045, 607);
+            ClientSize = new Size(1494, 627);
+            Controls.Add(dataGridView1);
             Controls.Add(trackBar1);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -193,6 +205,7 @@
             Name = "FormSTK";
             Text = "FormSTK";
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -213,5 +226,6 @@
         private Label label7;
         private Label label8;
         private TrackBar trackBar1;
+        private DataGridView dataGridView1;
     }
 }
