@@ -9,9 +9,13 @@ namespace SimulationAppV2.Simulation.SimObject.STK
     internal class CustomerSTK : Customer
     {
         public CarType Car { get; set; }
-        public CustomerSTK(CarType car)
+        public int ID { get; }
+        public Status Status { get; set; }
+        public CustomerSTK(CarType car, int id)
         {
             Car = car;
+            ID = id;
+            Status = 0;
         }
     }
 
@@ -21,5 +25,16 @@ namespace SimulationAppV2.Simulation.SimObject.STK
         PersonalCar,
         Van,
         Truck
+    }
+
+    enum Status
+    {
+        None = 0,
+        WaitingTakeOver,
+        TakingOver,
+        WaitingControlling,
+        Controlling,
+        WaitingPaying,
+        Paying
     }
 }

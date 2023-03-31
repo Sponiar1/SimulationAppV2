@@ -9,12 +9,15 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class PaymentStartSTK : EventSTK
     {
-        public PaymentStartSTK(SimSTK sim, CustomerSTK paCustomer)
-            : base(sim, paCustomer) { }
+        CashierSTK cashier;
+        public PaymentStartSTK(SimSTK sim, CustomerSTK paCustomer, CashierSTK cashier)
+            : base(sim, paCustomer) { this.cashier = cashier; }
 
         public override void Exec()
         {
-            PaymentEndSTK paymentEndSTK = new PaymentEndSTK(myCore, customer);
+            customer.Status = Status.Paying;
+            cashier.BeginPayment(customer.ID);
+            PaymentEndSTK paymentEndSTK = new PaymentEndSTK(myCore, customer, cashier);
             paymentEndSTK.Time = myCore.CurrentTime + myCore.getshopPaymentTime();
             myCore.addEvent(paymentEndSTK);
         }

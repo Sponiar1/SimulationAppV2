@@ -9,12 +9,14 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class ArrivalSTK : EventSTK
     {
+        int customerId = 2;
         public ArrivalSTK(SimSTK simCore, CustomerSTK paCustomer) 
         : base(simCore, paCustomer)
         { }
 
         public override void Exec()
         {
+            myCore.CustomersInSystem.Add(customer.ID, customer);
             Time = myCore.CurrentTime + myCore.getArrivalTime();
             if (Time < myCore.STKDetails.StopAccepting)
             {
@@ -22,13 +24,14 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
 
             //   neni volny pokladnik    stoja v rade                       neni miesto pred kontrolou                                  neni otvorene
-            if(myCore.AvailableCashiers == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
+            if(myCore.AvailableCashiers.Count() == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
             {
+                customer.Status = Status.WaitingTakeOver;
                 myCore.Customers.Enqueue(customer);
             }
             else
             {
-                TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, customer);
+                TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, customer, myCore.AvailableCashiers.Dequeue());
                 if(myCore.CurrentTime >= myCore.STKDetails.Opening)
                 {
                     takeOver.Time = myCore.CurrentTime;
@@ -38,12 +41,13 @@ namespace SimulationAppV2.Simulation.Event.STK
                     takeOver.Time = myCore.STKDetails.Opening;
                 }
                 myCore.addEvent(takeOver);
-                myCore.AvailableCashiers--;
+                //myCore.AvailableCashiers--;
                 myCore.AvailableSpots--;
 
                 //myCore.ControlWaiting.Enqueue(customer);
             }
-            CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType());
+            CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType(), customerId);
+            customerId++;
             this.customer = newCustomer;
         }
     }

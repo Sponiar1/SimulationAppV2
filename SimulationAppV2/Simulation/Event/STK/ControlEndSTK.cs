@@ -28,18 +28,20 @@ namespace SimulationAppV2.Simulation.Event.STK
             {
                 //myCore.AvailableTechnicians++;
                 myCore.AvailableTechnicians.Enqueue(technicianSTK);
+                technicianSTK.WorkingOn = TechnicianWork.Break;
                 technicianSTK.ControlledCar = CarType.None;
             }
 
-            if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers > 0)
+            if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers.Count() > 0)
             {
-                PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, customer);
+                PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, customer, myCore.AvailableCashiers.Dequeue());
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);
-                myCore.AvailableCashiers--;
+                //myCore.AvailableCashiers--;
             }
             else
             {
+                customer.Status = Status.WaitingPaying;
                 myCore.PaymentQueue.Enqueue(customer);
             }
         }

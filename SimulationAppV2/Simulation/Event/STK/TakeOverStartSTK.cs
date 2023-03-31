@@ -9,12 +9,15 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class TakeOverStartSTK : EventSTK
     {
-        public TakeOverStartSTK(SimSTK sim, CustomerSTK paCustomer)
-            : base(sim, paCustomer) { }
+        CashierSTK cashier;
+        public TakeOverStartSTK(SimSTK sim, CustomerSTK paCustomer, CashierSTK cashier)
+            : base(sim, paCustomer) { this.cashier = cashier; }
 
         public override void Exec()
         {
-            TakeOverEndSTK takeOverEndSTK = new TakeOverEndSTK(myCore, customer);
+            cashier.BeginTakeOver(customer.ID);
+            customer.Status = Status.TakingOver;
+            TakeOverEndSTK takeOverEndSTK = new TakeOverEndSTK(myCore, customer, cashier);
             takeOverEndSTK.Time = myCore.CurrentTime + myCore.getshopParkingTime();
             myCore.addEvent(takeOverEndSTK);
         }

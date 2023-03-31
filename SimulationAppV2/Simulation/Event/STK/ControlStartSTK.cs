@@ -17,15 +17,16 @@ namespace SimulationAppV2.Simulation.Event.STK
         {
             technicianSTK.WorkingOn = TechnicianWork.Controling;
             technicianSTK.ControlledCar = customer.Car;
+            customer.Status = Status.Controlling;
             ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer, technicianSTK);
             controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime(customer.Car);
             myCore.addEvent(controlEndSTK);
             
-            if(myCore.Customers.Count() > 0 && myCore.AvailableCashiers > 0 && myCore.PaymentQueue.Count() == 0) 
+            if(myCore.Customers.Count() > 0 && myCore.AvailableCashiers.Count() > 0 && myCore.PaymentQueue.Count() == 0) 
             {
-                TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue());
+                TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), myCore.AvailableCashiers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
-                myCore.AvailableCashiers--;
+                //myCore.AvailableCashiers--;
                 myCore.AvailableSpots--;
                 myCore.addEvent(takeOver);
             }

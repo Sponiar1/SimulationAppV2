@@ -24,7 +24,10 @@ namespace SimulationAppV2
         String paymentQueue;
         String freeCashiers;
         String freeTechnician;
+        String customersInShop;
         TechnicianSTK[] technicianSTKs;
+        CashierSTK[] cashierSTKs;
+        Dictionary<int, CustomerSTK> customersInSystem;
         public FormSTK()
         {
             InitializeComponent();
@@ -45,6 +48,9 @@ namespace SimulationAppV2
             freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): " + e.FreeCashiers;
             freeTechnician = "Počet voľných technikov(Pracovníci 2): " + e.FreeTechnicians;
             technicianSTKs = e.Technicians;
+            cashierSTKs = e.Cashier;
+            customersInSystem = e.customersInSystem;
+            customersInShop = "Počet zákazníkov v systéme: " + customersInSystem.Count();
             this.Invoke(new Action(() => Refresh()));
 
         }
@@ -57,10 +63,21 @@ namespace SimulationAppV2
             label5.Text = paymentQueue;
             label6.Text = freeCashiers;
             label7.Text = freeTechnician;
+            label9.Text = customersInShop;
             dataGridView1.Rows.Clear();
             foreach (var worker in technicianSTKs)
             {
                 dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar);
+            }
+            dataGridView2.Rows.Clear();
+            foreach (var worker in cashierSTKs)
+            {
+                dataGridView2.Rows.Add(worker.ID, worker.WorkingOn, worker.customerID);
+            }
+            dataGridView3.Rows.Clear();
+            foreach (var customer in customersInSystem)
+            {
+                dataGridView3.Rows.Add(customer.Value.ID, customer.Value.Car, customer.Value.Status);
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -106,6 +123,14 @@ namespace SimulationAppV2
             dataGridView1.Columns.Add("TechnicianID", "Technician ID");
             dataGridView1.Columns.Add("Status", "Status");
             dataGridView1.Columns.Add("ControlledCar", "Controlled Car");
+
+            dataGridView2.Columns.Add("CashierID", "Cashier ID");
+            dataGridView2.Columns.Add("Status", "Status");
+            dataGridView2.Columns.Add("Serving", "Serving Customer");
+
+            dataGridView3.Columns.Add("CustomerID", "Customer ID");
+            dataGridView3.Columns.Add("Car", "Car");
+            dataGridView3.Columns.Add("Status", "Status");
         }
     }
 }

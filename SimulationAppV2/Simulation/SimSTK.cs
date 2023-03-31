@@ -24,18 +24,21 @@ namespace SimulationAppV2.Simulation
         CashierSTK[] cashiers;
         public CashierSTK[] Cashiers { get { return cashiers; } }
         Queue<CashierSTK> cashiersQueue = new Queue<CashierSTK>(); // zrušiť int a pýtať queue size
+        public Queue<CashierSTK> AvailableCashiers { get { return cashiersQueue; } }
 
         TechnicianSTK[] technicians;
         public TechnicianSTK[] Technicians { get { return technicians; } }
         Queue<TechnicianSTK> technicianQueue = new Queue<TechnicianSTK>();
         public Queue<TechnicianSTK> AvailableTechnicians { get { return technicianQueue; } }
 
+        Dictionary<int, CustomerSTK> customersInSystem = new Dictionary<int, CustomerSTK>();
+        public Dictionary<int, CustomerSTK> CustomersInSystem { get { return customersInSystem; } }
+
         Queue<CustomerSTK> customers = new Queue<CustomerSTK>(); // rada na prevzatie
         Queue<CustomerSTK> paymentQueue = new Queue<CustomerSTK>(); //rada na zaplatenie po kontrole
         Queue<CustomerSTK> controlWaiting = new Queue<CustomerSTK>(); // rada na kontrolu
         public int AvailableSpots { get; set; } //rezervácia pre check-in
-        public int AvailableCashiers { get; set; } //pracovnici 1
-        //public int AvailableTechnicians { get; set; } //pracovnici 2
+        //public int AvailableCashiers { get; set; } //pracovnici 1
         public Queue<CustomerSTK> Customers
         {
             get { return customers; }
@@ -70,14 +73,15 @@ namespace SimulationAppV2.Simulation
             RefreshTime = 10;
             CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
-            AvailableCashiers = 10;  //7
-            int Technicians = 20; //10 blizko
-            cashiers = new CashierSTK[AvailableCashiers];
+            int pokladnici = 10;  //7
+            int technici = 20; //10 blizko
+            cashiers = new CashierSTK[pokladnici];
             for (int i = 0; i < cashiers.Length; i++)
             {
                 cashiers[i] = new CashierSTK(i);
+                AvailableCashiers.Enqueue(cashiers[i]);
             }
-            technicians = new TechnicianSTK[Technicians];
+            technicians = new TechnicianSTK[technici];
             for ( int i = 0;i < technicians.Length;i++)
             {
                 technicians[i] = new TechnicianSTK(i);
@@ -88,11 +92,11 @@ namespace SimulationAppV2.Simulation
         public override void BeforeReplication()
         {
             Event.Event helpEvent;
-            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType()));
+            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType(), 1));
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
             
-            AvailableCashiers = 10;  //7
+            //AvailableCashiers = 10;  //7
             //AvailableTechnicians = 20; //10 blizko
             AvailableSpots = 5;
             Customers.Clear();
@@ -151,9 +155,11 @@ namespace SimulationAppV2.Simulation
                                                                     Customers.Count(),
                                                                     ControlWaiting.Count(),
                                                                     PaymentQueue.Count(),
-                                                                    AvailableCashiers,
+                                                                    AvailableCashiers.Count(),
                                                                     AvailableTechnicians.Count(),
-                                                                    Technicians
+                                                                    Technicians,
+                                                                    Cashiers,
+                                                                    CustomersInSystem
                                                                     //Arrived,
                                                                     //Left
                                                                     ));
@@ -169,7 +175,10 @@ namespace SimulationAppV2.Simulation
         public int FreeCashiers { get; set; }
         public int FreeTechnicians { get; set; }
         public TechnicianSTK[] Technicians { get; }
-        public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician, TechnicianSTK[] technicians)
+        public CashierSTK[] Cashier { get; }
+        public Dictionary<int, CustomerSTK> customersInSystem { get; }
+        public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician, 
+                                            TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -178,6 +187,8 @@ namespace SimulationAppV2.Simulation
             FreeCashiers = freeCashiers;
             FreeTechnicians = freeTechnician;
             Technicians = technicians;
+            Cashier = cashier;
+            this.customersInSystem = customers;
         }
     }
 }

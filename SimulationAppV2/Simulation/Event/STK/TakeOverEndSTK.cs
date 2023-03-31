@@ -9,20 +9,21 @@ namespace SimulationAppV2.Simulation.Event.STK
 {
     internal class TakeOverEndSTK : EventSTK
     {
-        public TakeOverEndSTK(SimSTK sim, CustomerSTK paCustomer)
-            : base(sim, paCustomer) { }
+        CashierSTK cashier;
+        public TakeOverEndSTK(SimSTK sim, CustomerSTK paCustomer, CashierSTK cashier)
+            : base(sim, paCustomer) { this.cashier = cashier; }
 
         public override void Exec()
         {
             if(myCore.PaymentQueue.Count() > 0) 
             {
-                PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, myCore.PaymentQueue.Dequeue());
+                PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, myCore.PaymentQueue.Dequeue(), cashier);
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);
             }
             else if(myCore.Customers.Count() > 0 && myCore.AvailableSpots > 0)
             {
-                TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue());
+                TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), cashier);
                 takeOver.Time = myCore.CurrentTime;
                 myCore.addEvent(takeOver);
                 myCore.AvailableSpots--;
@@ -30,7 +31,9 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                myCore.AvailableCashiers++;
+                //myCore.AvailableCashiers++;
+                cashier.BeginBreak();
+                myCore.AvailableCashiers.Enqueue(cashier);
             }
 
             if(myCore.AvailableTechnicians.Count() > 0) 
@@ -43,6 +46,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
+                customer.Status = Status.WaitingControlling;
                 myCore.ControlWaiting.Enqueue(customer);
             }
         }

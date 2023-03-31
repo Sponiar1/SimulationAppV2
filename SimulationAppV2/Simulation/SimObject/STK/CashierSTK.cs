@@ -8,28 +8,29 @@ namespace SimulationAppV2.Simulation.SimObject.STK
 {
     internal class CashierSTK : EmployerSTK
     {
-        public CarType WorkOnCar { get; set; }
+        public int customerID { get; set; }
         public CashierWork WorkingOn { get; set; }
         public CashierSTK(int id) : base (id)
         {
-            WorkOnCar = CarType.None;
+            customerID = 0;
             WorkingOn = CashierWork.Break;
         }
 
-        public void BeginTakeOver(CarType car)
+        public void BeginTakeOver(int customerId)
         {
-            WorkOnCar = car;
+            customerID = customerId;
             WorkingOn = CashierWork.TakingOver;
         }
 
         public void BeginBreak()
         {
-            WorkOnCar = CarType.None;
+            customerID = 0;
             WorkingOn= CashierWork.Break;
         }
 
-        public void BeginPayment()
+        public void BeginPayment(int customerId)
         {
+            customerID = customerId;
             WorkingOn = CashierWork.CashRegister;
         }
     }
