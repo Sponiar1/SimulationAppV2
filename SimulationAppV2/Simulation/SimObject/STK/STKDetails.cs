@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimulationAppV2.Simulation.SimObject
+namespace SimulationAppV2.Simulation.SimObject.STK
 {
     internal class STKDetails
     {

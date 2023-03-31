@@ -1,4 +1,4 @@
-﻿using SimulationAppV2.Simulation.SimObject;
+﻿using SimulationAppV2.Simulation.SimObject.STK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +19,10 @@ namespace SimulationAppV2.Simulation.Event.STK
             if (Time < myCore.STKDetails.StopAccepting)
             {
                 myCore.addEvent(this);
-                myCore.Arrived++;
             }
 
             //   neni volny pokladnik    stoja v rade                       neni miesto pred kontrolou                                  neni otvorene
-            if(myCore.Cashiers == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
+            if(myCore.AvailableCashiers == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
             {
                 myCore.Customers.Enqueue(customer);
             }
@@ -39,7 +38,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                     takeOver.Time = myCore.STKDetails.Opening;
                 }
                 myCore.addEvent(takeOver);
-                myCore.Cashiers--;
+                myCore.AvailableCashiers--;
                 myCore.AvailableSpots--;
                 //myCore.ControlWaiting.Enqueue(customer);
             }

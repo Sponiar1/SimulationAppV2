@@ -1,11 +1,11 @@
 ﻿using SimulationAppV2.Generator;
-using SimulationAppV2.Simulation.SimObject;
 using SimulationAppV2.Simulation.Event.STK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SimulationAppV2.Simulation.SimObject.STK;
 
 namespace SimulationAppV2.Simulation
 {
@@ -21,12 +21,13 @@ namespace SimulationAppV2.Simulation
         Empiric vanProb;
         Empiric truckProb;
 
+        CashierSTK[] cashiers;
         Queue<CustomerSTK> customers = new Queue<CustomerSTK>(); // rada na prevzatie
         Queue<CustomerSTK> paymentQueue = new Queue<CustomerSTK>(); //rada na zaplatenie po kontrole
         Queue<CustomerSTK> controlWaiting = new Queue<CustomerSTK>(); // rada na kontrolu
         public int AvailableSpots { get; set; } //rezervácia pre check-in
-        public int Cashiers { get; set; } //pracovnici 1
-        public int Technicians { get; set; } //pracovnici 2
+        public int AvailableCashiers { get; set; } //pracovnici 1
+        public int AvailableTechnicians { get; set; } //pracovnici 2
         public Queue<CustomerSTK> Customers
         {
             get { return customers; }
@@ -39,8 +40,6 @@ namespace SimulationAppV2.Simulation
         {
             get { return controlWaiting; }
         }
-        public int Arrived { get; set; }
-        public int Left { get; set; }
         public STKDetails STKDetails { get; set; }
 
         public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
@@ -61,8 +60,11 @@ namespace SimulationAppV2.Simulation
             vanProb = new Empiric(STKDetails.VanTime, STKDetails.VanTimeProb, new Random(seedGen.Next()));
             truckProb = new Empiric(STKDetails.TruckTime, STKDetails.TruckTimeProb, new Random(seedGen.Next()));
             RefreshTime = 10;
-            CurrentTime = STKDetails.Heating;
+            CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
+            AvailableCashiers = 10;  //7
+            AvailableTechnicians = 20; //10 blizko
+            cashiers = new CashierSTK[AvailableCashiers];
         }
 
         public override void BeforeReplication()
@@ -72,11 +74,9 @@ namespace SimulationAppV2.Simulation
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
             
-            Cashiers = 10;  //7
-            Technicians = 20; //10 blizko
+            AvailableCashiers = 10;  //7
+            AvailableTechnicians = 20; //10 blizko
             AvailableSpots = 5;
-            Arrived = 0;
-            Left = 0;
             Customers.Clear();
             ControlWaiting.Clear();
             PaymentQueue.Clear();
@@ -133,8 +133,8 @@ namespace SimulationAppV2.Simulation
                                                                     Customers.Count(),
                                                                     ControlWaiting.Count(),
                                                                     PaymentQueue.Count(),
-                                                                    Cashiers,
-                                                                    Technicians
+                                                                    AvailableCashiers,
+                                                                    AvailableTechnicians
                                                                     //Arrived,
                                                                     //Left
                                                                     ));

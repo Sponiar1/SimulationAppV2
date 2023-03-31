@@ -1,9 +1,9 @@
 ﻿using System;
-using SimulationAppV2.Simulation.SimObject;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SimulationAppV2.Simulation.SimObject.STK;
 
 namespace SimulationAppV2.Simulation.Event.STK
 {

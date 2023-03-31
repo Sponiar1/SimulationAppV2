@@ -1,4 +1,4 @@
-﻿using SimulationAppV2.Simulation.SimObject;
+﻿using SimulationAppV2.Simulation.SimObject.STK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +29,8 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                myCore.Cashiers++;
+                myCore.AvailableCashiers++;
             }
-            myCore.Left++;
         }
     }
 }

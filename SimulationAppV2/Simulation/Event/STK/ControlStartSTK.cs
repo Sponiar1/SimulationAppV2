@@ -1,4 +1,4 @@
-﻿using SimulationAppV2.Simulation.SimObject;
+﻿using SimulationAppV2.Simulation.SimObject.STK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +18,11 @@ namespace SimulationAppV2.Simulation.Event.STK
             controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime(customer.Car);
             myCore.addEvent(controlEndSTK);
             
-            if(myCore.Customers.Count() > 0 && myCore.Cashiers > 0 && myCore.PaymentQueue.Count() == 0) 
+            if(myCore.Customers.Count() > 0 && myCore.AvailableCashiers > 0 && myCore.PaymentQueue.Count() == 0) 
             {
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
-                myCore.Cashiers--;
+                myCore.AvailableCashiers--;
                 myCore.AvailableSpots--;
                 myCore.addEvent(takeOver);
             }

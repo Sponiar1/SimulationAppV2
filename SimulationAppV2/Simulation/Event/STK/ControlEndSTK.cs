@@ -1,4 +1,4 @@
-﻿using SimulationAppV2.Simulation.SimObject;
+﻿using SimulationAppV2.Simulation.SimObject.STK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,15 +23,15 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                myCore.Technicians++;
+                myCore.AvailableTechnicians++;
             }
 
-            if(myCore.PaymentQueue.Count() == 0 && myCore.Cashiers > 0)
+            if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers > 0)
             {
                 PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, customer);
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);
-                myCore.Cashiers--;
+                myCore.AvailableCashiers--;
             }
             else
             {
