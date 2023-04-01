@@ -35,6 +35,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.AvailableCashiers.Enqueue(cashier);
             }
             myCore.CustomersInSystem.Remove(customer.ID);
+            myCore.Left++;
             myCore.AverageTimeInSystem.Add(Time - customer.Arrival);
         }
     }

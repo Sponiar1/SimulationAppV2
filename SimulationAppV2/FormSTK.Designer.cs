@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             button1 = new Button();
             label1 = new Label();
-            timer1 = new System.Windows.Forms.Timer(components);
             label3 = new Label();
             label4 = new Label();
             button2 = new Button();
@@ -48,15 +46,25 @@
             dataGridView3 = new DataGridView();
             label9 = new Label();
             label10 = new Label();
+            labelReplication = new Label();
+            numericCashier = new NumericUpDown();
+            numericTechnician = new NumericUpDown();
+            numericReplications = new NumericUpDown();
+            labelGlobalTimeSpent = new Label();
+            label11 = new Label();
+            labelLeftInSystem = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericCashier).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericTechnician).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericReplications).BeginInit();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(27, 527);
+            button1.Location = new Point(27, 677);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
@@ -68,20 +76,16 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(469, 477);
+            label1.Location = new Point(463, 639);
             label1.Name = "label1";
             label1.Size = new Size(63, 25);
             label1.TabIndex = 1;
             label1.Text = "label1";
             // 
-            // timer1
-            // 
-            timer1.Tick += timer1_Tick;
-            // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(385, 535);
+            label3.Location = new Point(385, 703);
             label3.Name = "label3";
             label3.Size = new Size(38, 15);
             label3.TabIndex = 3;
@@ -90,7 +94,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(577, 531);
+            label4.Location = new Point(577, 703);
             label4.Name = "label4";
             label4.Size = new Size(38, 15);
             label4.TabIndex = 4;
@@ -98,7 +102,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(141, 527);
+            button2.Location = new Point(385, 531);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 5;
@@ -108,7 +112,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(259, 527);
+            button3.Location = new Point(239, 677);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 6;
@@ -118,7 +122,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(27, 565);
+            button4.Location = new Point(540, 531);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 7;
@@ -173,11 +177,12 @@
             // 
             // trackBar1
             // 
-            trackBar1.Location = new Point(385, 429);
+            trackBar1.Location = new Point(385, 591);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
-            trackBar1.TabIndex = 13;
+            trackBar1.TabIndex = 500;
+            trackBar1.Value = 500;
             trackBar1.Scroll += trackBar1_Scroll;
             // 
             // dataGridView1
@@ -225,11 +230,85 @@
             label10.TabIndex = 18;
             label10.Text = "label10";
             // 
+            // labelReplication
+            // 
+            labelReplication.AutoSize = true;
+            labelReplication.Location = new Point(706, 531);
+            labelReplication.Name = "labelReplication";
+            labelReplication.Size = new Size(91, 15);
+            labelReplication.TabIndex = 19;
+            labelReplication.Text = "labelReplication";
+            // 
+            // numericCashier
+            // 
+            numericCashier.Location = new Point(27, 613);
+            numericCashier.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            numericCashier.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericCashier.Name = "numericCashier";
+            numericCashier.Size = new Size(120, 23);
+            numericCashier.TabIndex = 502;
+            numericCashier.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            // 
+            // numericTechnician
+            // 
+            numericTechnician.Location = new Point(194, 613);
+            numericTechnician.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
+            numericTechnician.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericTechnician.Name = "numericTechnician";
+            numericTechnician.Size = new Size(120, 23);
+            numericTechnician.TabIndex = 503;
+            numericTechnician.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            // 
+            // numericReplications
+            // 
+            numericReplications.Increment = new decimal(new int[] { 1000000, 0, 0, 0 });
+            numericReplications.Location = new Point(108, 558);
+            numericReplications.Maximum = new decimal(new int[] { 1410065408, 2, 0, 0 });
+            numericReplications.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericReplications.Name = "numericReplications";
+            numericReplications.Size = new Size(120, 23);
+            numericReplications.TabIndex = 504;
+            numericReplications.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // labelGlobalTimeSpent
+            // 
+            labelGlobalTimeSpent.AutoSize = true;
+            labelGlobalTimeSpent.Location = new Point(706, 566);
+            labelGlobalTimeSpent.Name = "labelGlobalTimeSpent";
+            labelGlobalTimeSpent.Size = new Size(122, 15);
+            labelGlobalTimeSpent.TabIndex = 505;
+            labelGlobalTimeSpent.Text = "labelGlobalTimeSpent";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(706, 594);
+            label11.Name = "label11";
+            label11.Size = new Size(44, 15);
+            label11.TabIndex = 506;
+            label11.Text = "label11";
+            // 
+            // labelLeftInSystem
+            // 
+            labelLeftInSystem.AutoSize = true;
+            labelLeftInSystem.Location = new Point(706, 621);
+            labelLeftInSystem.Name = "labelLeftInSystem";
+            labelLeftInSystem.Size = new Size(100, 15);
+            labelLeftInSystem.TabIndex = 507;
+            labelLeftInSystem.Text = "labelLeftInSystem";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1508, 742);
+            ClientSize = new Size(1579, 807);
+            Controls.Add(labelLeftInSystem);
+            Controls.Add(label11);
+            Controls.Add(labelGlobalTimeSpent);
+            Controls.Add(numericReplications);
+            Controls.Add(numericTechnician);
+            Controls.Add(numericCashier);
+            Controls.Add(labelReplication);
             Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(dataGridView3);
@@ -254,6 +333,9 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericCashier).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericTechnician).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericReplications).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -262,7 +344,6 @@
 
         private Button button1;
         private Label label1;
-        private System.Windows.Forms.Timer timer1;
         private Label label3;
         private Label label4;
         private Button button2;
@@ -279,5 +360,12 @@
         private DataGridView dataGridView3;
         private Label label9;
         private Label label10;
+        private Label labelReplication;
+        private NumericUpDown numericCashier;
+        private NumericUpDown numericTechnician;
+        private NumericUpDown numericReplications;
+        private Label labelGlobalTimeSpent;
+        private Label label11;
+        private Label labelLeftInSystem;
     }
 }

@@ -16,6 +16,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
+            myCore.Arrived++;
             myCore.CustomersInSystem.Add(customer.ID, customer);
             Time = myCore.CurrentTime + myCore.getArrivalTime();
             if (Time < myCore.STKDetails.StopAccepting)

@@ -29,15 +29,35 @@ namespace SimulationAppV2
         CashierSTK[] cashierSTKs;
         Dictionary<int, CustomerSTK> customersInSystem;
         String averageActual;
+        String numberOfReplication;
+        String globalAverageActual;
+        String globalAverageVisits;
+        String leftInSystem;
         public FormSTK()
         {
             InitializeComponent();
             simSTK = new SimSTK();
             simSTK.SimulationDetails += SimulationDetailsHandler;
+            simSTK.GlobalDetails += GlobalDetailsHandler;
             label3.Text = "Otvárací čas: " + (simSTK.STKDetails.Opening / 60) + ":" + (simSTK.STKDetails.Opening % 60);
             label4.Text = "Zatvára sa o: " + (simSTK.STKDetails.Closing / 60) + ":" + (simSTK.STKDetails.Closing % 60);
         }
 
+        private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
+        {
+            globalAverageActual = "Priemerný čas strávený v prevádzke(global): " + e.GlobalAverage;
+            numberOfReplication = "Replikácia no. " + e.NumberOfReplication;
+            globalAverageVisits = "Priemerný počet ľudí za deň: " + e.GlobalVisits;
+            leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + e.GlobalLeftInSystem;
+            this.Invoke(new Action(() => RefreshGlobal()));
+        }
+        public void RefreshGlobal()
+        {
+            labelGlobalTimeSpent.Text = globalAverageActual;
+            labelReplication.Text = numberOfReplication;
+            label11.Text = globalAverageVisits;
+            labelLeftInSystem.Text = leftInSystem;
+        }
         private void SimulationDetailsHandler(object? sender, SimulationDetailsEventArgs e)
         {
 
@@ -87,8 +107,9 @@ namespace SimulationAppV2
         {
             cts = new CancellationTokenSource();
             RefreshTable();
-            //timer1.Enabled = true;
-            Task.Run(() => simSTK.Simulate(1, cts.Token));
+            simSTK.NumberOfCashier = (int)numericCashier.Value;
+            simSTK.NumberOfTechnicians = (int)numericTechnician.Value;
+            Task.Run(() => simSTK.Simulate((int)numericReplications.Value, cts.Token));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
