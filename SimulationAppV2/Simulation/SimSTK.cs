@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimulationAppV2.Simulation.SimObject.STK;
+using SimulationAppV2.Statistics;
 
 namespace SimulationAppV2.Simulation
 {
@@ -53,6 +54,8 @@ namespace SimulationAppV2.Simulation
         }
         public STKDetails STKDetails { get; set; }
 
+        public Average AverageTimeInSystem { get; set; }
+
         public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
         public SimSTK()
         {
@@ -73,8 +76,8 @@ namespace SimulationAppV2.Simulation
             RefreshTime = 10;
             CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
-            int pokladnici = 10;  //7
-            int technici = 20; //10 blizko
+            int pokladnici = 6;  //7
+            int technici = 22; //10 blizko
             cashiers = new CashierSTK[pokladnici];
             for (int i = 0; i < cashiers.Length; i++)
             {
@@ -91,8 +94,10 @@ namespace SimulationAppV2.Simulation
 
         public override void BeforeReplication()
         {
+            AverageTimeInSystem = new Average();
+
             Event.Event helpEvent;
-            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType(), 1));
+            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType(), 1, CurrentTime));
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
             
@@ -159,7 +164,8 @@ namespace SimulationAppV2.Simulation
                                                                     AvailableTechnicians.Count(),
                                                                     Technicians,
                                                                     Cashiers,
-                                                                    CustomersInSystem
+                                                                    CustomersInSystem,
+                                                                    AverageTimeInSystem.getActualAverage()
                                                                     //Arrived,
                                                                     //Left
                                                                     ));
@@ -177,8 +183,9 @@ namespace SimulationAppV2.Simulation
         public TechnicianSTK[] Technicians { get; }
         public CashierSTK[] Cashier { get; }
         public Dictionary<int, CustomerSTK> customersInSystem { get; }
+        public double AverageActual { get; }
         public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician, 
-                                            TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers)
+                                            TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers, double averageActual)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -189,6 +196,7 @@ namespace SimulationAppV2.Simulation
             Technicians = technicians;
             Cashier = cashier;
             this.customersInSystem = customers;
+            AverageActual = averageActual;
         }
     }
 }

@@ -47,6 +47,7 @@
             dataGridView2 = new DataGridView();
             dataGridView3 = new DataGridView();
             label9 = new Label();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -67,7 +68,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(762, 523);
+            label1.Location = new Point(469, 477);
             label1.Name = "label1";
             label1.Size = new Size(63, 25);
             label1.TabIndex = 1;
@@ -80,7 +81,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(680, 565);
+            label3.Location = new Point(385, 535);
             label3.Name = "label3";
             label3.Size = new Size(38, 15);
             label3.TabIndex = 3;
@@ -89,7 +90,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(863, 565);
+            label4.Location = new Point(577, 531);
             label4.Name = "label4";
             label4.Size = new Size(38, 15);
             label4.TabIndex = 4;
@@ -172,7 +173,7 @@
             // 
             // trackBar1
             // 
-            trackBar1.Location = new Point(385, 523);
+            trackBar1.Location = new Point(385, 429);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
@@ -182,7 +183,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(680, 12);
+            dataGridView1.Location = new Point(799, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(358, 217);
@@ -191,7 +192,7 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(1044, 12);
+            dataGridView2.Location = new Point(1163, 12);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.Size = new Size(333, 217);
@@ -200,7 +201,7 @@
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(1044, 255);
+            dataGridView3.Location = new Point(1163, 249);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.RowTemplate.Height = 25;
             dataGridView3.Size = new Size(333, 360);
@@ -215,11 +216,21 @@
             label9.TabIndex = 17;
             label9.Text = "label9";
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(706, 497);
+            label10.Name = "label10";
+            label10.Size = new Size(44, 15);
+            label10.TabIndex = 18;
+            label10.Text = "label10";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1494, 627);
+            ClientSize = new Size(1508, 742);
+            Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(dataGridView3);
             Controls.Add(dataGridView2);
@@ -267,5 +278,6 @@
         private DataGridView dataGridView2;
         private DataGridView dataGridView3;
         private Label label9;
+        private Label label10;
     }
 }

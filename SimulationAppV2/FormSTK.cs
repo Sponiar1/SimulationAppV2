@@ -28,6 +28,7 @@ namespace SimulationAppV2
         TechnicianSTK[] technicianSTKs;
         CashierSTK[] cashierSTKs;
         Dictionary<int, CustomerSTK> customersInSystem;
+        String averageActual;
         public FormSTK()
         {
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace SimulationAppV2
             cashierSTKs = e.Cashier;
             customersInSystem = e.customersInSystem;
             customersInShop = "Počet zákazníkov v systéme: " + customersInSystem.Count();
+            averageActual = "Priemerný čas strávený v prevádzke: " + e.AverageActual;
             this.Invoke(new Action(() => Refresh()));
 
         }
@@ -65,6 +67,7 @@ namespace SimulationAppV2
             label7.Text = freeTechnician;
             label9.Text = customersInShop;
             dataGridView1.Rows.Clear();
+            label10.Text = averageActual;
             foreach (var worker in technicianSTKs)
             {
                 dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar);

@@ -11,11 +11,13 @@ namespace SimulationAppV2.Simulation.SimObject.STK
         public CarType Car { get; set; }
         public int ID { get; }
         public Status Status { get; set; }
-        public CustomerSTK(CarType car, int id)
+        public double Arrival {get; set; }
+        public CustomerSTK(CarType car, int id, double arrival)
         {
             Car = car;
             ID = id;
             Status = 0;
+            Arrival = arrival;
         }
     }
 

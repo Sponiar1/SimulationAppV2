@@ -46,7 +46,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 
                 //myCore.ControlWaiting.Enqueue(customer);
             }
-            CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType(), customerId);
+            CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType(), customerId, Time);
             customerId++;
             this.customer = newCustomer;
         }
