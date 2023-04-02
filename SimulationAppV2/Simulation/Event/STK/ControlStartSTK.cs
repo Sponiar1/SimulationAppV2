@@ -24,6 +24,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             
             if(myCore.Customers.Count() > 0 && myCore.AvailableCashiers.Count() > 0 && myCore.PaymentQueue.Count() == 0) 
             {
+                myCore.updateAverageCashiersInSystem();
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), myCore.AvailableCashiers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
                 //myCore.AvailableCashiers--;

@@ -31,10 +31,11 @@ namespace SimulationAppV2.Simulation.Event.STK
             else
             {
                 //myCore.AvailableCashiers++;
+                myCore.updateAverageCashiersInSystem();
                 cashier.BeginBreak();
                 myCore.AvailableCashiers.Enqueue(cashier);
             }
-            myCore.updatePeopleInSystem();
+            myCore.updateAverageCustomersInSystem();
             myCore.CustomersInSystem.Remove(customer.ID);
             myCore.Left++;
             myCore.AverageTimeInSystem.Add(Time - customer.Arrival);

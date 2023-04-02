@@ -26,6 +26,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
+                myCore.updateAverageTechniciansInSystem();
                 myCore.AvailableTechnicians.Enqueue(technicianSTK);
                 technicianSTK.WorkingOn = TechnicianWork.Break;
                 technicianSTK.ControlledCar = CarType.None;
@@ -33,6 +34,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 
             if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers.Count() > 0)
             {
+                myCore.updateAverageCashiersInSystem();
                 PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, customer, myCore.AvailableCashiers.Dequeue());
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);

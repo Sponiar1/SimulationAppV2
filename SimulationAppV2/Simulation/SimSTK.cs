@@ -59,7 +59,13 @@ namespace SimulationAppV2.Simulation
         public Average GlobalTakeOverWaiting { get; set; }
         public WeightedAverage AveragePeopleInSystem { get; set; }
         public Average GlobalAveragePeopleInSystem { get; set; }
-        double timeSinceLastChange;
+        double timeSinceLastChangeCustomers;
+        public WeightedAverage AverageFreeCashier { get; set; }
+        public Average GlobalAverageFreeCashier { get; set; }
+        double timeSinceLastChangeCashiers;
+        public WeightedAverage AverageFreeTechnician { get; set; }
+        public Average GlobalAverageFreeTechnician { get; set; }
+        double timeSinceLastChangeTechnician;
         public ConfidenceInterval CIAverageTimeInSystem { get; set; }
         public ConfidenceInterval CIAverageNumberOfCustomers { get; set; }
         #endregion
@@ -94,6 +100,8 @@ namespace SimulationAppV2.Simulation
             GlobalLeftInSystem = new Average();
             GlobalTakeOverWaiting = new Average();
             GlobalAveragePeopleInSystem = new Average();
+            GlobalAverageFreeCashier = new Average();
+            GlobalAverageFreeTechnician = new Average();
             CIAverageTimeInSystem = new ConfidenceInterval();
             CIAverageNumberOfCustomers = new ConfidenceInterval();
             #endregion
@@ -106,12 +114,16 @@ namespace SimulationAppV2.Simulation
             AverageTimeInSystem = new Average();
             TakeOverWaiting = new Average();
             AveragePeopleInSystem = new WeightedAverage();
+            AverageFreeCashier = new WeightedAverage();
+            AverageFreeTechnician = new WeightedAverage();
             Arrived = 0;
             Left = 0;
             CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
             AvailableSpots = 5;
-            timeSinceLastChange = CurrentTime;
+            timeSinceLastChangeCustomers = CurrentTime;
+            timeSinceLastChangeCashiers = CurrentTime;
+            timeSinceLastChangeTechnician = CurrentTime;
             #endregion
 
             #region StartingEvent
@@ -154,6 +166,8 @@ namespace SimulationAppV2.Simulation
             CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
             GlobalAveragePeopleInSystem.Add(AveragePeopleInSystem.getWeightedAverage());
             CIAverageNumberOfCustomers.add(AveragePeopleInSystem.getWeightedAverage());
+            GlobalAverageFreeCashier.Add(AverageFreeCashier.getWeightedAverage());
+            GlobalAverageFreeTechnician.Add(AverageFreeTechnician.getWeightedAverage());
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
             {
                 refreshGlobalStatOnGui();
@@ -210,10 +224,21 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        public void updatePeopleInSystem()
+        public void updateAverageCustomersInSystem()
         {
-            AveragePeopleInSystem.add((CurrentTime - timeSinceLastChange) * CustomersInSystem.Count(), (CurrentTime - timeSinceLastChange));
-            timeSinceLastChange = CurrentTime;
+            AveragePeopleInSystem.add((CurrentTime - timeSinceLastChangeCustomers) * CustomersInSystem.Count(), (CurrentTime - timeSinceLastChangeCustomers));
+            timeSinceLastChangeCustomers = CurrentTime;
+        }
+
+        public void updateAverageCashiersInSystem()
+        {
+            AverageFreeCashier.add((CurrentTime - timeSinceLastChangeCashiers) * AvailableCashiers.Count(), (CurrentTime - timeSinceLastChangeCashiers));
+            timeSinceLastChangeCashiers = CurrentTime;
+        }
+        public void updateAverageTechniciansInSystem()
+        {
+            AverageFreeTechnician.add((CurrentTime - timeSinceLastChangeTechnician) * AvailableTechnicians.Count(), (CurrentTime - timeSinceLastChangeTechnician));
+            timeSinceLastChangeTechnician = CurrentTime;
         }
 
         public void refreshGlobalStatOnGui()
@@ -223,7 +248,9 @@ namespace SimulationAppV2.Simulation
                                                                     GlobalAverageVisits.getActualAverage(),
                                                                     GlobalLeftInSystem.getActualAverage(),
                                                                     GlobalTakeOverWaiting.getActualAverage(),
-                                                                    GlobalAveragePeopleInSystem.getActualAverage()
+                                                                    GlobalAveragePeopleInSystem.getActualAverage(),
+                                                                    GlobalAverageFreeCashier.getActualAverage(),
+                                                                    GlobalAverageFreeTechnician.getActualAverage()
                                                                     ));
         }
         public override void refreshGui()
@@ -239,7 +266,9 @@ namespace SimulationAppV2.Simulation
                                                                     CustomersInSystem,
                                                                     AverageTimeInSystem.getActualAverage(),
                                                                     TakeOverWaiting.getActualAverage(),
-                                                                    AveragePeopleInSystem.getWeightedAverage()
+                                                                    AveragePeopleInSystem.getWeightedAverage(),
+                                                                    AverageFreeCashier.getWeightedAverage(),
+                                                                    AverageFreeTechnician.getWeightedAverage()
                                                                     //Arrived,
                                                                     //Left
                                                                     )) ; 
@@ -260,9 +289,11 @@ namespace SimulationAppV2.Simulation
         public double AverageActual { get; }
         public double AverageTakeOverWaiting { get; }
         public double AveragePeopleInSystem { get; }
+        public double AverageFreeCashiers { get; }
+        public double AverageFreeTechnician { get; }
         public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician,
                                             TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers, double averageActual,
-                                            double averageTakeOverWaiting, double averagePeopleInSystem)
+                                            double averageTakeOverWaiting, double averagePeopleInSystem, double averageFreeCashiers, double averageFreeTechnician)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -276,6 +307,8 @@ namespace SimulationAppV2.Simulation
             AverageActual = averageActual;
             AverageTakeOverWaiting = averageTakeOverWaiting;
             AveragePeopleInSystem = averagePeopleInSystem;
+            AverageFreeCashiers = averageFreeCashiers;
+            AverageFreeTechnician = averageFreeTechnician;
         }
     }
 
@@ -287,12 +320,16 @@ namespace SimulationAppV2.Simulation
         public double GlobalLeftInSystem { get; set; }
         public double GlobalTakeOverWaiting { get; set; }
         public double GlobalAveragePeopleInSystem { get; set; }
+        public double GlobalAverageFreeCashiers { get; set; }
+        public double GlobalAverageFreeTechnicians { get; set; }
         public GlobalDetailsEventArgs(double globalAverage,
                                       int numberOfReplication,
                                       double globalVisits,
                                       double globalLeftInSystem,
                                       double globalTakeOverWaiting,
-                                      double globalAveragePeopleInSystem)
+                                      double globalAveragePeopleInSystem,
+                                      double globalAverageFreeCashiers,
+                                      double globalAverageFreeTechnicians)
         {
             NumberOfReplication = numberOfReplication;
             GlobalAverage = globalAverage;
@@ -300,6 +337,8 @@ namespace SimulationAppV2.Simulation
             GlobalLeftInSystem = globalLeftInSystem;
             GlobalTakeOverWaiting = globalTakeOverWaiting;
             GlobalAveragePeopleInSystem = globalAveragePeopleInSystem;
+            GlobalAverageFreeCashiers = globalAverageFreeCashiers;
+            GlobalAverageFreeTechnicians = globalAverageFreeTechnicians;
         }
     }
 

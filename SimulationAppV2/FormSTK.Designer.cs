@@ -62,6 +62,10 @@
             labelCIPeopleInSystem = new Label();
             labelGlobalAveragePeopleInSystem = new Label();
             labelAveragePeopleInSystem = new Label();
+            labelAverageFreeCashiers = new Label();
+            labelAverageFreeTechnicians = new Label();
+            labelGlobalAverageFreeCashiers = new Label();
+            labelGlobalAverageFreeTechnicians = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -207,7 +211,7 @@
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(1214, 322);
+            dataGridView3.Location = new Point(1214, 342);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.RowTemplate.Height = 25;
             dataGridView3.Size = new Size(358, 360);
@@ -225,7 +229,7 @@
             // labelAverageTimeInSystem
             // 
             labelAverageTimeInSystem.AutoSize = true;
-            labelAverageTimeInSystem.Location = new Point(850, 374);
+            labelAverageTimeInSystem.Location = new Point(850, 394);
             labelAverageTimeInSystem.Name = "labelAverageTimeInSystem";
             labelAverageTimeInSystem.Size = new Size(196, 15);
             labelAverageTimeInSystem.TabIndex = 18;
@@ -235,7 +239,7 @@
             // 
             labelReplication.AutoSize = true;
             labelReplication.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            labelReplication.Location = new Point(697, 531);
+            labelReplication.Location = new Point(697, 517);
             labelReplication.Name = "labelReplication";
             labelReplication.Size = new Size(119, 25);
             labelReplication.TabIndex = 19;
@@ -313,7 +317,7 @@
             // labelAverageTakeOver
             // 
             labelAverageTakeOver.AutoSize = true;
-            labelAverageTakeOver.Location = new Point(850, 347);
+            labelAverageTakeOver.Location = new Point(850, 367);
             labelAverageTakeOver.Name = "labelAverageTakeOver";
             labelAverageTakeOver.Size = new Size(231, 15);
             labelAverageTakeOver.TabIndex = 509;
@@ -391,17 +395,57 @@
             // labelAveragePeopleInSystem
             // 
             labelAveragePeopleInSystem.AutoSize = true;
-            labelAveragePeopleInSystem.Location = new Point(850, 322);
+            labelAveragePeopleInSystem.Location = new Point(850, 342);
             labelAveragePeopleInSystem.Name = "labelAveragePeopleInSystem";
             labelAveragePeopleInSystem.Size = new Size(174, 15);
             labelAveragePeopleInSystem.TabIndex = 517;
             labelAveragePeopleInSystem.Text = "Priemerný počet ľudí v sytéme: ";
+            // 
+            // labelAverageFreeCashiers
+            // 
+            labelAverageFreeCashiers.AutoSize = true;
+            labelAverageFreeCashiers.Location = new Point(850, 283);
+            labelAverageFreeCashiers.Name = "labelAverageFreeCashiers";
+            labelAverageFreeCashiers.Size = new Size(233, 15);
+            labelAverageFreeCashiers.TabIndex = 518;
+            labelAverageFreeCashiers.Text = "Priemerný počet voľlých pracovníkov sk.1: ";
+            // 
+            // labelAverageFreeTechnicians
+            // 
+            labelAverageFreeTechnicians.AutoSize = true;
+            labelAverageFreeTechnicians.Location = new Point(1220, 309);
+            labelAverageFreeTechnicians.Name = "labelAverageFreeTechnicians";
+            labelAverageFreeTechnicians.Size = new Size(234, 15);
+            labelAverageFreeTechnicians.TabIndex = 519;
+            labelAverageFreeTechnicians.Text = "Priemerný počet voľných pracovníkov sk.2:";
+            // 
+            // labelGlobalAverageFreeCashiers
+            // 
+            labelGlobalAverageFreeCashiers.AutoSize = true;
+            labelGlobalAverageFreeCashiers.Location = new Point(697, 742);
+            labelGlobalAverageFreeCashiers.Name = "labelGlobalAverageFreeCashiers";
+            labelGlobalAverageFreeCashiers.Size = new Size(275, 15);
+            labelGlobalAverageFreeCashiers.TabIndex = 520;
+            labelGlobalAverageFreeCashiers.Text = "Priemerný počet voľných pracovníkov sk.1(global):";
+            // 
+            // labelGlobalAverageFreeTechnicians
+            // 
+            labelGlobalAverageFreeTechnicians.AutoSize = true;
+            labelGlobalAverageFreeTechnicians.Location = new Point(697, 772);
+            labelGlobalAverageFreeTechnicians.Name = "labelGlobalAverageFreeTechnicians";
+            labelGlobalAverageFreeTechnicians.Size = new Size(275, 15);
+            labelGlobalAverageFreeTechnicians.TabIndex = 521;
+            labelGlobalAverageFreeTechnicians.Text = "Priemerný počet voľných pracovníkov sk.2(global):";
             // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1579, 807);
+            Controls.Add(labelGlobalAverageFreeTechnicians);
+            Controls.Add(labelGlobalAverageFreeCashiers);
+            Controls.Add(labelAverageFreeTechnicians);
+            Controls.Add(labelAverageFreeCashiers);
             Controls.Add(labelAveragePeopleInSystem);
             Controls.Add(labelGlobalAveragePeopleInSystem);
             Controls.Add(labelCIPeopleInSystem);
@@ -485,5 +529,9 @@
         private Label labelCIPeopleInSystem;
         private Label labelGlobalAveragePeopleInSystem;
         private Label labelAveragePeopleInSystem;
+        private Label labelAverageFreeCashiers;
+        private Label labelAverageFreeTechnicians;
+        private Label labelGlobalAverageFreeCashiers;
+        private Label labelGlobalAverageFreeTechnicians;
     }
 }

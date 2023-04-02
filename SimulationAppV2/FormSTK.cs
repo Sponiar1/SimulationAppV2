@@ -37,6 +37,10 @@ namespace SimulationAppV2
         String globalWaitingTakeOver;
         String averagePeopleInSystem;
         String globalAveragePeopleInSystem;
+        String averageFreeCashiers;
+        String globalAverageFreeCashiers;
+        String averageFreeTechnicians;
+        String globalAverageFreeTechnicians;
         String conIntervalTimeInSystem;
         String conIntervalPeopleInSystem;
         Boolean showCustomers = false;
@@ -72,6 +76,8 @@ namespace SimulationAppV2
             leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + e.GlobalLeftInSystem;
             globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: " + e.GlobalTakeOverWaiting;
             globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): " + e.GlobalAveragePeopleInSystem;
+            globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1(global): " + e.GlobalAverageFreeCashiers;
+            globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2(global): " + e.GlobalAverageFreeTechnicians;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
 
@@ -83,6 +89,8 @@ namespace SimulationAppV2
             labelLeftInSystem.Text = leftInSystem;
             labelGlobalTakeOver.Text = globalWaitingTakeOver;
             labelGlobalAveragePeopleInSystem.Text = globalAveragePeopleInSystem;
+            labelGlobalAverageFreeCashiers.Text = globalAverageFreeCashiers;
+            labelGlobalAverageFreeTechnicians.Text = globalAverageFreeTechnicians;
         }
         private void SimulationDetailsHandler(object? sender, SimulationDetailsEventArgs e)
         {
@@ -100,8 +108,9 @@ namespace SimulationAppV2
             averageActual = "Priemerný čas strávený v prevádzke: " + e.AverageActual;
             averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: " + e.AverageTakeOverWaiting;
             averagePeopleInSystem = "Priemerný počet ľudí v systéme: " + e.AveragePeopleInSystem;
+            averageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + e.AverageFreeCashiers;
+            averageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + e.AverageFreeTechnician;
             this.Invoke(new Action(() => Refresh()));
-
         }
 
         private void Refresh()
@@ -116,6 +125,8 @@ namespace SimulationAppV2
             labelAverageTakeOver.Text = averageWaitingTakeOver;
             labelAverageTimeInSystem.Text = averageActual;
             labelAveragePeopleInSystem.Text = averagePeopleInSystem;
+            labelAverageFreeCashiers.Text = averageFreeCashiers;
+            labelAverageFreeTechnicians.Text = averageFreeTechnicians;
             dataGridView1.Rows.Clear();
             if (showTechnicians)
             {
