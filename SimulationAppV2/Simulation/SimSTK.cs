@@ -58,7 +58,7 @@ namespace SimulationAppV2.Simulation
         public Average TakeOverWaiting { get; set; }
         public Average GlobalTakeOverWaiting { get; set; }
         public WeightedAverage AveragePeopleInSystem { get; set; }
-        public WeightedAverage GlobalAveragePeopleInSystem { get; set; }
+        public Average GlobalAveragePeopleInSystem { get; set; }
         double timeSinceLastChange;
         public ConfidenceInterval CIAverageTimeInSystem { get; set; }
         public ConfidenceInterval CIAverageNumberOfCustomers { get; set; }
@@ -93,7 +93,7 @@ namespace SimulationAppV2.Simulation
             GlobalAverageVisits = new Average();
             GlobalLeftInSystem = new Average();
             GlobalTakeOverWaiting = new Average();
-            GlobalAveragePeopleInSystem = new WeightedAverage();
+            GlobalAveragePeopleInSystem = new Average();
             CIAverageTimeInSystem = new ConfidenceInterval();
             CIAverageNumberOfCustomers = new ConfidenceInterval();
             #endregion
@@ -147,13 +147,15 @@ namespace SimulationAppV2.Simulation
 
         public override void AfterReplication()
         {
+            GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
+            GlobalAverageVisits.Add(Arrived);
+            GlobalLeftInSystem.Add(Arrived - Left);
+            GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
+            CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
+            GlobalAveragePeopleInSystem.Add(AveragePeopleInSystem.getWeightedAverage());
+            CIAverageNumberOfCustomers.add(AveragePeopleInSystem.getWeightedAverage());
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
             {
-                GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
-                GlobalAverageVisits.Add(Arrived);
-                GlobalLeftInSystem.Add(Arrived - Left);
-                GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
-                CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
                 refreshGlobalStatOnGui();
             }
         }
@@ -220,7 +222,8 @@ namespace SimulationAppV2.Simulation
                                                                     ReplicationsDone + 1,
                                                                     GlobalAverageVisits.getActualAverage(),
                                                                     GlobalLeftInSystem.getActualAverage(),
-                                                                    GlobalTakeOverWaiting.getActualAverage()
+                                                                    GlobalTakeOverWaiting.getActualAverage(),
+                                                                    GlobalAveragePeopleInSystem.getActualAverage()
                                                                     ));
         }
         public override void refreshGui()
@@ -283,17 +286,20 @@ namespace SimulationAppV2.Simulation
         public double GlobalVisits { get; set; }
         public double GlobalLeftInSystem { get; set; }
         public double GlobalTakeOverWaiting { get; set; }
+        public double GlobalAveragePeopleInSystem { get; set; }
         public GlobalDetailsEventArgs(double globalAverage,
                                       int numberOfReplication,
                                       double globalVisits,
                                       double globalLeftInSystem,
-                                      double globalTakeOverWaiting)
+                                      double globalTakeOverWaiting,
+                                      double globalAveragePeopleInSystem)
         {
             NumberOfReplication = numberOfReplication;
             GlobalAverage = globalAverage;
             GlobalVisits = globalVisits;
             GlobalLeftInSystem = globalLeftInSystem;
             GlobalTakeOverWaiting = globalTakeOverWaiting;
+            GlobalAveragePeopleInSystem = globalAveragePeopleInSystem;
         }
     }
 
@@ -306,12 +312,12 @@ namespace SimulationAppV2.Simulation
         public AfterSimulationDetailsEventArgs(ConfidenceInterval confidenceTimeInSystem, ConfidenceInterval confidenceAverageCustomers)
         {
             confidenceTimeInSystem.setStandardDeviation();
-            CITimeInSystemLeft = Math.Round(confidenceTimeInSystem.getLeftSideNinety(),5);
-            CITimeInSystemRight = Math.Round(confidenceTimeInSystem.getRightSideNinety(),5);
+            CITimeInSystemLeft = Math.Round(confidenceTimeInSystem.getLeftSideNinety(),6);
+            CITimeInSystemRight = Math.Round(confidenceTimeInSystem.getRightSideNinety(),6);
 
             confidenceAverageCustomers.setStandardDeviation();
-            CIAverageCustomersLeft = Math.Round(confidenceAverageCustomers.getLeftSideNinetyFive(), 5);
-            CIAverageCustomersRight = Math.Round(confidenceAverageCustomers.getRightSideNinetyFive(), 5);
+            CIAverageCustomersLeft = Math.Round(confidenceAverageCustomers.getLeftSideNinetyFive(), 6);
+            CIAverageCustomersRight = Math.Round(confidenceAverageCustomers.getRightSideNinetyFive(), 6);
         }
     }
 }

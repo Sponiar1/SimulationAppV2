@@ -29,31 +29,31 @@
         private void InitializeComponent()
         {
             button1 = new Button();
-            label1 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            labelCurrentTime = new Label();
+            labelOpening = new Label();
+            labelClosing = new Label();
             button2 = new Button();
             button4 = new Button();
-            label2 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
+            labelControlParking = new Label();
+            labelPaymentQueue = new Label();
+            labelCashiers = new Label();
+            labelTechnician = new Label();
+            labelCheckInWait = new Label();
             trackBar1 = new TrackBar();
             dataGridView1 = new DataGridView();
             dataGridView2 = new DataGridView();
             dataGridView3 = new DataGridView();
-            label9 = new Label();
-            label10 = new Label();
+            labelCustomersInSystem = new Label();
+            labelAverageTimeInSystem = new Label();
             labelReplication = new Label();
             numericCashier = new NumericUpDown();
             numericTechnician = new NumericUpDown();
             numericReplications = new NumericUpDown();
             labelGlobalTimeSpent = new Label();
-            label11 = new Label();
+            labelAverageVisits = new Label();
             labelLeftInSystem = new Label();
             checkBox1 = new CheckBox();
-            label12 = new Label();
+            labelAverageTakeOver = new Label();
             checkBoxWorker2 = new CheckBox();
             checkBoxWorker1 = new CheckBox();
             checkBoxCustomers = new CheckBox();
@@ -81,33 +81,33 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // label1
+            // labelCurrentTime
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(454, 60);
-            label1.Name = "label1";
-            label1.Size = new Size(126, 25);
-            label1.TabIndex = 1;
-            label1.Text = "Aktuálny čas: ";
+            labelCurrentTime.AutoSize = true;
+            labelCurrentTime.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCurrentTime.Location = new Point(454, 60);
+            labelCurrentTime.Name = "labelCurrentTime";
+            labelCurrentTime.Size = new Size(160, 25);
+            labelCurrentTime.TabIndex = 1;
+            labelCurrentTime.Text = "Aktuálny čas: 9:00";
             // 
-            // label3
+            // labelOpening
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(410, 109);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 3;
-            label3.Text = "label3";
+            labelOpening.AutoSize = true;
+            labelOpening.Location = new Point(410, 109);
+            labelOpening.Name = "labelOpening";
+            labelOpening.Size = new Size(74, 15);
+            labelOpening.TabIndex = 3;
+            labelOpening.Text = "Otvárací čas:";
             // 
-            // label4
+            // labelClosing
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(602, 109);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 4;
-            label4.Text = "label4";
+            labelClosing.AutoSize = true;
+            labelClosing.Location = new Point(602, 109);
+            labelClosing.Name = "labelClosing";
+            labelClosing.Size = new Size(76, 15);
+            labelClosing.TabIndex = 4;
+            labelClosing.Text = "Zatvára sa o: ";
             // 
             // button2
             // 
@@ -129,50 +129,50 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
-            // label2
+            // labelControlParking
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(1220, 283);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 8;
-            label2.Text = "label2";
+            labelControlParking.AutoSize = true;
+            labelControlParking.Location = new Point(1220, 283);
+            labelControlParking.Name = "labelControlParking";
+            labelControlParking.Size = new Size(279, 15);
+            labelControlParking.TabIndex = 8;
+            labelControlParking.Text = "Počet čakjúcich áut na parkovisku pred inšpekciou: ";
             // 
-            // label5
+            // labelPaymentQueue
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(1220, 772);
-            label5.Name = "label5";
-            label5.Size = new Size(38, 15);
-            label5.TabIndex = 9;
-            label5.Text = "label5";
+            labelPaymentQueue.AutoSize = true;
+            labelPaymentQueue.Location = new Point(1220, 772);
+            labelPaymentQueue.Name = "labelPaymentQueue";
+            labelPaymentQueue.Size = new Size(195, 15);
+            labelPaymentQueue.TabIndex = 9;
+            labelPaymentQueue.Text = "Počet ľudí čakajúcich na zaplatenie:";
             // 
-            // label6
+            // labelCashiers
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(934, 253);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 10;
-            label6.Text = "label6";
+            labelCashiers.AutoSize = true;
+            labelCashiers.Location = new Point(850, 253);
+            labelCashiers.Name = "labelCashiers";
+            labelCashiers.Size = new Size(226, 15);
+            labelCashiers.TabIndex = 10;
+            labelCashiers.Text = "Počet voľných pokladníkov(Pracovníci 1):";
             // 
-            // label7
+            // labelTechnician
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(1220, 253);
-            label7.Name = "label7";
-            label7.Size = new Size(38, 15);
-            label7.TabIndex = 11;
-            label7.Text = "label7";
+            labelTechnician.AutoSize = true;
+            labelTechnician.Location = new Point(1220, 253);
+            labelTechnician.Name = "labelTechnician";
+            labelTechnician.Size = new Size(213, 15);
+            labelTechnician.TabIndex = 11;
+            labelTechnician.Text = "Počet voľných technikov(Pracovníci 2):";
             // 
-            // label8
+            // labelCheckInWait
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(1220, 742);
-            label8.Name = "label8";
-            label8.Size = new Size(38, 15);
-            label8.TabIndex = 12;
-            label8.Text = "label8";
+            labelCheckInWait.AutoSize = true;
+            labelCheckInWait.Location = new Point(1220, 742);
+            labelCheckInWait.Name = "labelCheckInWait";
+            labelCheckInWait.Size = new Size(189, 15);
+            labelCheckInWait.TabIndex = 12;
+            labelCheckInWait.Text = "Počet ľudí čakajúcich na prevzatie:";
             // 
             // trackBar1
             // 
@@ -213,32 +213,32 @@
             dataGridView3.Size = new Size(358, 360);
             dataGridView3.TabIndex = 16;
             // 
-            // label9
+            // labelCustomersInSystem
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(1220, 716);
-            label9.Name = "label9";
-            label9.Size = new Size(38, 15);
-            label9.TabIndex = 17;
-            label9.Text = "label9";
+            labelCustomersInSystem.AutoSize = true;
+            labelCustomersInSystem.Location = new Point(1220, 716);
+            labelCustomersInSystem.Name = "labelCustomersInSystem";
+            labelCustomersInSystem.Size = new Size(158, 15);
+            labelCustomersInSystem.TabIndex = 17;
+            labelCustomersInSystem.Text = "Počet zákazníkov v systéme: ";
             // 
-            // label10
+            // labelAverageTimeInSystem
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(695, 457);
-            label10.Name = "label10";
-            label10.Size = new Size(44, 15);
-            label10.TabIndex = 18;
-            label10.Text = "label10";
+            labelAverageTimeInSystem.AutoSize = true;
+            labelAverageTimeInSystem.Location = new Point(697, 476);
+            labelAverageTimeInSystem.Name = "labelAverageTimeInSystem";
+            labelAverageTimeInSystem.Size = new Size(196, 15);
+            labelAverageTimeInSystem.TabIndex = 18;
+            labelAverageTimeInSystem.Text = "Priemerný čas strávený v prevádzke:";
             // 
             // labelReplication
             // 
             labelReplication.AutoSize = true;
-            labelReplication.Location = new Point(695, 491);
+            labelReplication.Location = new Point(695, 532);
             labelReplication.Name = "labelReplication";
-            labelReplication.Size = new Size(91, 15);
+            labelReplication.Size = new Size(80, 15);
             labelReplication.TabIndex = 19;
-            labelReplication.Text = "labelReplication";
+            labelReplication.Text = "Replikácia no.";
             // 
             // numericCashier
             // 
@@ -276,27 +276,27 @@
             labelGlobalTimeSpent.AutoSize = true;
             labelGlobalTimeSpent.Location = new Point(695, 636);
             labelGlobalTimeSpent.Name = "labelGlobalTimeSpent";
-            labelGlobalTimeSpent.Size = new Size(122, 15);
+            labelGlobalTimeSpent.Size = new Size(240, 15);
             labelGlobalTimeSpent.TabIndex = 505;
-            labelGlobalTimeSpent.Text = "labelGlobalTimeSpent";
+            labelGlobalTimeSpent.Text = "Priemerný čas strávený v prevádzke(global): ";
             // 
-            // label11
+            // labelAverageVisits
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(695, 554);
-            label11.Name = "label11";
-            label11.Size = new Size(44, 15);
-            label11.TabIndex = 506;
-            label11.Text = "label11";
+            labelAverageVisits.AutoSize = true;
+            labelAverageVisits.Location = new Point(697, 556);
+            labelAverageVisits.Name = "labelAverageVisits";
+            labelAverageVisits.Size = new Size(161, 15);
+            labelAverageVisits.TabIndex = 506;
+            labelAverageVisits.Text = "Priemerný počet ľudí za deň: ";
             // 
             // labelLeftInSystem
             // 
             labelLeftInSystem.AutoSize = true;
             labelLeftInSystem.Location = new Point(695, 581);
             labelLeftInSystem.Name = "labelLeftInSystem";
-            labelLeftInSystem.Size = new Size(100, 15);
+            labelLeftInSystem.Size = new Size(248, 15);
             labelLeftInSystem.TabIndex = 507;
-            labelLeftInSystem.Text = "labelLeftInSystem";
+            labelLeftInSystem.Text = "Priemerný počet ľudí v systéme po uzávierke: ";
             // 
             // checkBox1
             // 
@@ -309,14 +309,14 @@
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // label12
+            // labelAverageTakeOver
             // 
-            label12.AutoSize = true;
-            label12.Location = new Point(695, 428);
-            label12.Name = "label12";
-            label12.Size = new Size(44, 15);
-            label12.TabIndex = 509;
-            label12.Text = "label12";
+            labelAverageTakeOver.AutoSize = true;
+            labelAverageTakeOver.Location = new Point(697, 449);
+            labelAverageTakeOver.Name = "labelAverageTakeOver";
+            labelAverageTakeOver.Size = new Size(231, 15);
+            labelAverageTakeOver.TabIndex = 509;
+            labelAverageTakeOver.Text = "Priemerný čas čakania v rade na prevzatie: ";
             // 
             // checkBoxWorker2
             // 
@@ -356,9 +356,9 @@
             labelGlobalTakeOver.AutoSize = true;
             labelGlobalTakeOver.Location = new Point(695, 609);
             labelGlobalTakeOver.Name = "labelGlobalTakeOver";
-            labelGlobalTakeOver.Size = new Size(266, 15);
+            labelGlobalTakeOver.Size = new Size(257, 15);
             labelGlobalTakeOver.TabIndex = 513;
-            labelGlobalTakeOver.Text = "Globálne priemerné čakanie na odovzdanie auta: ";
+            labelGlobalTakeOver.Text = "Priemerné čakanie na odovzdanie auta(global): ";
             // 
             // labelCITimeInSystem
             // 
@@ -383,18 +383,18 @@
             labelGlobalAveragePeopleInSystem.AutoSize = true;
             labelGlobalAveragePeopleInSystem.Location = new Point(696, 687);
             labelGlobalAveragePeopleInSystem.Name = "labelGlobalAveragePeopleInSystem";
-            labelGlobalAveragePeopleInSystem.Size = new Size(174, 15);
+            labelGlobalAveragePeopleInSystem.Size = new Size(215, 15);
             labelGlobalAveragePeopleInSystem.TabIndex = 516;
-            labelGlobalAveragePeopleInSystem.Text = "Priemerný počet ľudí v ystéme: ";
+            labelGlobalAveragePeopleInSystem.Text = "Priemerný počet ľudí v sytéme(global): ";
             // 
             // labelAveragePeopleInSystem
             // 
             labelAveragePeopleInSystem.AutoSize = true;
-            labelAveragePeopleInSystem.Location = new Point(697, 519);
+            labelAveragePeopleInSystem.Location = new Point(697, 424);
             labelAveragePeopleInSystem.Name = "labelAveragePeopleInSystem";
             labelAveragePeopleInSystem.Size = new Size(174, 15);
             labelAveragePeopleInSystem.TabIndex = 517;
-            labelAveragePeopleInSystem.Text = "Priemerný počet ľudí v ystéme: ";
+            labelAveragePeopleInSystem.Text = "Priemerný počet ľudí v sytéme: ";
             // 
             // FormSTK
             // 
@@ -409,31 +409,31 @@
             Controls.Add(checkBoxCustomers);
             Controls.Add(checkBoxWorker1);
             Controls.Add(checkBoxWorker2);
-            Controls.Add(label12);
+            Controls.Add(labelAverageTakeOver);
             Controls.Add(checkBox1);
             Controls.Add(labelLeftInSystem);
-            Controls.Add(label11);
+            Controls.Add(labelAverageVisits);
             Controls.Add(labelGlobalTimeSpent);
             Controls.Add(numericReplications);
             Controls.Add(numericTechnician);
             Controls.Add(numericCashier);
             Controls.Add(labelReplication);
-            Controls.Add(label10);
-            Controls.Add(label9);
+            Controls.Add(labelAverageTimeInSystem);
+            Controls.Add(labelCustomersInSystem);
             Controls.Add(dataGridView3);
             Controls.Add(dataGridView2);
             Controls.Add(dataGridView1);
             Controls.Add(trackBar1);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label2);
+            Controls.Add(labelCheckInWait);
+            Controls.Add(labelTechnician);
+            Controls.Add(labelCashiers);
+            Controls.Add(labelPaymentQueue);
+            Controls.Add(labelControlParking);
             Controls.Add(button4);
             Controls.Add(button2);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label1);
+            Controls.Add(labelClosing);
+            Controls.Add(labelOpening);
+            Controls.Add(labelCurrentTime);
             Controls.Add(button1);
             Name = "FormSTK";
             Text = "FormSTK";
@@ -451,31 +451,31 @@
         #endregion
 
         private Button button1;
-        private Label label1;
-        private Label label3;
-        private Label label4;
+        private Label labelCurrentTime;
+        private Label labelOpening;
+        private Label labelClosing;
         private Button button2;
         private Button button4;
-        private Label label2;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private Label label8;
+        private Label labelControlParking;
+        private Label labelPaymentQueue;
+        private Label labelCashiers;
+        private Label labelTechnician;
+        private Label labelCheckInWait;
         private TrackBar trackBar1;
         private DataGridView dataGridView1;
         private DataGridView dataGridView2;
         private DataGridView dataGridView3;
-        private Label label9;
-        private Label label10;
+        private Label labelCustomersInSystem;
+        private Label labelAverageTimeInSystem;
         private Label labelReplication;
         private NumericUpDown numericCashier;
         private NumericUpDown numericTechnician;
         private NumericUpDown numericReplications;
         private Label labelGlobalTimeSpent;
-        private Label label11;
+        private Label labelAverageVisits;
         private Label labelLeftInSystem;
         private CheckBox checkBox1;
-        private Label label12;
+        private Label labelAverageTakeOver;
         private CheckBox checkBoxWorker2;
         private CheckBox checkBoxWorker1;
         private CheckBox checkBoxCustomers;

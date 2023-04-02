@@ -49,8 +49,9 @@ namespace SimulationAppV2
             simSTK.SimulationDetails += SimulationDetailsHandler;
             simSTK.GlobalDetails += GlobalDetailsHandler;
             simSTK.AfterSimulationDetails += AfterSimulationHandler;
-            label3.Text = "Otvárací čas: " + (simSTK.STKDetails.Opening / 60) + ":" + (simSTK.STKDetails.Opening % 60);
-            label4.Text = "Zatvára sa o: " + (simSTK.STKDetails.Closing / 60) + ":" + (simSTK.STKDetails.Closing % 60);
+            labelCurrentTime.Text = "Aktuálny čas: " + TimeSpan.FromMinutes(simSTK.STKDetails.Opening).ToString(@"hh\:mm");
+            labelOpening.Text = "Otvárací čas: " + TimeSpan.FromMinutes(simSTK.STKDetails.Opening).ToString(@"hh\:mm");
+            labelClosing.Text = "Zatvára sa o: " + TimeSpan.FromMinutes(simSTK.STKDetails.Closing).ToString(@"hh\:mm");
         }
         private void AfterSimulationHandler(object? sender, AfterSimulationDetailsEventArgs e)
         {
@@ -70,6 +71,7 @@ namespace SimulationAppV2
             globalAverageVisits = "Priemerný počet ľudí za deň: " + e.GlobalVisits;
             leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + e.GlobalLeftInSystem;
             globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: " + e.GlobalTakeOverWaiting;
+            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): " + e.GlobalAveragePeopleInSystem;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
 
@@ -77,14 +79,15 @@ namespace SimulationAppV2
         {
             labelGlobalTimeSpent.Text = globalAverageActual;
             labelReplication.Text = numberOfReplication;
-            label11.Text = globalAverageVisits;
+            labelAverageVisits.Text = globalAverageVisits;
             labelLeftInSystem.Text = leftInSystem;
             labelGlobalTakeOver.Text = globalWaitingTakeOver;
+            labelGlobalAveragePeopleInSystem.Text = globalAveragePeopleInSystem;
         }
         private void SimulationDetailsHandler(object? sender, SimulationDetailsEventArgs e)
         {
 
-            actualTime = "Aktuálny čas: " + (int)e.Time / 60 + ":" + (int)e.Time % 60;
+            actualTime = "Aktuálny čas: " + TimeSpan.FromMinutes(e.Time).ToString(@"hh\:mm");
             checkInQueue = "Počet ľudí čakajúcich na prevzatie: " + e.CheckInQueue;
             inspectionQueue = "Počet čakjúcich áut na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
             paymentQueue = "Počet ľudí čakajúcich na zaplatenie: " + e.PaymentQueue;
@@ -103,15 +106,15 @@ namespace SimulationAppV2
 
         private void Refresh()
         {
-            label1.Text = actualTime;
-            label8.Text = checkInQueue;
-            label2.Text = inspectionQueue;
-            label5.Text = paymentQueue;
-            label6.Text = freeCashiers;
-            label7.Text = freeTechnician;
-            label9.Text = customersInShop;
-            label12.Text = averageWaitingTakeOver;
-            label10.Text = averageActual;
+            labelCurrentTime.Text = actualTime;
+            labelCheckInWait.Text = checkInQueue;
+            labelControlParking.Text = inspectionQueue;
+            labelPaymentQueue.Text = paymentQueue;
+            labelCashiers.Text = freeCashiers;
+            labelTechnician.Text = freeTechnician;
+            labelCustomersInSystem.Text = customersInShop;
+            labelAverageTakeOver.Text = averageWaitingTakeOver;
+            labelAverageTimeInSystem.Text = averageActual;
             labelAveragePeopleInSystem.Text = averagePeopleInSystem;
             dataGridView1.Rows.Clear();
             if (showTechnicians)
@@ -142,6 +145,7 @@ namespace SimulationAppV2
         {
             cts = new CancellationTokenSource();
             RefreshTable();
+            ClearData();
             simSTK.NumberOfCashier = (int)numericCashier.Value;
             simSTK.NumberOfTechnicians = (int)numericTechnician.Value;
             Task.Run(() => simSTK.Simulate((int)numericReplications.Value, cts.Token));
@@ -178,6 +182,35 @@ namespace SimulationAppV2
             dataGridView3.Columns.Add("Status", "Status");
         }
 
+        public void ClearData()
+        {
+            actualTime = "Aktuálny čas: ";
+
+            customersInShop = "Počet zákazníkov v systéme: ";
+            checkInQueue = "Počet ľudí čakajúcich na prevzatie: ";
+            paymentQueue = "Počet ľudí čakajúcich na zaplatenie: ";
+
+            freeTechnician = "Počet voľných technikov(Pracovníci 2): ";
+            inspectionQueue = "Počet čakjúcich áut na parkovisku pred inšpekciou: ";
+
+            freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): ";
+
+            averageActual = "Priemerný čas strávený v prevádzke: ";
+            averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: ";
+            averagePeopleInSystem = "Priemerný počet ľudí v systéme: ";
+
+            numberOfReplication = "Replikácia no. ";
+            globalAverageVisits = "Priemerný počet ľudí za deň: ";
+            leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: ";
+            globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: ";
+            globalAverageActual = "Priemerný čas strávený v prevádzke(global): ";
+            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): ";
+            conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme:";
+            conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
+            Refresh();
+            RefreshGlobal();
+            RefreshIntervals();
+        }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
