@@ -26,7 +26,6 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                //myCore.AvailableTechnicians++;
                 myCore.AvailableTechnicians.Enqueue(technicianSTK);
                 technicianSTK.WorkingOn = TechnicianWork.Break;
                 technicianSTK.ControlledCar = CarType.None;

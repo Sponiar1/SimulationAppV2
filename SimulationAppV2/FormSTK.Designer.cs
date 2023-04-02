@@ -33,7 +33,6 @@
             label3 = new Label();
             label4 = new Label();
             button2 = new Button();
-            button3 = new Button();
             button4 = new Button();
             label2 = new Label();
             label5 = new Label();
@@ -53,6 +52,12 @@
             labelGlobalTimeSpent = new Label();
             label11 = new Label();
             labelLeftInSystem = new Label();
+            checkBox1 = new CheckBox();
+            label12 = new Label();
+            checkBoxWorker2 = new CheckBox();
+            checkBoxWorker1 = new CheckBox();
+            checkBoxCustomers = new CheckBox();
+            labelGlobalTakeOver = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -76,11 +81,11 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(463, 639);
+            label1.Location = new Point(405, 639);
             label1.Name = "label1";
-            label1.Size = new Size(63, 25);
+            label1.Size = new Size(126, 25);
             label1.TabIndex = 1;
-            label1.Text = "label1";
+            label1.Text = "Aktuálny čas: ";
             // 
             // label3
             // 
@@ -110,16 +115,6 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // button3
-            // 
-            button3.Location = new Point(239, 677);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 6;
-            button3.Text = "Turbo";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
             // button4
             // 
             button4.Location = new Point(540, 531);
@@ -133,7 +128,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(706, 354);
+            label2.Location = new Point(1163, 274);
             label2.Name = "label2";
             label2.Size = new Size(38, 15);
             label2.TabIndex = 8;
@@ -142,7 +137,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(706, 390);
+            label5.Location = new Point(1163, 733);
             label5.Name = "label5";
             label5.Size = new Size(38, 15);
             label5.TabIndex = 9;
@@ -151,7 +146,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(706, 424);
+            label6.Location = new Point(799, 244);
             label6.Name = "label6";
             label6.Size = new Size(38, 15);
             label6.TabIndex = 10;
@@ -160,7 +155,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(706, 459);
+            label7.Location = new Point(1163, 244);
             label7.Name = "label7";
             label7.Size = new Size(38, 15);
             label7.TabIndex = 11;
@@ -169,7 +164,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(706, 318);
+            label8.Location = new Point(1163, 703);
             label8.Name = "label8";
             label8.Size = new Size(38, 15);
             label8.TabIndex = 12;
@@ -177,10 +172,12 @@
             // 
             // trackBar1
             // 
+            trackBar1.LargeChange = 250;
             trackBar1.Location = new Point(385, 591);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
+            trackBar1.SmallChange = 100;
             trackBar1.TabIndex = 500;
             trackBar1.Value = 500;
             trackBar1.Scroll += trackBar1_Scroll;
@@ -188,7 +185,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(799, 12);
+            dataGridView1.Location = new Point(1163, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(358, 217);
@@ -197,7 +194,7 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(1163, 12);
+            dataGridView2.Location = new Point(799, 12);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.Size = new Size(333, 217);
@@ -206,16 +203,16 @@
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(1163, 249);
+            dataGridView3.Location = new Point(1163, 304);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.RowTemplate.Height = 25;
-            dataGridView3.Size = new Size(333, 360);
+            dataGridView3.Size = new Size(358, 360);
             dataGridView3.TabIndex = 16;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(706, 280);
+            label9.Location = new Point(1163, 677);
             label9.Name = "label9";
             label9.Size = new Size(38, 15);
             label9.TabIndex = 17;
@@ -247,7 +244,7 @@
             numericCashier.Name = "numericCashier";
             numericCashier.Size = new Size(120, 23);
             numericCashier.TabIndex = 502;
-            numericCashier.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            numericCashier.Value = new decimal(new int[] { 20, 0, 0, 0 });
             // 
             // numericTechnician
             // 
@@ -257,7 +254,7 @@
             numericTechnician.Name = "numericTechnician";
             numericTechnician.Size = new Size(120, 23);
             numericTechnician.TabIndex = 503;
-            numericTechnician.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            numericTechnician.Value = new decimal(new int[] { 20, 0, 0, 0 });
             // 
             // numericReplications
             // 
@@ -268,7 +265,7 @@
             numericReplications.Name = "numericReplications";
             numericReplications.Size = new Size(120, 23);
             numericReplications.TabIndex = 504;
-            numericReplications.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericReplications.Value = new decimal(new int[] { 100000, 0, 0, 0 });
             // 
             // labelGlobalTimeSpent
             // 
@@ -297,11 +294,79 @@
             labelLeftInSystem.TabIndex = 507;
             labelLeftInSystem.Text = "labelLeftInSystem";
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(231, 681);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(57, 19);
+            checkBox1.TabIndex = 508;
+            checkBox1.Text = "Turbo";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(706, 468);
+            label12.Name = "label12";
+            label12.Size = new Size(44, 15);
+            label12.TabIndex = 509;
+            label12.Text = "label12";
+            // 
+            // checkBoxWorker2
+            // 
+            checkBoxWorker2.AutoSize = true;
+            checkBoxWorker2.Location = new Point(850, 703);
+            checkBoxWorker2.Name = "checkBoxWorker2";
+            checkBoxWorker2.Size = new Size(191, 19);
+            checkBoxWorker2.TabIndex = 510;
+            checkBoxWorker2.Text = "Zobraziť tabuľku pracovníkov 2";
+            checkBoxWorker2.UseVisualStyleBackColor = true;
+            checkBoxWorker2.CheckedChanged += checkBox2_CheckedChanged;
+            // 
+            // checkBoxWorker1
+            // 
+            checkBoxWorker1.AutoSize = true;
+            checkBoxWorker1.Location = new Point(850, 673);
+            checkBoxWorker1.Name = "checkBoxWorker1";
+            checkBoxWorker1.Size = new Size(191, 19);
+            checkBoxWorker1.TabIndex = 511;
+            checkBoxWorker1.Text = "Zobraziť tabuľku pracovníkov 1";
+            checkBoxWorker1.UseVisualStyleBackColor = true;
+            checkBoxWorker1.CheckedChanged += checkBox3_CheckedChanged;
+            // 
+            // checkBoxCustomers
+            // 
+            checkBoxCustomers.AutoSize = true;
+            checkBoxCustomers.Location = new Point(850, 733);
+            checkBoxCustomers.Name = "checkBoxCustomers";
+            checkBoxCustomers.Size = new Size(185, 19);
+            checkBoxCustomers.TabIndex = 512;
+            checkBoxCustomers.Text = "Zobraziť zákazníkov v systéme";
+            checkBoxCustomers.UseVisualStyleBackColor = true;
+            checkBoxCustomers.CheckedChanged += checkBox4_CheckedChanged;
+            // 
+            // labelGlobalTakeOver
+            // 
+            labelGlobalTakeOver.AutoSize = true;
+            labelGlobalTakeOver.Location = new Point(706, 649);
+            labelGlobalTakeOver.Name = "labelGlobalTakeOver";
+            labelGlobalTakeOver.Size = new Size(266, 15);
+            labelGlobalTakeOver.TabIndex = 513;
+            labelGlobalTakeOver.Text = "Globálne priemerné čakanie na odovzdanie auta: ";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1579, 807);
+            Controls.Add(labelGlobalTakeOver);
+            Controls.Add(checkBoxCustomers);
+            Controls.Add(checkBoxWorker1);
+            Controls.Add(checkBoxWorker2);
+            Controls.Add(label12);
+            Controls.Add(checkBox1);
             Controls.Add(labelLeftInSystem);
             Controls.Add(label11);
             Controls.Add(labelGlobalTimeSpent);
@@ -321,7 +386,6 @@
             Controls.Add(label5);
             Controls.Add(label2);
             Controls.Add(button4);
-            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -347,7 +411,6 @@
         private Label label3;
         private Label label4;
         private Button button2;
-        private Button button3;
         private Button button4;
         private Label label2;
         private Label label5;
@@ -367,5 +430,11 @@
         private Label labelGlobalTimeSpent;
         private Label label11;
         private Label labelLeftInSystem;
+        private CheckBox checkBox1;
+        private Label label12;
+        private CheckBox checkBoxWorker2;
+        private CheckBox checkBoxWorker1;
+        private CheckBox checkBoxCustomers;
+        private Label labelGlobalTakeOver;
     }
 }

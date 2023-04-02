@@ -16,6 +16,7 @@ namespace SimulationAppV2.Simulation.Event.STK
         public override void Exec()
         {
             cashier.BeginTakeOver(customer.ID);
+            myCore.TakeOverWaiting.Add(Time - customer.Arrival);
             customer.Status = Status.TakingOver;
             TakeOverEndSTK takeOverEndSTK = new TakeOverEndSTK(myCore, customer, cashier);
             takeOverEndSTK.Time = myCore.CurrentTime + myCore.getshopParkingTime();

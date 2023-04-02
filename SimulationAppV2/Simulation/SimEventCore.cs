@@ -12,7 +12,7 @@ namespace SimulationAppV2.Simulation
         PriorityQueue<Event.Event, double> timeline = new PriorityQueue<Event.Event, double>();
         public double CurrentTime { get; set; }
         public double MaxTime { get; set; }
-        public Boolean Pause { get; set; }
+        public Boolean Pause { get; set; } = false;
         public Boolean Turbo { get; set; } = false;
         public int Delay { get; set; }
         public double RefreshTime { get; set; } = 10;
@@ -24,7 +24,6 @@ namespace SimulationAppV2.Simulation
             addEvent(sysEvent);
             while (timeline.Count != 0 || CurrentTime > MaxTime)
             {
-                
                 helpEvent = timeline.Dequeue();
                 CurrentTime = helpEvent.Time;
                 while(Pause)

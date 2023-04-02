@@ -28,6 +28,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             if(myCore.AvailableCashiers.Count() == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
             {
                 customer.Status = Status.WaitingTakeOver;
+                customer.WaitingStartAt = myCore.CurrentTime;
                 myCore.Customers.Enqueue(customer);
             }
             else
@@ -42,10 +43,8 @@ namespace SimulationAppV2.Simulation.Event.STK
                     takeOver.Time = myCore.STKDetails.Opening;
                 }
                 myCore.addEvent(takeOver);
-                //myCore.AvailableCashiers--;
                 myCore.AvailableSpots--;
 
-                //myCore.ControlWaiting.Enqueue(customer);
             }
             CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType(), customerId, Time);
             customerId++;

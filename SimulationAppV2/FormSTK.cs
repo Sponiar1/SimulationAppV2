@@ -33,6 +33,11 @@ namespace SimulationAppV2
         String globalAverageActual;
         String globalAverageVisits;
         String leftInSystem;
+        String averageWaitingTakeOver;
+        String globalWaitingTakeOver;
+        Boolean showCustomers = false;
+        Boolean showTechnicians = false;
+        Boolean showCashiers = false;
         public FormSTK()
         {
             InitializeComponent();
@@ -49,6 +54,7 @@ namespace SimulationAppV2
             numberOfReplication = "Replikácia no. " + e.NumberOfReplication;
             globalAverageVisits = "Priemerný počet ľudí za deň: " + e.GlobalVisits;
             leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + e.GlobalLeftInSystem;
+            globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: " + e.GlobalTakeOverWaiting;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
         public void RefreshGlobal()
@@ -57,22 +63,23 @@ namespace SimulationAppV2
             labelReplication.Text = numberOfReplication;
             label11.Text = globalAverageVisits;
             labelLeftInSystem.Text = leftInSystem;
+            labelGlobalTakeOver.Text = globalWaitingTakeOver;
         }
         private void SimulationDetailsHandler(object? sender, SimulationDetailsEventArgs e)
         {
 
             actualTime = "Aktuálny čas: " + (int)e.Time / 60 + ":" + (int)e.Time % 60;
             checkInQueue = "Počet ľudí čakajúcich na prevzatie: " + e.CheckInQueue;
-            //inspectionQueue = "Počet áut na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
-            inspectionQueue = "Počet voľných miest na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
+            inspectionQueue = "Počet čakjúcich áut na parkovisku pred inšpekciou: " + e.InspectionParkingLot;
             paymentQueue = "Počet ľudí čakajúcich na zaplatenie: " + e.PaymentQueue;
-            freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): " + e.FreeCashiers;
-            freeTechnician = "Počet voľných technikov(Pracovníci 2): " + e.FreeTechnicians;
+            freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): " + e.FreeCashiers + "/" + (int)numericCashier.Value;
+            freeTechnician = "Počet voľných technikov(Pracovníci 2): " + e.FreeTechnicians + "/" + (int)numericTechnician.Value;
             technicianSTKs = e.Technicians;
             cashierSTKs = e.Cashier;
             customersInSystem = e.customersInSystem;
             customersInShop = "Počet zákazníkov v systéme: " + customersInSystem.Count();
             averageActual = "Priemerný čas strávený v prevádzke: " + e.AverageActual;
+            averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: " + e.AverageTakeOverWaiting;
             this.Invoke(new Action(() => Refresh()));
 
         }
@@ -86,21 +93,31 @@ namespace SimulationAppV2
             label6.Text = freeCashiers;
             label7.Text = freeTechnician;
             label9.Text = customersInShop;
-            dataGridView1.Rows.Clear();
+            label12.Text = averageWaitingTakeOver;
             label10.Text = averageActual;
-            foreach (var worker in technicianSTKs)
+            dataGridView1.Rows.Clear();
+            if (showTechnicians)
             {
-                dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar);
+                foreach (var worker in technicianSTKs)
+                {
+                    dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar);
+                }
             }
             dataGridView2.Rows.Clear();
-            foreach (var worker in cashierSTKs)
+            if (showCashiers)
             {
-                dataGridView2.Rows.Add(worker.ID, worker.WorkingOn, worker.customerID);
+                foreach (var worker in cashierSTKs)
+                {
+                    dataGridView2.Rows.Add(worker.ID, worker.WorkingOn, worker.customerID);
+                }
             }
             dataGridView3.Rows.Clear();
-            foreach (var customer in customersInSystem)
+            if (showCustomers)
             {
-                dataGridView3.Rows.Add(customer.Value.ID, customer.Value.Car, customer.Value.Status);
+                foreach (var customer in customersInSystem)
+                {
+                    dataGridView3.Rows.Add(customer.Value.ID, customer.Value.Car, customer.Value.Status);
+                }
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -112,24 +129,10 @@ namespace SimulationAppV2
             Task.Run(() => simSTK.Simulate((int)numericReplications.Value, cts.Token));
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            label1.Text = actualTime;
-            label8.Text = checkInQueue;
-            label2.Text = inspectionQueue;
-            label5.Text = paymentQueue;
-            label6.Text = freeCashiers;
-            label7.Text = freeTechnician;
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
             simSTK.switchPause();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            simSTK.switchTurbo();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -155,6 +158,48 @@ namespace SimulationAppV2
             dataGridView3.Columns.Add("CustomerID", "Customer ID");
             dataGridView3.Columns.Add("Car", "Car");
             dataGridView3.Columns.Add("Status", "Status");
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                simSTK.Turbo = true;
+            }
+            else
+            {
+                simSTK.Turbo = false;
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxWorker2.Checked)
+            {
+                showTechnicians = true;
+            }
+            else { showTechnicians = false; }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxWorker1.Checked)
+            {
+                showCashiers = true;
+            }
+            else { showCashiers = false; }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxCustomers.Checked)
+            {
+                showCustomers = true;
+            }
+            else
+            {
+                showCustomers = false;
+            }
         }
     }
 }

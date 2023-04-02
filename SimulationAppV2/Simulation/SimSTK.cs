@@ -12,7 +12,7 @@ namespace SimulationAppV2.Simulation
 {
     internal class SimSTK : SimEventCore
     {
-        Random seedGen = new Random(10);
+        Random seedGen = new Random();
         Probability arrivalProb;
         Probability shopParkingProb;
         Probability paymentProb;
@@ -51,6 +51,9 @@ namespace SimulationAppV2.Simulation
         public Average GlobalAverageVisits { get; set; }
         public int Left { get; set; }
         public Average GlobalLeftInSystem { get; set; }
+        public Average TakeOverWaiting { get; set; }
+        public Average GlobalTakeOverWaiting { get; set; }
+        public ConfidenceInterval CIAverageTimeInSystem { get; set; }
 
         public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
         public event EventHandler<GlobalDetailsEventArgs> GlobalDetails;
@@ -73,13 +76,16 @@ namespace SimulationAppV2.Simulation
             GlobalAverageTimeInSystem = new Average();
             GlobalAverageVisits = new Average();
             GlobalLeftInSystem = new Average();
+            GlobalTakeOverWaiting = new Average();
+            CIAverageTimeInSystem = new ConfidenceInterval();
         }
 
         public override void BeforeReplication()
         {
             base.BeforeReplication();
             AverageTimeInSystem = new Average();
-            
+            TakeOverWaiting = new Average();
+
             Arrived = 0;
             Left = 0;
             CurrentTime = STKDetails.Opening;
@@ -90,6 +96,13 @@ namespace SimulationAppV2.Simulation
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
 
+            AvailableSpots = 5;
+            Customers.Clear();
+            ControlWaiting.Clear();
+            PaymentQueue.Clear();
+            CustomersInSystem.Clear();
+            AvailableCashiers.Clear();
+            AvailableTechnicians.Clear();  
 
             cashiers = new CashierSTK[NumberOfCashier];
             for (int i = 0; i < cashiers.Length; i++)
@@ -104,11 +117,7 @@ namespace SimulationAppV2.Simulation
                 AvailableTechnicians.Enqueue(technicians[i]);
             }
 
-            AvailableSpots = 5;
-            Customers.Clear();
-            ControlWaiting.Clear();
-            PaymentQueue.Clear();
-            CustomersInSystem.Clear();
+            
         }
 
         public override void AfterReplication()
@@ -116,9 +125,15 @@ namespace SimulationAppV2.Simulation
             GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
             GlobalAverageVisits.Add(Arrived);
             GlobalLeftInSystem.Add(Arrived - Left);
+            GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
+            CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
             refreshGlobalStatOnGui();
         }
 
+        public override void AfterSimulation()
+        {
+           
+        }
 
         public double getArrivalTime()
         {
@@ -170,7 +185,8 @@ namespace SimulationAppV2.Simulation
             GlobalDetails?.Invoke(this, new GlobalDetailsEventArgs(GlobalAverageTimeInSystem.getActualAverage(),
                                                                     ReplicationsDone + 1,
                                                                     GlobalAverageVisits.getActualAverage(),
-                                                                    GlobalLeftInSystem.getActualAverage()
+                                                                    GlobalLeftInSystem.getActualAverage(),
+                                                                    GlobalTakeOverWaiting.getActualAverage()
                                                                     ));
         }
         public override void refreshGui()
@@ -184,10 +200,11 @@ namespace SimulationAppV2.Simulation
                                                                     Technicians,
                                                                     Cashiers,
                                                                     CustomersInSystem,
-                                                                    AverageTimeInSystem.getActualAverage()
+                                                                    AverageTimeInSystem.getActualAverage(),
+                                                                    TakeOverWaiting.getActualAverage()
                                                                     //Arrived,
                                                                     //Left
-                                                                    )); 
+                                                                    )) ; 
         }
     }
 
@@ -203,8 +220,10 @@ namespace SimulationAppV2.Simulation
         public CashierSTK[] Cashier { get; }
         public Dictionary<int, CustomerSTK> customersInSystem { get; }
         public double AverageActual { get; }
+        public double AverageTakeOverWaiting { get; }
         public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician,
-                                            TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers, double averageActual)
+                                            TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers, double averageActual,
+                                            double averageTakeOverWaiting)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -216,6 +235,7 @@ namespace SimulationAppV2.Simulation
             Cashier = cashier;
             this.customersInSystem = customers;
             AverageActual = averageActual;
+            AverageTakeOverWaiting = averageTakeOverWaiting;
         }
     }
 
@@ -225,15 +245,18 @@ namespace SimulationAppV2.Simulation
         public int NumberOfReplication { get; set; }
         public double GlobalVisits { get; set; }
         public double GlobalLeftInSystem { get; set; }
+        public double GlobalTakeOverWaiting { get; set; }
         public GlobalDetailsEventArgs(double globalAverage,
                                       int numberOfReplication,
                                       double globalVisits,
-                                      double globalLeftInSystem)
+                                      double globalLeftInSystem,
+                                      double globalTakeOverWaiting)
         {
             NumberOfReplication = numberOfReplication;
             GlobalAverage = globalAverage;
             GlobalVisits = globalVisits;
             GlobalLeftInSystem = globalLeftInSystem;
+            GlobalTakeOverWaiting = globalTakeOverWaiting;
         }
     }
 }
