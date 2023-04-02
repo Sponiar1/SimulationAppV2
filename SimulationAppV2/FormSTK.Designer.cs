@@ -225,7 +225,7 @@
             // labelAverageTimeInSystem
             // 
             labelAverageTimeInSystem.AutoSize = true;
-            labelAverageTimeInSystem.Location = new Point(697, 476);
+            labelAverageTimeInSystem.Location = new Point(850, 374);
             labelAverageTimeInSystem.Name = "labelAverageTimeInSystem";
             labelAverageTimeInSystem.Size = new Size(196, 15);
             labelAverageTimeInSystem.TabIndex = 18;
@@ -234,9 +234,10 @@
             // labelReplication
             // 
             labelReplication.AutoSize = true;
-            labelReplication.Location = new Point(695, 532);
+            labelReplication.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            labelReplication.Location = new Point(697, 531);
             labelReplication.Name = "labelReplication";
-            labelReplication.Size = new Size(80, 15);
+            labelReplication.Size = new Size(119, 25);
             labelReplication.TabIndex = 19;
             labelReplication.Text = "Replikácia no.";
             // 
@@ -312,7 +313,7 @@
             // labelAverageTakeOver
             // 
             labelAverageTakeOver.AutoSize = true;
-            labelAverageTakeOver.Location = new Point(697, 449);
+            labelAverageTakeOver.Location = new Point(850, 347);
             labelAverageTakeOver.Name = "labelAverageTakeOver";
             labelAverageTakeOver.Size = new Size(231, 15);
             labelAverageTakeOver.TabIndex = 509;
@@ -390,7 +391,7 @@
             // labelAveragePeopleInSystem
             // 
             labelAveragePeopleInSystem.AutoSize = true;
-            labelAveragePeopleInSystem.Location = new Point(697, 424);
+            labelAveragePeopleInSystem.Location = new Point(850, 322);
             labelAveragePeopleInSystem.Name = "labelAveragePeopleInSystem";
             labelAveragePeopleInSystem.Size = new Size(174, 15);
             labelAveragePeopleInSystem.TabIndex = 517;
