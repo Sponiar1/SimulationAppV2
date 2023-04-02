@@ -16,6 +16,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
+            myCore.updatePeopleInSystem();
             myCore.Arrived++;
             myCore.CustomersInSystem.Add(customer.ID, customer);
             Time = myCore.CurrentTime + myCore.getArrivalTime();
@@ -24,8 +25,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.addEvent(this);
             }
 
-            //   neni volny pokladnik    stoja v rade                       neni miesto pred kontrolou                                  neni otvorene
-            if(myCore.AvailableCashiers.Count() == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0 /*|| myCore.CurrentTime < myCore.STKDetails.Opening*/)
+            if(myCore.AvailableCashiers.Count() == 0 || myCore.Customers.Count() != 0 || /*myCore.ControlWaiting.Count() + */myCore.AvailableSpots  == 0)
             {
                 customer.Status = Status.WaitingTakeOver;
                 customer.WaitingStartAt = myCore.CurrentTime;

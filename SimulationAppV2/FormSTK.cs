@@ -35,6 +35,8 @@ namespace SimulationAppV2
         String leftInSystem;
         String averageWaitingTakeOver;
         String globalWaitingTakeOver;
+        String averagePeopleInSystem;
+        String globalAveragePeopleInSystem;
         String conIntervalTimeInSystem;
         String conIntervalPeopleInSystem;
         Boolean showCustomers = false;
@@ -58,6 +60,7 @@ namespace SimulationAppV2
         }
         private void RefreshIntervals()
         {
+            labelCIPeopleInSystem.Text = conIntervalPeopleInSystem;
             labelCITimeInSystem.Text = conIntervalTimeInSystem;
         }
         private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
@@ -93,6 +96,7 @@ namespace SimulationAppV2
             customersInShop = "Počet zákazníkov v systéme: " + customersInSystem.Count();
             averageActual = "Priemerný čas strávený v prevádzke: " + e.AverageActual;
             averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: " + e.AverageTakeOverWaiting;
+            averagePeopleInSystem = "Priemerný počet ľudí v systéme: " + e.AveragePeopleInSystem;
             this.Invoke(new Action(() => Refresh()));
 
         }
@@ -108,6 +112,7 @@ namespace SimulationAppV2
             label9.Text = customersInShop;
             label12.Text = averageWaitingTakeOver;
             label10.Text = averageActual;
+            labelAveragePeopleInSystem.Text = averagePeopleInSystem;
             dataGridView1.Rows.Clear();
             if (showTechnicians)
             {

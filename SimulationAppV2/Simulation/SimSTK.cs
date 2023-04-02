@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using SimulationAppV2.Simulation.SimObject.STK;
 using SimulationAppV2.Statistics;
+using System.Collections;
 
 namespace SimulationAppV2.Simulation
 {
     internal class SimSTK : SimEventCore
     {
+        #region Generators
         Random seedGen = new Random();
         Probability arrivalProb;
         Probability shopParkingProb;
@@ -21,7 +23,9 @@ namespace SimulationAppV2.Simulation
         Probability personalCarProb;
         Empiric vanProb;
         Empiric truckProb;
+        #endregion
 
+        #region Staff and Customers 
         public int NumberOfCashier { get; set; } = 10;
         public int NumberOfTechnicians { get; set; } = 20;
         CashierSTK[] cashiers;
@@ -42,9 +46,9 @@ namespace SimulationAppV2.Simulation
         Queue<CustomerSTK> controlWaiting = new Queue<CustomerSTK>(); // rada na kontrolu
         public Queue<CustomerSTK> ControlWaiting { get { return controlWaiting; } }
         public int AvailableSpots { get; set; } //rezervácia pre check-in
+        #endregion
 
-        public STKDetails STKDetails { get; set; }
-
+        #region Statistics
         public Average AverageTimeInSystem { get; set; }
         public Average GlobalAverageTimeInSystem { get; set; }
         public int Arrived { get; set; }
@@ -55,9 +59,12 @@ namespace SimulationAppV2.Simulation
         public Average GlobalTakeOverWaiting { get; set; }
         public WeightedAverage AveragePeopleInSystem { get; set; }
         public WeightedAverage GlobalAveragePeopleInSystem { get; set; }
-
+        double timeSinceLastChange;
         public ConfidenceInterval CIAverageTimeInSystem { get; set; }
         public ConfidenceInterval CIAverageNumberOfCustomers { get; set; }
+        #endregion
+
+        public STKDetails STKDetails { get; set; }
 
         public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
         public event EventHandler<GlobalDetailsEventArgs> GlobalDetails;
@@ -71,6 +78,7 @@ namespace SimulationAppV2.Simulation
 
         public override void BeforeSimulation()
         {
+            #region Generators initialization
             arrivalProb = new Exponential(60.0 / 23.0, new Random(seedGen.Next()));
             shopParkingProb = new Triangular(180.0 / 60.0, 695.0 / 60.0, 431.0 / 60.0, new Random(seedGen.Next()));
             paymentProb = new Continuous(65 / 60, 177 / 60, new Random(seedGen.Next()));
@@ -78,6 +86,9 @@ namespace SimulationAppV2.Simulation
             personalCarProb = new Discrete(31, 45, new Random(seedGen.Next()));
             vanProb = new Empiric(STKDetails.VanTime, STKDetails.VanTimeProb, new Random(seedGen.Next()));
             truckProb = new Empiric(STKDetails.TruckTime, STKDetails.TruckTimeProb, new Random(seedGen.Next()));
+            #endregion
+
+            #region Global statistics initialization
             GlobalAverageTimeInSystem = new Average();
             GlobalAverageVisits = new Average();
             GlobalLeftInSystem = new Average();
@@ -85,33 +96,39 @@ namespace SimulationAppV2.Simulation
             GlobalAveragePeopleInSystem = new WeightedAverage();
             CIAverageTimeInSystem = new ConfidenceInterval();
             CIAverageNumberOfCustomers = new ConfidenceInterval();
+            #endregion
         }
 
         public override void BeforeReplication()
         {
             base.BeforeReplication();
+            #region Local Statistics and variables initialization
             AverageTimeInSystem = new Average();
             TakeOverWaiting = new Average();
             AveragePeopleInSystem = new WeightedAverage();
-
             Arrived = 0;
             Left = 0;
             CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
+            AvailableSpots = 5;
+            timeSinceLastChange = CurrentTime;
+            #endregion
 
+            #region StartingEvent
             Event.Event helpEvent;
             helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType(), 1, CurrentTime));
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
+            #endregion
 
-            AvailableSpots = 5;
+            #region Fronts and arrays initialization
             Customers.Clear();
             ControlWaiting.Clear();
             PaymentQueue.Clear();
             CustomersInSystem.Clear();
-            AvailableCashiers.Clear();
-            AvailableTechnicians.Clear();  
 
+            AvailableCashiers.Clear();
+            AvailableTechnicians.Clear();
             cashiers = new CashierSTK[NumberOfCashier];
             for (int i = 0; i < cashiers.Length; i++)
             {
@@ -124,18 +141,21 @@ namespace SimulationAppV2.Simulation
                 technicians[i] = new TechnicianSTK(i);
                 AvailableTechnicians.Enqueue(technicians[i]);
             }
+            #endregion
 
-            
         }
 
         public override void AfterReplication()
         {
-            GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
-            GlobalAverageVisits.Add(Arrived);
-            GlobalLeftInSystem.Add(Arrived - Left);
-            GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
-            CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
-            refreshGlobalStatOnGui();
+            if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
+            {
+                GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
+                GlobalAverageVisits.Add(Arrived);
+                GlobalLeftInSystem.Add(Arrived - Left);
+                GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
+                CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
+                refreshGlobalStatOnGui();
+            }
         }
 
         public override void AfterSimulation()
@@ -188,6 +208,12 @@ namespace SimulationAppV2.Simulation
             }
         }
 
+        public void updatePeopleInSystem()
+        {
+            AveragePeopleInSystem.add((CurrentTime - timeSinceLastChange) * CustomersInSystem.Count(), (CurrentTime - timeSinceLastChange));
+            timeSinceLastChange = CurrentTime;
+        }
+
         public void refreshGlobalStatOnGui()
         {
             GlobalDetails?.Invoke(this, new GlobalDetailsEventArgs(GlobalAverageTimeInSystem.getActualAverage(),
@@ -209,7 +235,8 @@ namespace SimulationAppV2.Simulation
                                                                     Cashiers,
                                                                     CustomersInSystem,
                                                                     AverageTimeInSystem.getActualAverage(),
-                                                                    TakeOverWaiting.getActualAverage()
+                                                                    TakeOverWaiting.getActualAverage(),
+                                                                    AveragePeopleInSystem.getWeightedAverage()
                                                                     //Arrived,
                                                                     //Left
                                                                     )) ; 
@@ -229,9 +256,10 @@ namespace SimulationAppV2.Simulation
         public Dictionary<int, CustomerSTK> customersInSystem { get; }
         public double AverageActual { get; }
         public double AverageTakeOverWaiting { get; }
+        public double AveragePeopleInSystem { get; }
         public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician,
                                             TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers, double averageActual,
-                                            double averageTakeOverWaiting)
+                                            double averageTakeOverWaiting, double averagePeopleInSystem)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -244,6 +272,7 @@ namespace SimulationAppV2.Simulation
             this.customersInSystem = customers;
             AverageActual = averageActual;
             AverageTakeOverWaiting = averageTakeOverWaiting;
+            AveragePeopleInSystem = averagePeopleInSystem;
         }
     }
 

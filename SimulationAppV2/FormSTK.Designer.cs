@@ -60,6 +60,8 @@
             labelGlobalTakeOver = new Label();
             labelCITimeInSystem = new Label();
             labelCIPeopleInSystem = new Label();
+            labelGlobalAveragePeopleInSystem = new Label();
+            labelAveragePeopleInSystem = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -71,9 +73,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(27, 677);
+            button1.Location = new Point(12, 12);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(113, 42);
             button1.TabIndex = 0;
             button1.Text = "Start";
             button1.UseVisualStyleBackColor = true;
@@ -83,7 +85,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(405, 639);
+            label1.Location = new Point(454, 60);
             label1.Name = "label1";
             label1.Size = new Size(126, 25);
             label1.TabIndex = 1;
@@ -92,7 +94,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(385, 703);
+            label3.Location = new Point(410, 109);
             label3.Name = "label3";
             label3.Size = new Size(38, 15);
             label3.TabIndex = 3;
@@ -101,7 +103,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(577, 703);
+            label4.Location = new Point(602, 109);
             label4.Name = "label4";
             label4.Size = new Size(38, 15);
             label4.TabIndex = 4;
@@ -109,9 +111,9 @@
             // 
             // button2
             // 
-            button2.Location = new Point(385, 531);
+            button2.Location = new Point(12, 60);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(113, 43);
             button2.TabIndex = 5;
             button2.Text = "Pause";
             button2.UseVisualStyleBackColor = true;
@@ -119,9 +121,9 @@
             // 
             // button4
             // 
-            button4.Location = new Point(540, 531);
+            button4.Location = new Point(12, 109);
             button4.Name = "button4";
-            button4.Size = new Size(75, 23);
+            button4.Size = new Size(113, 42);
             button4.TabIndex = 7;
             button4.Text = "Stop";
             button4.UseVisualStyleBackColor = true;
@@ -175,7 +177,7 @@
             // trackBar1
             // 
             trackBar1.LargeChange = 250;
-            trackBar1.Location = new Point(385, 591);
+            trackBar1.Location = new Point(152, 60);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
@@ -223,7 +225,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(706, 497);
+            label10.Location = new Point(695, 457);
             label10.Name = "label10";
             label10.Size = new Size(44, 15);
             label10.TabIndex = 18;
@@ -232,7 +234,7 @@
             // labelReplication
             // 
             labelReplication.AutoSize = true;
-            labelReplication.Location = new Point(706, 531);
+            labelReplication.Location = new Point(695, 491);
             labelReplication.Name = "labelReplication";
             labelReplication.Size = new Size(91, 15);
             labelReplication.TabIndex = 19;
@@ -240,7 +242,7 @@
             // 
             // numericCashier
             // 
-            numericCashier.Location = new Point(27, 613);
+            numericCashier.Location = new Point(303, 12);
             numericCashier.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
             numericCashier.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericCashier.Name = "numericCashier";
@@ -250,7 +252,7 @@
             // 
             // numericTechnician
             // 
-            numericTechnician.Location = new Point(194, 613);
+            numericTechnician.Location = new Point(454, 12);
             numericTechnician.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
             numericTechnician.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericTechnician.Name = "numericTechnician";
@@ -261,7 +263,7 @@
             // numericReplications
             // 
             numericReplications.Increment = new decimal(new int[] { 1000000, 0, 0, 0 });
-            numericReplications.Location = new Point(108, 558);
+            numericReplications.Location = new Point(152, 12);
             numericReplications.Maximum = new decimal(new int[] { 1410065408, 2, 0, 0 });
             numericReplications.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericReplications.Name = "numericReplications";
@@ -272,7 +274,7 @@
             // labelGlobalTimeSpent
             // 
             labelGlobalTimeSpent.AutoSize = true;
-            labelGlobalTimeSpent.Location = new Point(706, 566);
+            labelGlobalTimeSpent.Location = new Point(695, 636);
             labelGlobalTimeSpent.Name = "labelGlobalTimeSpent";
             labelGlobalTimeSpent.Size = new Size(122, 15);
             labelGlobalTimeSpent.TabIndex = 505;
@@ -281,7 +283,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(706, 594);
+            label11.Location = new Point(695, 554);
             label11.Name = "label11";
             label11.Size = new Size(44, 15);
             label11.TabIndex = 506;
@@ -290,7 +292,7 @@
             // labelLeftInSystem
             // 
             labelLeftInSystem.AutoSize = true;
-            labelLeftInSystem.Location = new Point(706, 621);
+            labelLeftInSystem.Location = new Point(695, 581);
             labelLeftInSystem.Name = "labelLeftInSystem";
             labelLeftInSystem.Size = new Size(100, 15);
             labelLeftInSystem.TabIndex = 507;
@@ -299,7 +301,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(231, 681);
+            checkBox1.Location = new Point(12, 167);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(57, 19);
             checkBox1.TabIndex = 508;
@@ -310,7 +312,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(706, 468);
+            label12.Location = new Point(695, 428);
             label12.Name = "label12";
             label12.Size = new Size(44, 15);
             label12.TabIndex = 509;
@@ -319,7 +321,7 @@
             // checkBoxWorker2
             // 
             checkBoxWorker2.AutoSize = true;
-            checkBoxWorker2.Location = new Point(850, 703);
+            checkBoxWorker2.Location = new Point(653, 43);
             checkBoxWorker2.Name = "checkBoxWorker2";
             checkBoxWorker2.Size = new Size(191, 19);
             checkBoxWorker2.TabIndex = 510;
@@ -330,7 +332,7 @@
             // checkBoxWorker1
             // 
             checkBoxWorker1.AutoSize = true;
-            checkBoxWorker1.Location = new Point(850, 673);
+            checkBoxWorker1.Location = new Point(653, 13);
             checkBoxWorker1.Name = "checkBoxWorker1";
             checkBoxWorker1.Size = new Size(191, 19);
             checkBoxWorker1.TabIndex = 511;
@@ -341,7 +343,7 @@
             // checkBoxCustomers
             // 
             checkBoxCustomers.AutoSize = true;
-            checkBoxCustomers.Location = new Point(850, 733);
+            checkBoxCustomers.Location = new Point(653, 73);
             checkBoxCustomers.Name = "checkBoxCustomers";
             checkBoxCustomers.Size = new Size(185, 19);
             checkBoxCustomers.TabIndex = 512;
@@ -352,7 +354,7 @@
             // labelGlobalTakeOver
             // 
             labelGlobalTakeOver.AutoSize = true;
-            labelGlobalTakeOver.Location = new Point(706, 649);
+            labelGlobalTakeOver.Location = new Point(695, 609);
             labelGlobalTakeOver.Name = "labelGlobalTakeOver";
             labelGlobalTakeOver.Size = new Size(266, 15);
             labelGlobalTakeOver.TabIndex = 513;
@@ -361,7 +363,7 @@
             // labelCITimeInSystem
             // 
             labelCITimeInSystem.AutoSize = true;
-            labelCITimeInSystem.Location = new Point(706, 439);
+            labelCITimeInSystem.Location = new Point(695, 661);
             labelCITimeInSystem.Name = "labelCITimeInSystem";
             labelCITimeInSystem.Size = new Size(347, 15);
             labelCITimeInSystem.TabIndex = 514;
@@ -370,17 +372,37 @@
             // labelCIPeopleInSystem
             // 
             labelCIPeopleInSystem.AutoSize = true;
-            labelCIPeopleInSystem.Location = new Point(706, 414);
+            labelCIPeopleInSystem.Location = new Point(695, 716);
             labelCIPeopleInSystem.Name = "labelCIPeopleInSystem";
             labelCIPeopleInSystem.Size = new Size(333, 15);
             labelCIPeopleInSystem.TabIndex = 515;
             labelCIPeopleInSystem.Text = "95% Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
+            // 
+            // labelGlobalAveragePeopleInSystem
+            // 
+            labelGlobalAveragePeopleInSystem.AutoSize = true;
+            labelGlobalAveragePeopleInSystem.Location = new Point(696, 687);
+            labelGlobalAveragePeopleInSystem.Name = "labelGlobalAveragePeopleInSystem";
+            labelGlobalAveragePeopleInSystem.Size = new Size(174, 15);
+            labelGlobalAveragePeopleInSystem.TabIndex = 516;
+            labelGlobalAveragePeopleInSystem.Text = "Priemerný počet ľudí v ystéme: ";
+            // 
+            // labelAveragePeopleInSystem
+            // 
+            labelAveragePeopleInSystem.AutoSize = true;
+            labelAveragePeopleInSystem.Location = new Point(697, 519);
+            labelAveragePeopleInSystem.Name = "labelAveragePeopleInSystem";
+            labelAveragePeopleInSystem.Size = new Size(174, 15);
+            labelAveragePeopleInSystem.TabIndex = 517;
+            labelAveragePeopleInSystem.Text = "Priemerný počet ľudí v ystéme: ";
             // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1579, 807);
+            Controls.Add(labelAveragePeopleInSystem);
+            Controls.Add(labelGlobalAveragePeopleInSystem);
             Controls.Add(labelCIPeopleInSystem);
             Controls.Add(labelCITimeInSystem);
             Controls.Add(labelGlobalTakeOver);
@@ -460,5 +482,7 @@
         private Label labelGlobalTakeOver;
         private Label labelCITimeInSystem;
         private Label labelCIPeopleInSystem;
+        private Label labelGlobalAveragePeopleInSystem;
+        private Label labelAveragePeopleInSystem;
     }
 }
