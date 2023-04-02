@@ -53,10 +53,15 @@ namespace SimulationAppV2.Simulation
         public Average GlobalLeftInSystem { get; set; }
         public Average TakeOverWaiting { get; set; }
         public Average GlobalTakeOverWaiting { get; set; }
+        public WeightedAverage AveragePeopleInSystem { get; set; }
+        public WeightedAverage GlobalAveragePeopleInSystem { get; set; }
+
         public ConfidenceInterval CIAverageTimeInSystem { get; set; }
+        public ConfidenceInterval CIAverageNumberOfCustomers { get; set; }
 
         public event EventHandler<SimulationDetailsEventArgs> SimulationDetails;
         public event EventHandler<GlobalDetailsEventArgs> GlobalDetails;
+        public event EventHandler<AfterSimulationDetailsEventArgs> AfterSimulationDetails;
         public SimSTK()
         {
             STKDetails = new STKDetails();
@@ -77,7 +82,9 @@ namespace SimulationAppV2.Simulation
             GlobalAverageVisits = new Average();
             GlobalLeftInSystem = new Average();
             GlobalTakeOverWaiting = new Average();
+            GlobalAveragePeopleInSystem = new WeightedAverage();
             CIAverageTimeInSystem = new ConfidenceInterval();
+            CIAverageNumberOfCustomers = new ConfidenceInterval();
         }
 
         public override void BeforeReplication()
@@ -85,6 +92,7 @@ namespace SimulationAppV2.Simulation
             base.BeforeReplication();
             AverageTimeInSystem = new Average();
             TakeOverWaiting = new Average();
+            AveragePeopleInSystem = new WeightedAverage();
 
             Arrived = 0;
             Left = 0;
@@ -132,7 +140,7 @@ namespace SimulationAppV2.Simulation
 
         public override void AfterSimulation()
         {
-           
+            AfterSimulationDetails?.Invoke(this, new AfterSimulationDetailsEventArgs(CIAverageTimeInSystem, CIAverageNumberOfCustomers));
         }
 
         public double getArrivalTime()
@@ -257,6 +265,24 @@ namespace SimulationAppV2.Simulation
             GlobalVisits = globalVisits;
             GlobalLeftInSystem = globalLeftInSystem;
             GlobalTakeOverWaiting = globalTakeOverWaiting;
+        }
+    }
+
+    internal class AfterSimulationDetailsEventArgs : EventArgs
+    {
+        public double CITimeInSystemLeft { get; set; }
+        public double CITimeInSystemRight { get; set; }
+        public double CIAverageCustomersLeft { get; set; }
+        public double CIAverageCustomersRight { get; set; }
+        public AfterSimulationDetailsEventArgs(ConfidenceInterval confidenceTimeInSystem, ConfidenceInterval confidenceAverageCustomers)
+        {
+            confidenceTimeInSystem.setStandardDeviation();
+            CITimeInSystemLeft = Math.Round(confidenceTimeInSystem.getLeftSideNinety(),5);
+            CITimeInSystemRight = Math.Round(confidenceTimeInSystem.getRightSideNinety(),5);
+
+            confidenceAverageCustomers.setStandardDeviation();
+            CIAverageCustomersLeft = Math.Round(confidenceAverageCustomers.getLeftSideNinetyFive(), 5);
+            CIAverageCustomersRight = Math.Round(confidenceAverageCustomers.getRightSideNinetyFive(), 5);
         }
     }
 }

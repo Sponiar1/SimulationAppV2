@@ -58,6 +58,8 @@
             checkBoxWorker1 = new CheckBox();
             checkBoxCustomers = new CheckBox();
             labelGlobalTakeOver = new Label();
+            labelCITimeInSystem = new Label();
+            labelCIPeopleInSystem = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -128,7 +130,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(1163, 274);
+            label2.Location = new Point(1220, 283);
             label2.Name = "label2";
             label2.Size = new Size(38, 15);
             label2.TabIndex = 8;
@@ -137,7 +139,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(1163, 733);
+            label5.Location = new Point(1220, 772);
             label5.Name = "label5";
             label5.Size = new Size(38, 15);
             label5.TabIndex = 9;
@@ -146,7 +148,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(799, 244);
+            label6.Location = new Point(934, 253);
             label6.Name = "label6";
             label6.Size = new Size(38, 15);
             label6.TabIndex = 10;
@@ -155,7 +157,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(1163, 244);
+            label7.Location = new Point(1220, 253);
             label7.Name = "label7";
             label7.Size = new Size(38, 15);
             label7.TabIndex = 11;
@@ -164,7 +166,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(1163, 703);
+            label8.Location = new Point(1220, 742);
             label8.Name = "label8";
             label8.Size = new Size(38, 15);
             label8.TabIndex = 12;
@@ -185,7 +187,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(1163, 12);
+            dataGridView1.Location = new Point(1214, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(358, 217);
@@ -194,16 +196,16 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(799, 12);
+            dataGridView2.Location = new Point(850, 12);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(333, 217);
+            dataGridView2.Size = new Size(358, 217);
             dataGridView2.TabIndex = 15;
             // 
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(1163, 304);
+            dataGridView3.Location = new Point(1214, 322);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.RowTemplate.Height = 25;
             dataGridView3.Size = new Size(358, 360);
@@ -212,7 +214,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(1163, 677);
+            label9.Location = new Point(1220, 716);
             label9.Name = "label9";
             label9.Size = new Size(38, 15);
             label9.TabIndex = 17;
@@ -356,11 +358,31 @@
             labelGlobalTakeOver.TabIndex = 513;
             labelGlobalTakeOver.Text = "Globálne priemerné čakanie na odovzdanie auta: ";
             // 
+            // labelCITimeInSystem
+            // 
+            labelCITimeInSystem.AutoSize = true;
+            labelCITimeInSystem.Location = new Point(706, 439);
+            labelCITimeInSystem.Name = "labelCITimeInSystem";
+            labelCITimeInSystem.Size = new Size(347, 15);
+            labelCITimeInSystem.TabIndex = 514;
+            labelCITimeInSystem.Text = "90% Interval spoľahlibosti pre priemerný strávený čas v systéme: ";
+            // 
+            // labelCIPeopleInSystem
+            // 
+            labelCIPeopleInSystem.AutoSize = true;
+            labelCIPeopleInSystem.Location = new Point(706, 414);
+            labelCIPeopleInSystem.Name = "labelCIPeopleInSystem";
+            labelCIPeopleInSystem.Size = new Size(333, 15);
+            labelCIPeopleInSystem.TabIndex = 515;
+            labelCIPeopleInSystem.Text = "95% Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1579, 807);
+            Controls.Add(labelCIPeopleInSystem);
+            Controls.Add(labelCITimeInSystem);
             Controls.Add(labelGlobalTakeOver);
             Controls.Add(checkBoxCustomers);
             Controls.Add(checkBoxWorker1);
@@ -436,5 +458,7 @@
         private CheckBox checkBoxWorker1;
         private CheckBox checkBoxCustomers;
         private Label labelGlobalTakeOver;
+        private Label labelCITimeInSystem;
+        private Label labelCIPeopleInSystem;
     }
 }

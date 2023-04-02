@@ -35,6 +35,8 @@ namespace SimulationAppV2
         String leftInSystem;
         String averageWaitingTakeOver;
         String globalWaitingTakeOver;
+        String conIntervalTimeInSystem;
+        String conIntervalPeopleInSystem;
         Boolean showCustomers = false;
         Boolean showTechnicians = false;
         Boolean showCashiers = false;
@@ -44,10 +46,20 @@ namespace SimulationAppV2
             simSTK = new SimSTK();
             simSTK.SimulationDetails += SimulationDetailsHandler;
             simSTK.GlobalDetails += GlobalDetailsHandler;
+            simSTK.AfterSimulationDetails += AfterSimulationHandler;
             label3.Text = "Otvárací čas: " + (simSTK.STKDetails.Opening / 60) + ":" + (simSTK.STKDetails.Opening % 60);
             label4.Text = "Zatvára sa o: " + (simSTK.STKDetails.Closing / 60) + ":" + (simSTK.STKDetails.Closing % 60);
         }
-
+        private void AfterSimulationHandler(object? sender, AfterSimulationDetailsEventArgs e)
+        {
+            conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme: <" + e.CITimeInSystemLeft + "," + e.CITimeInSystemRight + ">";
+            conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme: <" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
+            this.Invoke(new Action(() => RefreshIntervals()));
+        }
+        private void RefreshIntervals()
+        {
+            labelCITimeInSystem.Text = conIntervalTimeInSystem;
+        }
         private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
         {
             globalAverageActual = "Priemerný čas strávený v prevádzke(global): " + e.GlobalAverage;
@@ -57,6 +69,7 @@ namespace SimulationAppV2
             globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: " + e.GlobalTakeOverWaiting;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
+
         public void RefreshGlobal()
         {
             labelGlobalTimeSpent.Text = globalAverageActual;

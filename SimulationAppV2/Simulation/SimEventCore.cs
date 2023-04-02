@@ -14,7 +14,7 @@ namespace SimulationAppV2.Simulation
         public double MaxTime { get; set; }
         public Boolean Pause { get; set; } = false;
         public Boolean Turbo { get; set; } = false;
-        public int Delay { get; set; }
+        public int Delay { get; set; } = 500;
         public double RefreshTime { get; set; } = 10;
         public override void Replication()
         {

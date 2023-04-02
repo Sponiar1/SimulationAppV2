@@ -25,10 +25,9 @@ namespace SimulationAppV2.Statistics
             sumX += value;
             sumSquaredX += Math.Pow(value, 2);
         }
-        public double getStandardDeviation()
+        public void setStandardDeviation()
         {
             standardDeviation = (sumSquaredX - (Math.Pow(sumX, 2)/numberOfValues))/(numberOfValues-1);
-            return standardDeviation;
         }
         public double getLeftSideNinety()
         {
