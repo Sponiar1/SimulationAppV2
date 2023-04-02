@@ -66,6 +66,7 @@
             labelAverageFreeTechnicians = new Label();
             labelGlobalAverageFreeCashiers = new Label();
             labelGlobalAverageFreeTechnicians = new Label();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -437,11 +438,22 @@
             labelGlobalAverageFreeTechnicians.TabIndex = 521;
             labelGlobalAverageFreeTechnicians.Text = "Priemerný počet voľných pracovníkov sk.2(global):";
             // 
+            // button3
+            // 
+            button3.Location = new Point(12, 231);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 522;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1579, 807);
+            Controls.Add(button3);
             Controls.Add(labelGlobalAverageFreeTechnicians);
             Controls.Add(labelGlobalAverageFreeCashiers);
             Controls.Add(labelAverageFreeTechnicians);
@@ -533,5 +545,6 @@
         private Label labelAverageFreeTechnicians;
         private Label labelGlobalAverageFreeCashiers;
         private Label labelGlobalAverageFreeTechnicians;
+        private Button button3;
     }
 }

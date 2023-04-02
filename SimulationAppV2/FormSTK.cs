@@ -263,5 +263,13 @@ namespace SimulationAppV2
                 showCustomers = false;
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Enabled = false;
+            FormSTKWorkers formStkWorker = new FormSTKWorkers();
+            formStkWorker.Show();
+            this.Enabled = true;
+        }
     }
 }
