@@ -1,4 +1,7 @@
-﻿using SimulationAppV2.Simulation;
+﻿using ScottPlot.Plottable;
+using ScottPlot.Renderable;
+using ScottPlot;
+using SimulationAppV2.Simulation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,31 +18,33 @@ namespace SimulationAppV2
     {
         CancellationTokenSource cts = new CancellationTokenSource();
         SimSTK simSTK;
-        readonly double[] ValuesCashiers = new double[16];
-        readonly double[] ValuesTechnicians = new double[26];
+        double[] xValuesCashiers;
+        double[] yValuesCashiers;
+        double[] xValuesTechnicians;
+        double[] yValuesTechnicians;
         Boolean doingCashiers;
-        int highestIndex = 1;
-        readonly ScottPlot.Plottable.SignalPlot SignalPlotCashiers;
-        readonly ScottPlot.Plottable.SignalPlot SignalPlotTechnicians;
+        int highestIndex = 0;
+        ScottPlot.Plottable.SignalPlotXY SignalPlotCashiers;
+        ScottPlot.Plottable.SignalPlotXY SignalPlotTechnicians;
         public FormSTKWorkers()
         {
             simSTK = new SimSTK();
             simSTK.Turbo = true;
             InitializeComponent();
             simSTK.GlobalDetails += GlobalDetailsHandler;
-            SignalPlotCashiers = formsPlot1.Plot.AddSignal(ValuesCashiers);
-            SignalPlotTechnicians = formsPlot2.Plot.AddSignal(ValuesTechnicians);
         }
 
         private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
         {
             if (doingCashiers)
             {
-                ValuesCashiers[highestIndex] = e.GlobalTakeOverWaiting;
+                xValuesCashiers[highestIndex] = simSTK.NumberOfCashier;
+                yValuesCashiers[highestIndex] = e.GlobalTakeOverWaiting;
             }
             else
             {
-                ValuesTechnicians[highestIndex] = e.GlobalAverage;
+                xValuesTechnicians[highestIndex] = simSTK.NumberOfTechnicians;
+                yValuesTechnicians[highestIndex] = e.GlobalAverage;
             }
         }
 
@@ -51,21 +56,22 @@ namespace SimulationAppV2
             for (int i = 1; i <= 15; i++)
             {
                 simSTK.NumberOfCashier = i;
-                var simulationTask = Task.Run(() => simSTK.Simulate(10000, cts.Token));
+                var simulationTask = Task.Run(() => simSTK.Simulate(1000, cts.Token));
                 simulationTask.Wait();
                 highestIndex++;
             }
-            highestIndex = 10;
+            highestIndex = 0;
 
             doingCashiers = false;
             simSTK.NumberOfCashier = 8;
             for (int i = 10; i <= 25; i++)
             {
                 simSTK.NumberOfTechnicians = i;
-                var simulationTask = Task.Run(() => simSTK.Simulate(10000, cts.Token));
+                var simulationTask = Task.Run(() => simSTK.Simulate(1000, cts.Token));
                 simulationTask.Wait();
                 highestIndex++;
             }
+            RefreshGraph();
         }
 
         public void RefreshGraph()
@@ -77,8 +83,20 @@ namespace SimulationAppV2
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            initializeGraph();
             doTests();
             RefreshGraph();
+        }
+        private void initializeGraph()
+        {
+            formsPlot1.Plot.Clear();
+            formsPlot2.Plot.Clear();
+            xValuesCashiers = new double[15];
+            yValuesCashiers = new double[15];
+            xValuesTechnicians = new double[16];
+            yValuesTechnicians = new double[16];
+            SignalPlotCashiers = formsPlot1.Plot.AddSignalXY(xValuesCashiers, yValuesCashiers);
+            SignalPlotCashiers = formsPlot2.Plot.AddSignalXY(xValuesTechnicians, yValuesTechnicians);
         }
     }
 }
