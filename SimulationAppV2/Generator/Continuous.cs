@@ -8,11 +8,11 @@ namespace SimulationAppV2.Generator
 {
     internal class Continuous : Probability
     {
-        protected int min;
-        protected int max;
+        protected double min;
+        protected double max;
         protected Random random;
 
-        public Continuous(int min, int max, Random random)
+        public Continuous(double min, double max, Random random)
         {
             this.min = min;
             this.max = max;

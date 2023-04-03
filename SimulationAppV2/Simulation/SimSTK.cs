@@ -87,7 +87,7 @@ namespace SimulationAppV2.Simulation
             #region Generators initialization
             arrivalProb = new Exponential(60.0 / 23.0, new Random(seedGen.Next()));
             shopParkingProb = new Triangular(180.0 / 60.0, 695.0 / 60.0, 431.0 / 60.0, new Random(seedGen.Next()));
-            paymentProb = new Continuous(65 / 60, 177 / 60, new Random(seedGen.Next()));
+            paymentProb = new Continuous(65d / 60d, 177d / 60d, new Random(seedGen.Next()));
             carType = new Random(seedGen.Next());
             personalCarProb = new Discrete(31, 45, new Random(seedGen.Next()));
             vanProb = new Empiric(STKDetails.VanTime, STKDetails.VanTimeProb, new Random(seedGen.Next()));

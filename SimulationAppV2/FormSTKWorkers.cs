@@ -43,7 +43,7 @@ namespace SimulationAppV2
             }
         }
 
-        public void doTests()
+        public async void doTests()
         {
             cts = new CancellationTokenSource();
             simSTK.NumberOfTechnicians = 20;
@@ -51,29 +51,34 @@ namespace SimulationAppV2
             for (int i = 1; i <= 15; i++)
             {
                 simSTK.NumberOfCashier = i;
-                Task.Run(() => simSTK.Simulate(100000, cts.Token));
+                var simulationTask = Task.Run(() => simSTK.Simulate(10000, cts.Token));
+                simulationTask.Wait();
                 highestIndex++;
             }
             highestIndex = 10;
 
+            doingCashiers = false;
             simSTK.NumberOfCashier = 8;
             for (int i = 10; i <= 25; i++)
             {
                 simSTK.NumberOfTechnicians = i;
-                Task.Run(() => simSTK.Simulate(100000, cts.Token));
+                var simulationTask = Task.Run(() => simSTK.Simulate(10000, cts.Token));
+                simulationTask.Wait();
                 highestIndex++;
             }
+        }
 
+        public void RefreshGraph()
+        {
             formsPlot1.Plot.AxisAuto();
             formsPlot2.Plot.AxisAuto();
             formsPlot1.Render();
             formsPlot2.Render();
-
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             doTests();
+            RefreshGraph();
         }
     }
 }
