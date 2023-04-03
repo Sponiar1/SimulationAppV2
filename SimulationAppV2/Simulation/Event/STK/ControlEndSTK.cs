@@ -38,7 +38,6 @@ namespace SimulationAppV2.Simulation.Event.STK
                 PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, customer, myCore.AvailableCashiers.Dequeue());
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);
-                //myCore.AvailableCashiers--;
             }
             else
             {

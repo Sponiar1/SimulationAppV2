@@ -56,8 +56,7 @@ namespace SimulationAppV2
             for (int i = 1; i <= 15; i++)
             {
                 simSTK.NumberOfCashier = i;
-                var simulationTask = Task.Run(() => simSTK.Simulate(1000, cts.Token));
-                simulationTask.Wait();
+                await Task.Run(() => simSTK.Simulate(1000, cts.Token));
                 highestIndex++;
             }
             highestIndex = 0;
@@ -67,8 +66,7 @@ namespace SimulationAppV2
             for (int i = 10; i <= 25; i++)
             {
                 simSTK.NumberOfTechnicians = i;
-                var simulationTask = Task.Run(() => simSTK.Simulate(1000, cts.Token));
-                simulationTask.Wait();
+                await Task.Run(() => simSTK.Simulate(1000, cts.Token));
                 highestIndex++;
             }
             RefreshGraph();
@@ -85,7 +83,6 @@ namespace SimulationAppV2
         {
             initializeGraph();
             doTests();
-            RefreshGraph();
         }
         private void initializeGraph()
         {

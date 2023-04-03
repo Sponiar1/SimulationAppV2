@@ -133,7 +133,7 @@ namespace SimulationAppV2.Simulation
             addEvent(helpEvent);
             #endregion
 
-            #region Fronts and arrays initialization
+            #region Queues and arrays initialization
             Customers.Clear();
             ControlWaiting.Clear();
             PaymentQueue.Clear();
