@@ -90,7 +90,7 @@
             // 
             labelCurrentTime.AutoSize = true;
             labelCurrentTime.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCurrentTime.Location = new Point(454, 60);
+            labelCurrentTime.Location = new Point(459, 128);
             labelCurrentTime.Name = "labelCurrentTime";
             labelCurrentTime.Size = new Size(160, 25);
             labelCurrentTime.TabIndex = 1;
@@ -99,7 +99,7 @@
             // labelOpening
             // 
             labelOpening.AutoSize = true;
-            labelOpening.Location = new Point(410, 109);
+            labelOpening.Location = new Point(415, 177);
             labelOpening.Name = "labelOpening";
             labelOpening.Size = new Size(74, 15);
             labelOpening.TabIndex = 3;
@@ -108,7 +108,7 @@
             // labelClosing
             // 
             labelClosing.AutoSize = true;
-            labelClosing.Location = new Point(602, 109);
+            labelClosing.Location = new Point(607, 177);
             labelClosing.Name = "labelClosing";
             labelClosing.Size = new Size(76, 15);
             labelClosing.TabIndex = 4;
@@ -137,7 +137,7 @@
             // labelControlParking
             // 
             labelControlParking.AutoSize = true;
-            labelControlParking.Location = new Point(1220, 283);
+            labelControlParking.Location = new Point(1088, 283);
             labelControlParking.Name = "labelControlParking";
             labelControlParking.Size = new Size(279, 15);
             labelControlParking.TabIndex = 8;
@@ -146,7 +146,7 @@
             // labelPaymentQueue
             // 
             labelPaymentQueue.AutoSize = true;
-            labelPaymentQueue.Location = new Point(1220, 772);
+            labelPaymentQueue.Location = new Point(1082, 753);
             labelPaymentQueue.Name = "labelPaymentQueue";
             labelPaymentQueue.Size = new Size(195, 15);
             labelPaymentQueue.TabIndex = 9;
@@ -155,7 +155,7 @@
             // labelCashiers
             // 
             labelCashiers.AutoSize = true;
-            labelCashiers.Location = new Point(850, 253);
+            labelCashiers.Location = new Point(718, 253);
             labelCashiers.Name = "labelCashiers";
             labelCashiers.Size = new Size(226, 15);
             labelCashiers.TabIndex = 10;
@@ -164,7 +164,7 @@
             // labelTechnician
             // 
             labelTechnician.AutoSize = true;
-            labelTechnician.Location = new Point(1220, 253);
+            labelTechnician.Location = new Point(1088, 253);
             labelTechnician.Name = "labelTechnician";
             labelTechnician.Size = new Size(213, 15);
             labelTechnician.TabIndex = 11;
@@ -173,7 +173,7 @@
             // labelCheckInWait
             // 
             labelCheckInWait.AutoSize = true;
-            labelCheckInWait.Location = new Point(1220, 742);
+            labelCheckInWait.Location = new Point(1082, 723);
             labelCheckInWait.Name = "labelCheckInWait";
             labelCheckInWait.Size = new Size(189, 15);
             labelCheckInWait.TabIndex = 12;
@@ -182,7 +182,7 @@
             // trackBar1
             // 
             trackBar1.LargeChange = 250;
-            trackBar1.Location = new Point(152, 60);
+            trackBar1.Location = new Point(157, 128);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
@@ -194,7 +194,7 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(1214, 12);
+            dataGridView1.Location = new Point(1082, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(358, 217);
@@ -203,7 +203,7 @@
             // dataGridView2
             // 
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(850, 12);
+            dataGridView2.Location = new Point(718, 12);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.Size = new Size(358, 217);
@@ -212,16 +212,16 @@
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(1214, 342);
+            dataGridView3.Location = new Point(1082, 342);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.RowTemplate.Height = 25;
-            dataGridView3.Size = new Size(358, 360);
+            dataGridView3.Size = new Size(358, 333);
             dataGridView3.TabIndex = 16;
             // 
             // labelCustomersInSystem
             // 
             labelCustomersInSystem.AutoSize = true;
-            labelCustomersInSystem.Location = new Point(1220, 716);
+            labelCustomersInSystem.Location = new Point(1082, 697);
             labelCustomersInSystem.Name = "labelCustomersInSystem";
             labelCustomersInSystem.Size = new Size(158, 15);
             labelCustomersInSystem.TabIndex = 17;
@@ -230,7 +230,7 @@
             // labelAverageTimeInSystem
             // 
             labelAverageTimeInSystem.AutoSize = true;
-            labelAverageTimeInSystem.Location = new Point(850, 394);
+            labelAverageTimeInSystem.Location = new Point(718, 394);
             labelAverageTimeInSystem.Name = "labelAverageTimeInSystem";
             labelAverageTimeInSystem.Size = new Size(196, 15);
             labelAverageTimeInSystem.TabIndex = 18;
@@ -240,7 +240,7 @@
             // 
             labelReplication.AutoSize = true;
             labelReplication.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            labelReplication.Location = new Point(697, 517);
+            labelReplication.Location = new Point(255, 434);
             labelReplication.Name = "labelReplication";
             labelReplication.Size = new Size(119, 25);
             labelReplication.TabIndex = 19;
@@ -248,7 +248,7 @@
             // 
             // numericCashier
             // 
-            numericCashier.Location = new Point(303, 12);
+            numericCashier.Location = new Point(308, 80);
             numericCashier.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
             numericCashier.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericCashier.Name = "numericCashier";
@@ -258,7 +258,7 @@
             // 
             // numericTechnician
             // 
-            numericTechnician.Location = new Point(454, 12);
+            numericTechnician.Location = new Point(459, 80);
             numericTechnician.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
             numericTechnician.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericTechnician.Name = "numericTechnician";
@@ -269,7 +269,7 @@
             // numericReplications
             // 
             numericReplications.Increment = new decimal(new int[] { 1000000, 0, 0, 0 });
-            numericReplications.Location = new Point(152, 12);
+            numericReplications.Location = new Point(157, 80);
             numericReplications.Maximum = new decimal(new int[] { 1410065408, 2, 0, 0 });
             numericReplications.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericReplications.Name = "numericReplications";
@@ -280,7 +280,7 @@
             // labelGlobalTimeSpent
             // 
             labelGlobalTimeSpent.AutoSize = true;
-            labelGlobalTimeSpent.Location = new Point(695, 636);
+            labelGlobalTimeSpent.Location = new Point(12, 615);
             labelGlobalTimeSpent.Name = "labelGlobalTimeSpent";
             labelGlobalTimeSpent.Size = new Size(240, 15);
             labelGlobalTimeSpent.TabIndex = 505;
@@ -289,7 +289,7 @@
             // labelAverageVisits
             // 
             labelAverageVisits.AutoSize = true;
-            labelAverageVisits.Location = new Point(697, 556);
+            labelAverageVisits.Location = new Point(15, 480);
             labelAverageVisits.Name = "labelAverageVisits";
             labelAverageVisits.Size = new Size(161, 15);
             labelAverageVisits.TabIndex = 506;
@@ -298,7 +298,7 @@
             // labelLeftInSystem
             // 
             labelLeftInSystem.AutoSize = true;
-            labelLeftInSystem.Location = new Point(695, 581);
+            labelLeftInSystem.Location = new Point(15, 510);
             labelLeftInSystem.Name = "labelLeftInSystem";
             labelLeftInSystem.Size = new Size(248, 15);
             labelLeftInSystem.TabIndex = 507;
@@ -307,7 +307,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(12, 167);
+            checkBox1.Location = new Point(12, 224);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(57, 19);
             checkBox1.TabIndex = 508;
@@ -318,7 +318,7 @@
             // labelAverageTakeOver
             // 
             labelAverageTakeOver.AutoSize = true;
-            labelAverageTakeOver.Location = new Point(850, 367);
+            labelAverageTakeOver.Location = new Point(718, 367);
             labelAverageTakeOver.Name = "labelAverageTakeOver";
             labelAverageTakeOver.Size = new Size(231, 15);
             labelAverageTakeOver.TabIndex = 509;
@@ -327,7 +327,7 @@
             // checkBoxWorker2
             // 
             checkBoxWorker2.AutoSize = true;
-            checkBoxWorker2.Location = new Point(653, 43);
+            checkBoxWorker2.Location = new Point(12, 279);
             checkBoxWorker2.Name = "checkBoxWorker2";
             checkBoxWorker2.Size = new Size(191, 19);
             checkBoxWorker2.TabIndex = 510;
@@ -338,7 +338,7 @@
             // checkBoxWorker1
             // 
             checkBoxWorker1.AutoSize = true;
-            checkBoxWorker1.Location = new Point(653, 13);
+            checkBoxWorker1.Location = new Point(12, 249);
             checkBoxWorker1.Name = "checkBoxWorker1";
             checkBoxWorker1.Size = new Size(191, 19);
             checkBoxWorker1.TabIndex = 511;
@@ -349,7 +349,7 @@
             // checkBoxCustomers
             // 
             checkBoxCustomers.AutoSize = true;
-            checkBoxCustomers.Location = new Point(653, 73);
+            checkBoxCustomers.Location = new Point(12, 309);
             checkBoxCustomers.Name = "checkBoxCustomers";
             checkBoxCustomers.Size = new Size(185, 19);
             checkBoxCustomers.TabIndex = 512;
@@ -360,7 +360,7 @@
             // labelGlobalTakeOver
             // 
             labelGlobalTakeOver.AutoSize = true;
-            labelGlobalTakeOver.Location = new Point(695, 609);
+            labelGlobalTakeOver.Location = new Point(15, 538);
             labelGlobalTakeOver.Name = "labelGlobalTakeOver";
             labelGlobalTakeOver.Size = new Size(257, 15);
             labelGlobalTakeOver.TabIndex = 513;
@@ -369,7 +369,7 @@
             // labelCITimeInSystem
             // 
             labelCITimeInSystem.AutoSize = true;
-            labelCITimeInSystem.Location = new Point(695, 661);
+            labelCITimeInSystem.Location = new Point(12, 643);
             labelCITimeInSystem.Name = "labelCITimeInSystem";
             labelCITimeInSystem.Size = new Size(347, 15);
             labelCITimeInSystem.TabIndex = 514;
@@ -378,7 +378,7 @@
             // labelCIPeopleInSystem
             // 
             labelCIPeopleInSystem.AutoSize = true;
-            labelCIPeopleInSystem.Location = new Point(695, 716);
+            labelCIPeopleInSystem.Location = new Point(12, 711);
             labelCIPeopleInSystem.Name = "labelCIPeopleInSystem";
             labelCIPeopleInSystem.Size = new Size(333, 15);
             labelCIPeopleInSystem.TabIndex = 515;
@@ -387,7 +387,7 @@
             // labelGlobalAveragePeopleInSystem
             // 
             labelGlobalAveragePeopleInSystem.AutoSize = true;
-            labelGlobalAveragePeopleInSystem.Location = new Point(696, 687);
+            labelGlobalAveragePeopleInSystem.Location = new Point(12, 681);
             labelGlobalAveragePeopleInSystem.Name = "labelGlobalAveragePeopleInSystem";
             labelGlobalAveragePeopleInSystem.Size = new Size(215, 15);
             labelGlobalAveragePeopleInSystem.TabIndex = 516;
@@ -396,7 +396,7 @@
             // labelAveragePeopleInSystem
             // 
             labelAveragePeopleInSystem.AutoSize = true;
-            labelAveragePeopleInSystem.Location = new Point(850, 342);
+            labelAveragePeopleInSystem.Location = new Point(718, 342);
             labelAveragePeopleInSystem.Name = "labelAveragePeopleInSystem";
             labelAveragePeopleInSystem.Size = new Size(174, 15);
             labelAveragePeopleInSystem.TabIndex = 517;
@@ -405,7 +405,7 @@
             // labelAverageFreeCashiers
             // 
             labelAverageFreeCashiers.AutoSize = true;
-            labelAverageFreeCashiers.Location = new Point(850, 283);
+            labelAverageFreeCashiers.Location = new Point(718, 283);
             labelAverageFreeCashiers.Name = "labelAverageFreeCashiers";
             labelAverageFreeCashiers.Size = new Size(233, 15);
             labelAverageFreeCashiers.TabIndex = 518;
@@ -414,7 +414,7 @@
             // labelAverageFreeTechnicians
             // 
             labelAverageFreeTechnicians.AutoSize = true;
-            labelAverageFreeTechnicians.Location = new Point(1220, 309);
+            labelAverageFreeTechnicians.Location = new Point(1088, 309);
             labelAverageFreeTechnicians.Name = "labelAverageFreeTechnicians";
             labelAverageFreeTechnicians.Size = new Size(234, 15);
             labelAverageFreeTechnicians.TabIndex = 519;
@@ -423,7 +423,7 @@
             // labelGlobalAverageFreeCashiers
             // 
             labelGlobalAverageFreeCashiers.AutoSize = true;
-            labelGlobalAverageFreeCashiers.Location = new Point(697, 742);
+            labelGlobalAverageFreeCashiers.Location = new Point(415, 480);
             labelGlobalAverageFreeCashiers.Name = "labelGlobalAverageFreeCashiers";
             labelGlobalAverageFreeCashiers.Size = new Size(275, 15);
             labelGlobalAverageFreeCashiers.TabIndex = 520;
@@ -432,7 +432,7 @@
             // labelGlobalAverageFreeTechnicians
             // 
             labelGlobalAverageFreeTechnicians.AutoSize = true;
-            labelGlobalAverageFreeTechnicians.Location = new Point(697, 772);
+            labelGlobalAverageFreeTechnicians.Location = new Point(415, 510);
             labelGlobalAverageFreeTechnicians.Name = "labelGlobalAverageFreeTechnicians";
             labelGlobalAverageFreeTechnicians.Size = new Size(275, 15);
             labelGlobalAverageFreeTechnicians.TabIndex = 521;
@@ -440,11 +440,11 @@
             // 
             // button3
             // 
-            button3.Location = new Point(12, 231);
+            button3.Location = new Point(12, 162);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(113, 44);
             button3.TabIndex = 522;
-            button3.Text = "button3";
+            button3.Text = "Experiment závislostí";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
@@ -452,7 +452,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1579, 807);
+            ClientSize = new Size(1476, 775);
             Controls.Add(button3);
             Controls.Add(labelGlobalAverageFreeTechnicians);
             Controls.Add(labelGlobalAverageFreeCashiers);

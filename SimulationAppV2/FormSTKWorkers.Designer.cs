@@ -35,27 +35,28 @@
             // 
             // formsPlot1
             // 
-            formsPlot1.Location = new Point(26, 40);
+            formsPlot1.Location = new Point(25, 100);
             formsPlot1.Margin = new Padding(4, 3, 4, 3);
             formsPlot1.Name = "formsPlot1";
-            formsPlot1.Size = new Size(467, 346);
+            formsPlot1.Size = new Size(664, 452);
             formsPlot1.TabIndex = 0;
             // 
             // formsPlot2
             // 
-            formsPlot2.Location = new Point(591, 40);
+            formsPlot2.Location = new Point(697, 100);
             formsPlot2.Margin = new Padding(4, 3, 4, 3);
             formsPlot2.Name = "formsPlot2";
-            formsPlot2.Size = new Size(467, 346);
+            formsPlot2.Size = new Size(684, 452);
             formsPlot2.TabIndex = 1;
             // 
             // button1
             // 
-            button1.Location = new Point(200, 493);
+            button1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(608, 30);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(193, 54);
             button1.TabIndex = 2;
-            button1.Text = "button1";
+            button1.Text = "Začať experiment";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -63,7 +64,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1149, 641);
+            ClientSize = new Size(1394, 748);
             Controls.Add(button1);
             Controls.Add(formsPlot2);
             Controls.Add(formsPlot1);

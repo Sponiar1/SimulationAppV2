@@ -18,6 +18,7 @@ namespace SimulationAppV2
     {
         CancellationTokenSource cts = new CancellationTokenSource();
         SimSTK simSTK;
+        #region Label attributes
         String actualTime;
         String checkInQueue;
         String inspectionQueue;
@@ -25,9 +26,6 @@ namespace SimulationAppV2
         String freeCashiers;
         String freeTechnician;
         String customersInShop;
-        TechnicianSTK[] technicianSTKs;
-        CashierSTK[] cashierSTKs;
-        Dictionary<int, CustomerSTK> customersInSystem;
         String averageActual;
         String numberOfReplication;
         String globalAverageActual;
@@ -43,9 +41,16 @@ namespace SimulationAppV2
         String globalAverageFreeTechnicians;
         String conIntervalTimeInSystem;
         String conIntervalPeopleInSystem;
+        #endregion
+
+        #region Table stuff
         Boolean showCustomers = false;
         Boolean showTechnicians = false;
         Boolean showCashiers = false;
+        TechnicianSTK[] technicianSTKs;
+        CashierSTK[] cashierSTKs;
+        Dictionary<int, CustomerSTK> customersInSystem;
+        #endregion
         public FormSTK()
         {
             InitializeComponent();
@@ -115,6 +120,7 @@ namespace SimulationAppV2
 
         private void Refresh()
         {
+            #region Local stats label set
             labelCurrentTime.Text = actualTime;
             labelCheckInWait.Text = checkInQueue;
             labelControlParking.Text = inspectionQueue;
@@ -127,8 +133,10 @@ namespace SimulationAppV2
             labelAveragePeopleInSystem.Text = averagePeopleInSystem;
             labelAverageFreeCashiers.Text = averageFreeCashiers;
             labelAverageFreeTechnicians.Text = averageFreeTechnicians;
+            #endregion
+            #region Table refresh
             dataGridView1.Rows.Clear();
-            if (showTechnicians)
+            if (showTechnicians && technicianSTKs != null)
             {
                 foreach (var worker in technicianSTKs)
                 {
@@ -136,7 +144,7 @@ namespace SimulationAppV2
                 }
             }
             dataGridView2.Rows.Clear();
-            if (showCashiers)
+            if (showCashiers && cashierSTKs != null)
             {
                 foreach (var worker in cashierSTKs)
                 {
@@ -144,13 +152,14 @@ namespace SimulationAppV2
                 }
             }
             dataGridView3.Rows.Clear();
-            if (showCustomers)
+            if (showCustomers && customersInSystem != null)
             {
                 foreach (var customer in customersInSystem)
                 {
                     dataGridView3.Rows.Add(customer.Value.ID, customer.Value.Car, customer.Value.Status);
                 }
             }
+            #endregion
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -218,6 +227,9 @@ namespace SimulationAppV2
             globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): ";
             conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme:";
             conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
+            /*technicianSTKs = new TechnicianSTK[1];
+            cashierSTKs = new CashierSTK[1];
+            customersInSystem = new Dictionary<int, CustomerSTK>();*/
             Refresh();
             RefreshGlobal();
             RefreshIntervals();

@@ -32,6 +32,12 @@ namespace SimulationAppV2
             simSTK.Turbo = true;
             InitializeComponent();
             simSTK.GlobalDetails += GlobalDetailsHandler;
+            formsPlot1.Plot.YLabel("Priemerného počtu čakajúcich na prebratie auta");
+            formsPlot1.Plot.XLabel("Počet pracovníkov sk1. (sk.2 = 20)");
+            formsPlot1.Plot.Title("Závislosť priemerného počtu čakajúcich na prebratie auta od pracovníkov sk.1");
+            formsPlot2.Plot.YLabel("Priemerného dĺžka pobytu v prevádzke");
+            formsPlot2.Plot.XLabel("Počet pracovníkov sk.2 (sk.1 = 8)");
+            formsPlot2.Plot.Title("Závislosť priemernej dĺžky pobytu zákazníka v systéme od pracovníkov sk.2");
         }
 
         private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
