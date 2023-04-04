@@ -59,13 +59,16 @@ namespace SimulationAppV2.Simulation
         public Average GlobalTakeOverWaiting { get; set; }
         public WeightedAverage AveragePeopleInSystem { get; set; }
         public Average GlobalAveragePeopleInSystem { get; set; }
-        double timeSinceLastChangeCustomers;
+
         public WeightedAverage AverageFreeCashier { get; set; }
         public Average GlobalAverageFreeCashier { get; set; }
-        double timeSinceLastChangeCashiers;
+
         public WeightedAverage AverageFreeTechnician { get; set; }
         public Average GlobalAverageFreeTechnician { get; set; }
-        double timeSinceLastChangeTechnician;
+
+        public WeightedAverage AveragePeopleWaitingForTakeOver { get; set; }
+        public Average GlobalAveragePeopleWaitingForTakeOver { get; set; }
+
         public ConfidenceInterval CIAverageTimeInSystem { get; set; }
         public ConfidenceInterval CIAverageNumberOfCustomers { get; set; }
         #endregion
@@ -102,6 +105,7 @@ namespace SimulationAppV2.Simulation
             GlobalAveragePeopleInSystem = new Average();
             GlobalAverageFreeCashier = new Average();
             GlobalAverageFreeTechnician = new Average();
+            GlobalAveragePeopleWaitingForTakeOver = new Average();
             CIAverageTimeInSystem = new ConfidenceInterval();
             CIAverageNumberOfCustomers = new ConfidenceInterval();
             #endregion
@@ -111,19 +115,17 @@ namespace SimulationAppV2.Simulation
         {
             base.BeforeReplication();
             #region Local Statistics and variables initialization
-            AverageTimeInSystem = new Average();
-            TakeOverWaiting = new Average();
-            AveragePeopleInSystem = new WeightedAverage();
-            AverageFreeCashier = new WeightedAverage();
-            AverageFreeTechnician = new WeightedAverage();
             Arrived = 0;
             Left = 0;
             CurrentTime = STKDetails.Opening;
             MaxTime = STKDetails.Closing;
             AvailableSpots = 5;
-            timeSinceLastChangeCustomers = CurrentTime;
-            timeSinceLastChangeCashiers = CurrentTime;
-            timeSinceLastChangeTechnician = CurrentTime;
+            AverageTimeInSystem = new Average();
+            TakeOverWaiting = new Average();
+            AveragePeopleInSystem = new WeightedAverage(CurrentTime);
+            AverageFreeCashier = new WeightedAverage(CurrentTime);
+            AverageFreeTechnician = new WeightedAverage(CurrentTime);
+            AveragePeopleWaitingForTakeOver = new WeightedAverage(CurrentTime);
             #endregion
 
             #region StartingEvent
@@ -222,23 +224,6 @@ namespace SimulationAppV2.Simulation
                 default:
                     return truckProb.getDiscreteEmpiricProbability();
             }
-        }
-
-        public void updateAverageCustomersInSystem()
-        {
-            AveragePeopleInSystem.add((CurrentTime - timeSinceLastChangeCustomers) * CustomersInSystem.Count(), (CurrentTime - timeSinceLastChangeCustomers));
-            timeSinceLastChangeCustomers = CurrentTime;
-        }
-
-        public void updateAverageCashiersInSystem()
-        {
-            AverageFreeCashier.add((CurrentTime - timeSinceLastChangeCashiers) * AvailableCashiers.Count(), (CurrentTime - timeSinceLastChangeCashiers));
-            timeSinceLastChangeCashiers = CurrentTime;
-        }
-        public void updateAverageTechniciansInSystem()
-        {
-            AverageFreeTechnician.add((CurrentTime - timeSinceLastChangeTechnician) * AvailableTechnicians.Count(), (CurrentTime - timeSinceLastChangeTechnician));
-            timeSinceLastChangeTechnician = CurrentTime;
         }
 
         public void refreshGlobalStatOnGui()

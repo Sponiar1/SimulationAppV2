@@ -67,6 +67,7 @@
             labelGlobalAverageFreeCashiers = new Label();
             labelGlobalAverageFreeTechnicians = new Label();
             button3 = new Button();
+            groupBox1 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -74,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)numericCashier).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericTechnician).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericReplications).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
@@ -239,10 +241,10 @@
             // labelReplication
             // 
             labelReplication.AutoSize = true;
-            labelReplication.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            labelReplication.Location = new Point(255, 434);
+            labelReplication.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            labelReplication.Location = new Point(172, 19);
             labelReplication.Name = "labelReplication";
-            labelReplication.Size = new Size(119, 25);
+            labelReplication.Size = new Size(131, 28);
             labelReplication.TabIndex = 19;
             labelReplication.Text = "Replikácia no.";
             // 
@@ -280,27 +282,30 @@
             // labelGlobalTimeSpent
             // 
             labelGlobalTimeSpent.AutoSize = true;
-            labelGlobalTimeSpent.Location = new Point(12, 615);
+            labelGlobalTimeSpent.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGlobalTimeSpent.Location = new Point(6, 283);
             labelGlobalTimeSpent.Name = "labelGlobalTimeSpent";
-            labelGlobalTimeSpent.Size = new Size(240, 15);
+            labelGlobalTimeSpent.Size = new Size(301, 20);
             labelGlobalTimeSpent.TabIndex = 505;
             labelGlobalTimeSpent.Text = "Priemerný čas strávený v prevádzke(global): ";
             // 
             // labelAverageVisits
             // 
             labelAverageVisits.AutoSize = true;
-            labelAverageVisits.Location = new Point(15, 480);
+            labelAverageVisits.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelAverageVisits.Location = new Point(6, 105);
             labelAverageVisits.Name = "labelAverageVisits";
-            labelAverageVisits.Size = new Size(161, 15);
+            labelAverageVisits.Size = new Size(202, 20);
             labelAverageVisits.TabIndex = 506;
             labelAverageVisits.Text = "Priemerný počet ľudí za deň: ";
             // 
             // labelLeftInSystem
             // 
             labelLeftInSystem.AutoSize = true;
-            labelLeftInSystem.Location = new Point(15, 510);
+            labelLeftInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelLeftInSystem.Location = new Point(6, 135);
             labelLeftInSystem.Name = "labelLeftInSystem";
-            labelLeftInSystem.Size = new Size(248, 15);
+            labelLeftInSystem.Size = new Size(310, 20);
             labelLeftInSystem.TabIndex = 507;
             labelLeftInSystem.Text = "Priemerný počet ľudí v systéme po uzávierke: ";
             // 
@@ -360,36 +365,40 @@
             // labelGlobalTakeOver
             // 
             labelGlobalTakeOver.AutoSize = true;
-            labelGlobalTakeOver.Location = new Point(15, 538);
+            labelGlobalTakeOver.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGlobalTakeOver.Location = new Point(6, 163);
             labelGlobalTakeOver.Name = "labelGlobalTakeOver";
-            labelGlobalTakeOver.Size = new Size(257, 15);
+            labelGlobalTakeOver.Size = new Size(325, 20);
             labelGlobalTakeOver.TabIndex = 513;
             labelGlobalTakeOver.Text = "Priemerné čakanie na odovzdanie auta(global): ";
             // 
             // labelCITimeInSystem
             // 
             labelCITimeInSystem.AutoSize = true;
-            labelCITimeInSystem.Location = new Point(12, 643);
+            labelCITimeInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCITimeInSystem.Location = new Point(6, 311);
             labelCITimeInSystem.Name = "labelCITimeInSystem";
-            labelCITimeInSystem.Size = new Size(347, 15);
+            labelCITimeInSystem.Size = new Size(435, 20);
             labelCITimeInSystem.TabIndex = 514;
             labelCITimeInSystem.Text = "90% Interval spoľahlibosti pre priemerný strávený čas v systéme: ";
             // 
             // labelCIPeopleInSystem
             // 
             labelCIPeopleInSystem.AutoSize = true;
-            labelCIPeopleInSystem.Location = new Point(12, 711);
+            labelCIPeopleInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCIPeopleInSystem.Location = new Point(6, 379);
             labelCIPeopleInSystem.Name = "labelCIPeopleInSystem";
-            labelCIPeopleInSystem.Size = new Size(333, 15);
+            labelCIPeopleInSystem.Size = new Size(418, 20);
             labelCIPeopleInSystem.TabIndex = 515;
             labelCIPeopleInSystem.Text = "95% Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
             // 
             // labelGlobalAveragePeopleInSystem
             // 
             labelGlobalAveragePeopleInSystem.AutoSize = true;
-            labelGlobalAveragePeopleInSystem.Location = new Point(12, 681);
+            labelGlobalAveragePeopleInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGlobalAveragePeopleInSystem.Location = new Point(6, 349);
             labelGlobalAveragePeopleInSystem.Name = "labelGlobalAveragePeopleInSystem";
-            labelGlobalAveragePeopleInSystem.Size = new Size(215, 15);
+            labelGlobalAveragePeopleInSystem.Size = new Size(269, 20);
             labelGlobalAveragePeopleInSystem.TabIndex = 516;
             labelGlobalAveragePeopleInSystem.Text = "Priemerný počet ľudí v sytéme(global): ";
             // 
@@ -423,18 +432,20 @@
             // labelGlobalAverageFreeCashiers
             // 
             labelGlobalAverageFreeCashiers.AutoSize = true;
-            labelGlobalAverageFreeCashiers.Location = new Point(415, 480);
+            labelGlobalAverageFreeCashiers.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGlobalAverageFreeCashiers.Location = new Point(6, 191);
             labelGlobalAverageFreeCashiers.Name = "labelGlobalAverageFreeCashiers";
-            labelGlobalAverageFreeCashiers.Size = new Size(275, 15);
+            labelGlobalAverageFreeCashiers.Size = new Size(340, 20);
             labelGlobalAverageFreeCashiers.TabIndex = 520;
             labelGlobalAverageFreeCashiers.Text = "Priemerný počet voľných pracovníkov sk.1(global):";
             // 
             // labelGlobalAverageFreeTechnicians
             // 
             labelGlobalAverageFreeTechnicians.AutoSize = true;
-            labelGlobalAverageFreeTechnicians.Location = new Point(415, 510);
+            labelGlobalAverageFreeTechnicians.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGlobalAverageFreeTechnicians.Location = new Point(6, 221);
             labelGlobalAverageFreeTechnicians.Name = "labelGlobalAverageFreeTechnicians";
-            labelGlobalAverageFreeTechnicians.Size = new Size(275, 15);
+            labelGlobalAverageFreeTechnicians.Size = new Size(340, 20);
             labelGlobalAverageFreeTechnicians.TabIndex = 521;
             labelGlobalAverageFreeTechnicians.Text = "Priemerný počet voľných pracovníkov sk.2(global):";
             // 
@@ -448,33 +459,44 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(labelGlobalAverageFreeCashiers);
+            groupBox1.Controls.Add(labelGlobalAverageFreeTechnicians);
+            groupBox1.Controls.Add(labelReplication);
+            groupBox1.Controls.Add(labelGlobalTakeOver);
+            groupBox1.Controls.Add(labelAverageVisits);
+            groupBox1.Controls.Add(labelGlobalAveragePeopleInSystem);
+            groupBox1.Controls.Add(labelLeftInSystem);
+            groupBox1.Controls.Add(labelCIPeopleInSystem);
+            groupBox1.Controls.Add(labelGlobalTimeSpent);
+            groupBox1.Controls.Add(labelCITimeInSystem);
+            groupBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            groupBox1.Location = new Point(12, 354);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(700, 409);
+            groupBox1.TabIndex = 523;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Globálne štatistiky";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1476, 775);
+            Controls.Add(groupBox1);
             Controls.Add(button3);
-            Controls.Add(labelGlobalAverageFreeTechnicians);
-            Controls.Add(labelGlobalAverageFreeCashiers);
             Controls.Add(labelAverageFreeTechnicians);
             Controls.Add(labelAverageFreeCashiers);
             Controls.Add(labelAveragePeopleInSystem);
-            Controls.Add(labelGlobalAveragePeopleInSystem);
-            Controls.Add(labelCIPeopleInSystem);
-            Controls.Add(labelCITimeInSystem);
-            Controls.Add(labelGlobalTakeOver);
             Controls.Add(checkBoxCustomers);
             Controls.Add(checkBoxWorker1);
             Controls.Add(checkBoxWorker2);
             Controls.Add(labelAverageTakeOver);
             Controls.Add(checkBox1);
-            Controls.Add(labelLeftInSystem);
-            Controls.Add(labelAverageVisits);
-            Controls.Add(labelGlobalTimeSpent);
             Controls.Add(numericReplications);
             Controls.Add(numericTechnician);
             Controls.Add(numericCashier);
-            Controls.Add(labelReplication);
             Controls.Add(labelAverageTimeInSystem);
             Controls.Add(labelCustomersInSystem);
             Controls.Add(dataGridView3);
@@ -501,6 +523,8 @@
             ((System.ComponentModel.ISupportInitialize)numericCashier).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericTechnician).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericReplications).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -546,5 +570,6 @@
         private Label labelGlobalAverageFreeCashiers;
         private Label labelGlobalAverageFreeTechnicians;
         private Button button3;
+        private GroupBox groupBox1;
     }
 }

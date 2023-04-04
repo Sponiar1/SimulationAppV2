@@ -33,13 +33,15 @@ namespace SimulationAppV2.Simulation.Event.STK
             {
                 //myCore.AvailableCashiers++;
                 cashier.BeginBreak();
-                myCore.updateAverageCashiersInSystem();
+                //myCore.updateAverageCashiersInSystem();
+                myCore.AverageFreeCashier.Add(myCore.AvailableCashiers.Count(), myCore.CurrentTime);
                 myCore.AvailableCashiers.Enqueue(cashier);
             }
 
             if(myCore.AvailableTechnicians.Count() > 0) 
             {
-                myCore.updateAverageTechniciansInSystem();
+                //myCore.updateAverageTechniciansInSystem();
+                myCore.AverageFreeTechnician.Add(myCore.AvailableTechnicians.Count(), myCore.CurrentTime);
                 ControlStartSTK controlStartSTK = new ControlStartSTK(myCore, customer, myCore.AvailableTechnicians.Dequeue());
                 controlStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(controlStartSTK);

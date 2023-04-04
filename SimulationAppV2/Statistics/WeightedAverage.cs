@@ -10,14 +10,24 @@ namespace SimulationAppV2.Statistics
     {
         double weightedSum = 0;
         double sum = 0;
-        public WeightedAverage() { }
+        double timeSinceLastChange;
+        public WeightedAverage(double time)
+        {
+            this.timeSinceLastChange = time;
+        }
 
-        public void add(double weightedValue, double value) 
+        /*public void add(double weightedValue, double value) 
         {
             weightedSum += weightedValue;
             sum += value;
         }
-
+        */
+        public void Add(double weight, double changeTime)
+        {
+            weightedSum += (weight * (changeTime - timeSinceLastChange)) ;
+            sum += changeTime - timeSinceLastChange;
+            timeSinceLastChange = changeTime;
+        }
         public double getWeightedAverage()
         { 
             return weightedSum/sum;

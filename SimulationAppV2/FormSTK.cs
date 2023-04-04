@@ -67,6 +67,7 @@ namespace SimulationAppV2
             conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme: <" + e.CITimeInSystemLeft + "," + e.CITimeInSystemRight + ">";
             conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme: <" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
             this.Invoke(new Action(() => RefreshIntervals()));
+            button1.Enabled = true;
         }
         private void RefreshIntervals()
         {
@@ -168,6 +169,7 @@ namespace SimulationAppV2
             ClearData();
             simSTK.NumberOfCashier = (int)numericCashier.Value;
             simSTK.NumberOfTechnicians = (int)numericTechnician.Value;
+            button1.Enabled = false;
             Task.Run(() => simSTK.Simulate((int)numericReplications.Value, cts.Token));
         }
 
@@ -175,11 +177,21 @@ namespace SimulationAppV2
         private void button2_Click(object sender, EventArgs e)
         {
             simSTK.switchPause();
+            if (button2.Text == "Pause")
+            {
+                button2.Text = "Unpause";
+            }
+            else
+            {
+                button2.Text = "Pause";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             cts?.Cancel();
+            button1.Enabled = true;
+            button2.Text = "Pause";
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
