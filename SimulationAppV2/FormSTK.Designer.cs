@@ -68,6 +68,8 @@
             labelGlobalAverageFreeTechnicians = new Label();
             button3 = new Button();
             groupBox1 = new GroupBox();
+            labelGlobalAveragePeopleWaitingForTakeOver = new Label();
+            labelAverageWaitingForTakeOver = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -232,7 +234,7 @@
             // labelAverageTimeInSystem
             // 
             labelAverageTimeInSystem.AutoSize = true;
-            labelAverageTimeInSystem.Location = new Point(718, 394);
+            labelAverageTimeInSystem.Location = new Point(718, 425);
             labelAverageTimeInSystem.Name = "labelAverageTimeInSystem";
             labelAverageTimeInSystem.Size = new Size(196, 15);
             labelAverageTimeInSystem.TabIndex = 18;
@@ -251,7 +253,6 @@
             // numericCashier
             // 
             numericCashier.Location = new Point(308, 80);
-            numericCashier.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
             numericCashier.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericCashier.Name = "numericCashier";
             numericCashier.Size = new Size(120, 23);
@@ -261,7 +262,6 @@
             // numericTechnician
             // 
             numericTechnician.Location = new Point(459, 80);
-            numericTechnician.Maximum = new decimal(new int[] { 25, 0, 0, 0 });
             numericTechnician.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericTechnician.Name = "numericTechnician";
             numericTechnician.Size = new Size(120, 23);
@@ -323,7 +323,7 @@
             // labelAverageTakeOver
             // 
             labelAverageTakeOver.AutoSize = true;
-            labelAverageTakeOver.Location = new Point(718, 367);
+            labelAverageTakeOver.Location = new Point(718, 398);
             labelAverageTakeOver.Name = "labelAverageTakeOver";
             labelAverageTakeOver.Size = new Size(231, 15);
             labelAverageTakeOver.TabIndex = 509;
@@ -405,7 +405,7 @@
             // labelAveragePeopleInSystem
             // 
             labelAveragePeopleInSystem.AutoSize = true;
-            labelAveragePeopleInSystem.Location = new Point(718, 342);
+            labelAveragePeopleInSystem.Location = new Point(718, 373);
             labelAveragePeopleInSystem.Name = "labelAveragePeopleInSystem";
             labelAveragePeopleInSystem.Size = new Size(174, 15);
             labelAveragePeopleInSystem.TabIndex = 517;
@@ -461,6 +461,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(labelGlobalAveragePeopleWaitingForTakeOver);
             groupBox1.Controls.Add(labelGlobalAverageFreeCashiers);
             groupBox1.Controls.Add(labelGlobalAverageFreeTechnicians);
             groupBox1.Controls.Add(labelReplication);
@@ -479,11 +480,31 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Globálne štatistiky";
             // 
+            // labelGlobalAveragePeopleWaitingForTakeOver
+            // 
+            labelGlobalAveragePeopleWaitingForTakeOver.AutoSize = true;
+            labelGlobalAveragePeopleWaitingForTakeOver.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            labelGlobalAveragePeopleWaitingForTakeOver.Location = new Point(8, 251);
+            labelGlobalAveragePeopleWaitingForTakeOver.Name = "labelGlobalAveragePeopleWaitingForTakeOver";
+            labelGlobalAveragePeopleWaitingForTakeOver.Size = new Size(308, 20);
+            labelGlobalAveragePeopleWaitingForTakeOver.TabIndex = 522;
+            labelGlobalAveragePeopleWaitingForTakeOver.Text = "Priemerná veľkosť radu na prevzatie(global): ";
+            // 
+            // labelAverageWaitingForTakeOver
+            // 
+            labelAverageWaitingForTakeOver.AutoSize = true;
+            labelAverageWaitingForTakeOver.Location = new Point(718, 309);
+            labelAverageWaitingForTakeOver.Name = "labelAverageWaitingForTakeOver";
+            labelAverageWaitingForTakeOver.Size = new Size(202, 15);
+            labelAverageWaitingForTakeOver.TabIndex = 524;
+            labelAverageWaitingForTakeOver.Text = "Priemerná veľkosť radu na prevzatie: ";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1476, 775);
+            Controls.Add(labelAverageWaitingForTakeOver);
             Controls.Add(groupBox1);
             Controls.Add(button3);
             Controls.Add(labelAverageFreeTechnicians);
@@ -571,5 +592,7 @@
         private Label labelGlobalAverageFreeTechnicians;
         private Button button3;
         private GroupBox groupBox1;
+        private Label labelAverageWaitingForTakeOver;
+        private Label labelGlobalAveragePeopleWaitingForTakeOver;
     }
 }

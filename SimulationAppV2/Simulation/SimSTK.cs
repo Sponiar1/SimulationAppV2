@@ -161,6 +161,10 @@ namespace SimulationAppV2.Simulation
 
         public override void AfterReplication()
         {
+            AveragePeopleWaitingForTakeOver.Add(Customers.Count(), CurrentTime);
+            AverageFreeTechnician.Add(AvailableTechnicians.Count(), CurrentTime);
+            AverageFreeCashier.Add(AvailableCashiers.Count(), CurrentTime);
+            AveragePeopleInSystem.Add(CustomersInSystem.Count(), CurrentTime);
             GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
             GlobalAverageVisits.Add(Arrived);
             GlobalLeftInSystem.Add(Arrived - Left);
@@ -170,6 +174,7 @@ namespace SimulationAppV2.Simulation
             CIAverageNumberOfCustomers.add(AveragePeopleInSystem.getWeightedAverage());
             GlobalAverageFreeCashier.Add(AverageFreeCashier.getWeightedAverage());
             GlobalAverageFreeTechnician.Add(AverageFreeTechnician.getWeightedAverage());
+            GlobalAveragePeopleWaitingForTakeOver.Add(AveragePeopleWaitingForTakeOver.getWeightedAverage());
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
             {
                 refreshGlobalStatOnGui();
@@ -235,7 +240,8 @@ namespace SimulationAppV2.Simulation
                                                                     GlobalTakeOverWaiting.getActualAverage(),
                                                                     GlobalAveragePeopleInSystem.getActualAverage(),
                                                                     GlobalAverageFreeCashier.getActualAverage(),
-                                                                    GlobalAverageFreeTechnician.getActualAverage()
+                                                                    GlobalAverageFreeTechnician.getActualAverage(),
+                                                                    GlobalAveragePeopleWaitingForTakeOver.getActualAverage()
                                                                     ));
         }
         public override void refreshGui()
@@ -253,7 +259,8 @@ namespace SimulationAppV2.Simulation
                                                                     TakeOverWaiting.getActualAverage(),
                                                                     AveragePeopleInSystem.getWeightedAverage(),
                                                                     AverageFreeCashier.getWeightedAverage(),
-                                                                    AverageFreeTechnician.getWeightedAverage()
+                                                                    AverageFreeTechnician.getWeightedAverage(),
+                                                                    AveragePeopleWaitingForTakeOver.getWeightedAverage()
                                                                     //Arrived,
                                                                     //Left
                                                                     )) ; 
@@ -276,9 +283,11 @@ namespace SimulationAppV2.Simulation
         public double AveragePeopleInSystem { get; }
         public double AverageFreeCashiers { get; }
         public double AverageFreeTechnician { get; }
+        public double AveragePeopleWaitingForTakeOver { get; }
         public SimulationDetailsEventArgs(double time, int checkInQueue, int inspectionParkingLot, int paymentQueue, int freeCashiers, int freeTechnician,
                                             TechnicianSTK[] technicians, CashierSTK[] cashier, Dictionary<int, CustomerSTK> customers, double averageActual,
-                                            double averageTakeOverWaiting, double averagePeopleInSystem, double averageFreeCashiers, double averageFreeTechnician)
+                                            double averageTakeOverWaiting, double averagePeopleInSystem, double averageFreeCashiers, double averageFreeTechnician, 
+                                            double averagePeopleWaitingForTakeOver)
         {
             Time = time;
             CheckInQueue = checkInQueue;
@@ -294,6 +303,7 @@ namespace SimulationAppV2.Simulation
             AveragePeopleInSystem = averagePeopleInSystem;
             AverageFreeCashiers = averageFreeCashiers;
             AverageFreeTechnician = averageFreeTechnician;
+            AveragePeopleWaitingForTakeOver = averagePeopleWaitingForTakeOver;
         }
     }
 
@@ -307,6 +317,7 @@ namespace SimulationAppV2.Simulation
         public double GlobalAveragePeopleInSystem { get; set; }
         public double GlobalAverageFreeCashiers { get; set; }
         public double GlobalAverageFreeTechnicians { get; set; }
+        public double GlobalAveragePeopleWaitingForTakeOver { get; set; }
         public GlobalDetailsEventArgs(double globalAverage,
                                       int numberOfReplication,
                                       double globalVisits,
@@ -314,7 +325,8 @@ namespace SimulationAppV2.Simulation
                                       double globalTakeOverWaiting,
                                       double globalAveragePeopleInSystem,
                                       double globalAverageFreeCashiers,
-                                      double globalAverageFreeTechnicians)
+                                      double globalAverageFreeTechnicians,
+                                      double globalAveragePeopleWaitingForTakeOver)
         {
             NumberOfReplication = numberOfReplication;
             GlobalAverage = globalAverage;
@@ -324,6 +336,7 @@ namespace SimulationAppV2.Simulation
             GlobalAveragePeopleInSystem = globalAveragePeopleInSystem;
             GlobalAverageFreeCashiers = globalAverageFreeCashiers;
             GlobalAverageFreeTechnicians = globalAverageFreeTechnicians;
+            GlobalAveragePeopleWaitingForTakeOver = globalAveragePeopleWaitingForTakeOver;
         }
     }
 

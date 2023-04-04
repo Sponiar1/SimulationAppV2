@@ -26,6 +26,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             {
                 //myCore.updateAverageCashiersInSystem();
                 myCore.AverageFreeCashier.Add(myCore.AvailableCashiers.Count(), myCore.CurrentTime);
+                myCore.AveragePeopleWaitingForTakeOver.Add(myCore.Customers.Count(), myCore.CurrentTime);
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), myCore.AvailableCashiers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
                 //myCore.AvailableCashiers--;

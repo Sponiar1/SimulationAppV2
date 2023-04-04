@@ -23,6 +23,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else if(myCore.Customers.Count() > 0 && myCore.AvailableSpots > 0)
             {
+                myCore.AveragePeopleWaitingForTakeOver.Add(myCore.Customers.Count(), myCore.CurrentTime);
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), cashier);
                 takeOver.Time = myCore.CurrentTime;
                 myCore.addEvent(takeOver);

@@ -39,6 +39,8 @@ namespace SimulationAppV2
         String globalAverageFreeCashiers;
         String averageFreeTechnicians;
         String globalAverageFreeTechnicians;
+        String averagePeopleWaitingForTakeOver;
+        String globalAveragePeopleWaitingForTakeOver;
         String conIntervalTimeInSystem;
         String conIntervalPeopleInSystem;
         #endregion
@@ -67,7 +69,7 @@ namespace SimulationAppV2
             conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme: <" + e.CITimeInSystemLeft + "," + e.CITimeInSystemRight + ">";
             conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme: <" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
             this.Invoke(new Action(() => RefreshIntervals()));
-            button1.Enabled = true;
+            this.Invoke(new Action(() => button1.Enabled = true));
         }
         private void RefreshIntervals()
         {
@@ -84,6 +86,7 @@ namespace SimulationAppV2
             globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): " + e.GlobalAveragePeopleInSystem;
             globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1(global): " + e.GlobalAverageFreeCashiers;
             globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2(global): " + e.GlobalAverageFreeTechnicians;
+            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie(global): " + e.GlobalAveragePeopleWaitingForTakeOver;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
 
@@ -97,6 +100,7 @@ namespace SimulationAppV2
             labelGlobalAveragePeopleInSystem.Text = globalAveragePeopleInSystem;
             labelGlobalAverageFreeCashiers.Text = globalAverageFreeCashiers;
             labelGlobalAverageFreeTechnicians.Text = globalAverageFreeTechnicians;
+            labelGlobalAveragePeopleWaitingForTakeOver.Text = globalAveragePeopleWaitingForTakeOver;
         }
         private void SimulationDetailsHandler(object? sender, SimulationDetailsEventArgs e)
         {
@@ -116,6 +120,7 @@ namespace SimulationAppV2
             averagePeopleInSystem = "Priemerný počet ľudí v systéme: " + e.AveragePeopleInSystem;
             averageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + e.AverageFreeCashiers;
             averageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + e.AverageFreeTechnician;
+            averagePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: " + e.AveragePeopleWaitingForTakeOver;
             this.Invoke(new Action(() => Refresh()));
         }
 
@@ -134,6 +139,7 @@ namespace SimulationAppV2
             labelAveragePeopleInSystem.Text = averagePeopleInSystem;
             labelAverageFreeCashiers.Text = averageFreeCashiers;
             labelAverageFreeTechnicians.Text = averageFreeTechnicians;
+            labelAverageWaitingForTakeOver.Text = averagePeopleWaitingForTakeOver;
             #endregion
             #region Table refresh
             dataGridView1.Rows.Clear();
@@ -230,6 +236,7 @@ namespace SimulationAppV2
             averageActual = "Priemerný čas strávený v prevádzke: ";
             averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: ";
             averagePeopleInSystem = "Priemerný počet ľudí v systéme: ";
+            averagePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: ";
 
             numberOfReplication = "Replikácia no. ";
             globalAverageVisits = "Priemerný počet ľudí za deň: ";
@@ -237,6 +244,7 @@ namespace SimulationAppV2
             globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: ";
             globalAverageActual = "Priemerný čas strávený v prevádzke(global): ";
             globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): ";
+            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie(global): ";
             conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme:";
             conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
             /*technicianSTKs = new TechnicianSTK[1];

@@ -57,7 +57,7 @@ namespace SimulationAppV2
         public async void doTests()
         {
             cts = new CancellationTokenSource();
-            simSTK.NumberOfTechnicians = 20;
+            simSTK.NumberOfTechnicians = 17;
             doingCashiers = true;
             for (int i = 1; i <= 15; i++)
             {
@@ -68,7 +68,7 @@ namespace SimulationAppV2
             highestIndex = 0;
 
             doingCashiers = false;
-            simSTK.NumberOfCashier = 8;
+            simSTK.NumberOfCashier = 4;
             for (int i = 10; i <= 25; i++)
             {
                 simSTK.NumberOfTechnicians = i;

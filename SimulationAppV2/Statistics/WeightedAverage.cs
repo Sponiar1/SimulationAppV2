@@ -29,8 +29,12 @@ namespace SimulationAppV2.Statistics
             timeSinceLastChange = changeTime;
         }
         public double getWeightedAverage()
-        { 
-            return weightedSum/sum;
+        {
+            if (sum != 0)
+            {
+                return weightedSum / sum;
+            }
+            else return 0;
         }
     }
 }

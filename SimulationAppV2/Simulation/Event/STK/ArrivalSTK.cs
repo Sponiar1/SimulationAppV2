@@ -30,6 +30,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             {
                 customer.Status = Status.WaitingTakeOver;
                 customer.WaitingStartAt = myCore.CurrentTime;
+                myCore.AveragePeopleWaitingForTakeOver.Add(myCore.Customers.Count(), myCore.CurrentTime);
                 myCore.Customers.Enqueue(customer);
             }
             else
