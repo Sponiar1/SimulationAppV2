@@ -256,14 +256,15 @@ namespace SimulationAppV2
         }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            /*if (checkBox1.Checked)
             {
                 simSTK.Turbo = true;
             }
             else
             {
                 simSTK.Turbo = false;
-            }
+            }*/
+            simSTK.switchTurbo();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)

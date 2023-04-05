@@ -15,13 +15,10 @@ namespace SimulationAppV2.Simulation
         public Boolean Pause { get; set; } = false;
         public Boolean Turbo { get; set; } = false;
         public int Delay { get; set; } = 500;
-        public double RefreshTime { get; set; } = 10;
+        public double RefreshTime { get; set; } = 1;
         public override void Replication()
         {
             Event.Event helpEvent; 
-            Event.Event sysEvent = new SysEvent(this);
-            sysEvent.Time = CurrentTime;
-            addEvent(sysEvent);
             while (timeline.Count != 0 || CurrentTime > MaxTime)
             {
                 helpEvent = timeline.Dequeue();
@@ -77,6 +74,12 @@ namespace SimulationAppV2.Simulation
         public override void BeforeReplication()
         {
             timeline.Clear();
+            if (!Turbo)
+            {
+                Event.Event sysEvent = new SysEvent(this);
+                sysEvent.Time = CurrentTime;
+                addEvent(sysEvent);
+            }
         }
         public virtual void refreshGui()
         {

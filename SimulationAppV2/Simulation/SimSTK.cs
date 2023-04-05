@@ -178,18 +178,20 @@ namespace SimulationAppV2.Simulation
             #endregion
 
             #region Global statistics
-            GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
-            GlobalAverageVisits.Add(Arrived);
-            GlobalLeftInSystem.Add(Arrived - Left);
-            GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
-            CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
-            GlobalAveragePeopleInSystem.Add(AveragePeopleInSystem.getWeightedAverage());
-            CIAverageNumberOfCustomers.add(AveragePeopleInSystem.getWeightedAverage());
-            GlobalAverageFreeCashier.Add(AverageFreeCashier.getWeightedAverage());
-            GlobalAverageFreeTechnician.Add(AverageFreeTechnician.getWeightedAverage());
-            GlobalAveragePeopleWaitingForTakeOver.Add(AveragePeopleWaitingForTakeOver.getWeightedAverage());
+            if (!base.CancellationToken.IsCancellationRequested)
+            {
+                GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
+                GlobalAverageVisits.Add(Arrived);
+                GlobalLeftInSystem.Add(Arrived - Left);
+                GlobalTakeOverWaiting.Add(TakeOverWaiting.getActualAverage());
+                CIAverageTimeInSystem.add(AverageTimeInSystem.getActualAverage());
+                GlobalAveragePeopleInSystem.Add(AveragePeopleInSystem.getWeightedAverage());
+                CIAverageNumberOfCustomers.add(AveragePeopleInSystem.getWeightedAverage());
+                GlobalAverageFreeCashier.Add(AverageFreeCashier.getWeightedAverage());
+                GlobalAverageFreeTechnician.Add(AverageFreeTechnician.getWeightedAverage());
+                GlobalAveragePeopleWaitingForTakeOver.Add(AveragePeopleWaitingForTakeOver.getWeightedAverage());
+            }
             #endregion
-
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
             {
                 refreshGlobalStatOnGui();
