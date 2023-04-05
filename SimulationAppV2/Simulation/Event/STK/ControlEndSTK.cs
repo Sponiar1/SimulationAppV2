@@ -26,17 +26,13 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                //myCore.updateAverageTechniciansInSystem();
                 myCore.AverageFreeTechnician.Add(myCore.AvailableTechnicians.Count(), myCore.CurrentTime);
                 myCore.AvailableTechnicians.Enqueue(technicianSTK);
-                //technicianSTK.WorkingOn = TechnicianWork.Break;
-                //technicianSTK.ControlledCar = CarType.None;
                 technicianSTK.TechnicianBreak();
             }
 
             if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers.Count() > 0)
             {
-                //myCore.updateAverageCashiersInSystem();
                 myCore.AverageFreeCashier.Add(myCore.AvailableCashiers.Count(), myCore.CurrentTime);
                 PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, customer, myCore.AvailableCashiers.Dequeue());
                 paymentStartSTK.Time = myCore.CurrentTime;

@@ -16,7 +16,6 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
-            //myCore.AverageCustomersInSystem();
             myCore.AveragePeopleInSystem.Add(myCore.CustomersInSystem.Count(), myCore.CurrentTime);
             myCore.Arrived++;
             myCore.CustomersInSystem.Add(customer.ID, customer);
@@ -35,7 +34,6 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
-                //myCore.updateAverageCashiersInSystem();
                 myCore.AverageFreeCashier.Add(myCore.AvailableCashiers.Count(), myCore.CurrentTime);
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, customer, myCore.AvailableCashiers.Dequeue());
                 if(myCore.CurrentTime >= myCore.STKDetails.Opening)
