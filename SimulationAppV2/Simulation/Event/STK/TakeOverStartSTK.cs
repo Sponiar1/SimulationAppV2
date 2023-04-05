@@ -19,7 +19,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             myCore.TakeOverWaiting.Add(Time - customer.Arrival);
             customer.Status = Status.TakingOver;
             TakeOverEndSTK takeOverEndSTK = new TakeOverEndSTK(myCore, customer, cashier);
-            takeOverEndSTK.Time = myCore.CurrentTime + myCore.getshopParkingTime();
+            takeOverEndSTK.Time = myCore.CurrentTime + myCore.GetshopParkingTime();
             myCore.addEvent(takeOverEndSTK);
         }
     }

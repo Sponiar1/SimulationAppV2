@@ -20,7 +20,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             myCore.AveragePeopleInSystem.Add(myCore.CustomersInSystem.Count(), myCore.CurrentTime);
             myCore.Arrived++;
             myCore.CustomersInSystem.Add(customer.ID, customer);
-            Time = myCore.CurrentTime + myCore.getArrivalTime();
+            Time = myCore.CurrentTime + myCore.GetArrivalTime();
             if (Time < myCore.STKDetails.StopAccepting)
             {
                 myCore.addEvent(this);
@@ -50,7 +50,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.AvailableSpots--;
 
             }
-            CustomerSTK newCustomer = new CustomerSTK(myCore.getCarType(), customerId, Time);
+            CustomerSTK newCustomer = new CustomerSTK(myCore.GetCarType(), customerId, Time);
             customerId++;
             this.customer = newCustomer;
         }

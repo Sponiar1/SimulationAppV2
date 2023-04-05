@@ -29,8 +29,9 @@ namespace SimulationAppV2.Simulation.Event.STK
                 //myCore.updateAverageTechniciansInSystem();
                 myCore.AverageFreeTechnician.Add(myCore.AvailableTechnicians.Count(), myCore.CurrentTime);
                 myCore.AvailableTechnicians.Enqueue(technicianSTK);
-                technicianSTK.WorkingOn = TechnicianWork.Break;
-                technicianSTK.ControlledCar = CarType.None;
+                //technicianSTK.WorkingOn = TechnicianWork.Break;
+                //technicianSTK.ControlledCar = CarType.None;
+                technicianSTK.TechnicianBreak();
             }
 
             if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers.Count() > 0)

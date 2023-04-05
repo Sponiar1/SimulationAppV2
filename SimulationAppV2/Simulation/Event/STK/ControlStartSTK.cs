@@ -15,11 +15,13 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
-            technicianSTK.WorkingOn = TechnicianWork.Controling;
-            technicianSTK.ControlledCar = customer.Car;
+            //technicianSTK.WorkingOn = TechnicianWork.Controling;
+            //technicianSTK.ControlledCar = customer.Car;
+            //technicianSTK.CustomerID = customer.ID;
+            technicianSTK.StartWork(customer.ID, customer.Car);
             customer.Status = Status.Controlling;
             ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer, technicianSTK);
-            controlEndSTK.Time = myCore.CurrentTime + myCore.getCarTime(customer.Car);
+            controlEndSTK.Time = myCore.CurrentTime + myCore.GetCarTime(customer.Car);
             myCore.addEvent(controlEndSTK);
             
             if(myCore.Customers.Count() > 0 && myCore.AvailableCashiers.Count() > 0 && myCore.PaymentQueue.Count() == 0) 

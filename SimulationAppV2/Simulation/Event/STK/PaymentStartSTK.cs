@@ -18,7 +18,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             customer.Status = Status.Paying;
             cashier.BeginPayment(customer.ID);
             PaymentEndSTK paymentEndSTK = new PaymentEndSTK(myCore, customer, cashier);
-            paymentEndSTK.Time = myCore.CurrentTime + myCore.getshopPaymentTime();
+            paymentEndSTK.Time = myCore.CurrentTime + myCore.GetshopPaymentTime();
             myCore.addEvent(paymentEndSTK);
         }
     }

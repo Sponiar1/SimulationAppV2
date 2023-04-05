@@ -10,12 +10,24 @@ namespace SimulationAppV2.Simulation.SimObject.STK
     {
         public CarType ControlledCar { get; set; }
         public TechnicianWork WorkingOn { get; set; }
+        public int CustomerID { get; set; }
         public TechnicianSTK(int id) : base(id)
         { 
             ControlledCar = CarType.None;
             WorkingOn = TechnicianWork.Break;
         }
-
+        public void TechnicianBreak()
+        {
+            CustomerID = 0;
+            ControlledCar = CarType.None;
+            WorkingOn = TechnicianWork.Break;
+        }
+        public void StartWork(int customerID, CarType car)
+        {
+            CustomerID = customerID;
+            WorkingOn = STK.TechnicianWork.Controling;
+            ControlledCar = car;
+        }
     }
 
     enum TechnicianWork

@@ -131,7 +131,7 @@ namespace SimulationAppV2.Simulation
 
             #region StartingEvent
             Event.Event helpEvent;
-            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.getCarType(), 1, CurrentTime));
+            helpEvent = new ArrivalSTK(this, new CustomerSTK(this.GetCarType(), 1, CurrentTime));
             helpEvent.Time = CurrentTime;
             addEvent(helpEvent);
             #endregion
@@ -194,7 +194,7 @@ namespace SimulationAppV2.Simulation
             #endregion
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
             {
-                refreshGlobalStatOnGui();
+                RefreshGlobalStatOnGui();
             }
         }
 
@@ -203,22 +203,22 @@ namespace SimulationAppV2.Simulation
             AfterSimulationDetails?.Invoke(this, new AfterSimulationDetailsEventArgs(CIAverageTimeInSystem, CIAverageNumberOfCustomers));
         }
 
-        public double getArrivalTime()
+        public double GetArrivalTime()
         {
             return arrivalProb.getValue();
         }
 
-        public double getshopParkingTime()
+        public double GetshopParkingTime()
         {
             return shopParkingProb.getValue();
         }
 
-        public double getshopPaymentTime()
+        public double GetshopPaymentTime()
         {
             return paymentProb.getValue();
         }
 
-        public CarType getCarType()
+        public CarType GetCarType()
         {
             double p = carType.NextDouble();
             if (p <= 0.65)
@@ -235,7 +235,7 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        public double getCarTime(CarType type)
+        public double GetCarTime(CarType type)
         {
             switch (type)
             {
@@ -248,7 +248,7 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        public void refreshGlobalStatOnGui()
+        public void RefreshGlobalStatOnGui()
         {
             GlobalDetails?.Invoke(this, new GlobalDetailsEventArgs(GlobalAverageTimeInSystem.getActualAverage(),
                                                                     ReplicationsDone + 1,
@@ -261,7 +261,7 @@ namespace SimulationAppV2.Simulation
                                                                     GlobalAveragePeopleWaitingForTakeOver.getActualAverage()
                                                                     ));
         }
-        public override void refreshGui()
+        public override void RefreshGui()
         {
             SimulationDetails?.Invoke(this, new SimulationDetailsEventArgs(this.CurrentTime,
                                                                     Customers.Count(),

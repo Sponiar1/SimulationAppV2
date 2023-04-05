@@ -63,6 +63,7 @@ namespace SimulationAppV2
             labelCurrentTime.Text = "Aktuálny čas: " + TimeSpan.FromMinutes(simSTK.STKDetails.Opening).ToString(@"hh\:mm");
             labelOpening.Text = "Otvárací čas: " + TimeSpan.FromMinutes(simSTK.STKDetails.Opening).ToString(@"hh\:mm");
             labelClosing.Text = "Zatvára sa o: " + TimeSpan.FromMinutes(simSTK.STKDetails.Closing).ToString(@"hh\:mm");
+            InitializeTables();
         }
         private void AfterSimulationHandler(object? sender, AfterSimulationDetailsEventArgs e)
         {
@@ -78,15 +79,15 @@ namespace SimulationAppV2
         }
         private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
         {
-            globalAverageActual = "Priemerný čas strávený v prevádzke(global): " + e.GlobalAverage;
+            globalAverageActual = "Priemerný čas strávený v prevádzke: " + new string(' ', 49) + e.GlobalAverage;
             numberOfReplication = "Replikácia no. " + e.NumberOfReplication;
-            globalAverageVisits = "Priemerný počet ľudí za deň: " + e.GlobalVisits;
-            leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + e.GlobalLeftInSystem;
-            globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: " + e.GlobalTakeOverWaiting;
-            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): " + e.GlobalAveragePeopleInSystem;
-            globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1(global): " + e.GlobalAverageFreeCashiers;
-            globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2(global): " + e.GlobalAverageFreeTechnicians;
-            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie(global): " + e.GlobalAveragePeopleWaitingForTakeOver;
+            globalAverageVisits = "Priemerný počet ľudí za deň: " + new string(' ', 60) + e.GlobalVisits;
+            leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + new string(' ', 34) + e.GlobalLeftInSystem;
+            globalWaitingTakeOver = "Priemerné čakanie na odovzdanie auta: " + new string(' ', 43) + e.GlobalTakeOverWaiting;
+            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme: " + new string(' ', 56) + e.GlobalAveragePeopleInSystem;
+            globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + new string(' ', 38) + e.GlobalAverageFreeCashiers;
+            globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + new string(' ', 38) + e.GlobalAverageFreeTechnicians;
+            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: " + new string(' ', 47) + e.GlobalAveragePeopleWaitingForTakeOver;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
 
@@ -147,7 +148,7 @@ namespace SimulationAppV2
             {
                 foreach (var worker in technicianSTKs)
                 {
-                    dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar);
+                    dataGridView1.Rows.Add(worker.ID, worker.WorkingOn, worker.ControlledCar, worker.CustomerID);
                 }
             }
             dataGridView2.Rows.Clear();
@@ -171,7 +172,6 @@ namespace SimulationAppV2
         private void button1_Click(object sender, EventArgs e)
         {
             cts = new CancellationTokenSource();
-            RefreshTable();
             ClearData();
             simSTK.NumberOfCashier = (int)numericCashier.Value;
             simSTK.NumberOfTechnicians = (int)numericTechnician.Value;
@@ -182,7 +182,7 @@ namespace SimulationAppV2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            simSTK.switchPause();
+            simSTK.SwitchPause();
             if (button2.Text == "Pause")
             {
                 button2.Text = "Unpause";
@@ -205,11 +205,13 @@ namespace SimulationAppV2
             simSTK.Delay = trackBar1.Value;
         }
 
-        public void RefreshTable()
+        public void InitializeTables()
         {
+
             dataGridView1.Columns.Add("TechnicianID", "Technician ID");
             dataGridView1.Columns.Add("Status", "Status");
             dataGridView1.Columns.Add("ControlledCar", "Controlled Car");
+            dataGridView1.Columns.Add("CustomerID", "Customer ID");
 
             dataGridView2.Columns.Add("CashierID", "Cashier ID");
             dataGridView2.Columns.Add("Status", "Status");
@@ -241,10 +243,10 @@ namespace SimulationAppV2
             numberOfReplication = "Replikácia no. ";
             globalAverageVisits = "Priemerný počet ľudí za deň: ";
             leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: ";
-            globalWaitingTakeOver = "Globálne priemerné čakanie na odovzdanie auta: ";
-            globalAverageActual = "Priemerný čas strávený v prevádzke(global): ";
-            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme(global): ";
-            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie(global): ";
+            globalWaitingTakeOver = "Priemerné čakanie na odovzdanie auta: ";
+            globalAverageActual = "Priemerný čas strávený v prevádzke: ";
+            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme: ";
+            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: ";
             conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme:";
             conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
             /*technicianSTKs = new TechnicianSTK[1];
@@ -264,7 +266,7 @@ namespace SimulationAppV2
             {
                 simSTK.Turbo = false;
             }*/
-            simSTK.switchTurbo();
+            simSTK.SwitchTurbo();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)

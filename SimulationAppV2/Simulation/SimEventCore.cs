@@ -18,7 +18,8 @@ namespace SimulationAppV2.Simulation
         public double RefreshTime { get; set; } = 1;
         public override void Replication()
         {
-            Event.Event helpEvent; 
+            Event.Event helpEvent;
+            AddSystemEvent();
             while (timeline.Count != 0 || CurrentTime > MaxTime)
             {
                 helpEvent = timeline.Dequeue();
@@ -34,7 +35,7 @@ namespace SimulationAppV2.Simulation
                 helpEvent.Exec();
                 if (!Turbo)
                 {
-                    refreshGui();
+                    RefreshGui();
                 }
             }
         }
@@ -51,7 +52,7 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        public void switchTurbo()
+        public void SwitchTurbo()
         {
             if (Turbo)
             {
@@ -66,7 +67,7 @@ namespace SimulationAppV2.Simulation
             }
         }
 
-        public void switchPause()
+        public void SwitchPause()
         {
             Pause = (Pause == false) ? Pause = true : Pause = false;
         }
@@ -74,6 +75,10 @@ namespace SimulationAppV2.Simulation
         public override void BeforeReplication()
         {
             timeline.Clear();
+        }
+
+        public void AddSystemEvent()
+        {
             if (!Turbo)
             {
                 Event.Event sysEvent = new SysEvent(this);
@@ -81,7 +86,7 @@ namespace SimulationAppV2.Simulation
                 addEvent(sysEvent);
             }
         }
-        public virtual void refreshGui()
+        public virtual void RefreshGui()
         {
 
         }
