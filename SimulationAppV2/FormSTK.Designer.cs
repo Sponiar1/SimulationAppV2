@@ -70,6 +70,9 @@
             groupBox1 = new GroupBox();
             labelGlobalAveragePeopleWaitingForTakeOver = new Label();
             labelAverageWaitingForTakeOver = new Label();
+            labelCash = new Label();
+            labelTech = new Label();
+            labelNumberOfReplications = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -94,7 +97,7 @@
             // 
             labelCurrentTime.AutoSize = true;
             labelCurrentTime.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCurrentTime.Location = new Point(459, 128);
+            labelCurrentTime.Location = new Point(355, 218);
             labelCurrentTime.Name = "labelCurrentTime";
             labelCurrentTime.Size = new Size(160, 25);
             labelCurrentTime.TabIndex = 1;
@@ -103,7 +106,7 @@
             // labelOpening
             // 
             labelOpening.AutoSize = true;
-            labelOpening.Location = new Point(415, 177);
+            labelOpening.Location = new Point(306, 262);
             labelOpening.Name = "labelOpening";
             labelOpening.Size = new Size(74, 15);
             labelOpening.TabIndex = 3;
@@ -112,7 +115,7 @@
             // labelClosing
             // 
             labelClosing.AutoSize = true;
-            labelClosing.Location = new Point(607, 177);
+            labelClosing.Location = new Point(498, 262);
             labelClosing.Name = "labelClosing";
             labelClosing.Size = new Size(76, 15);
             labelClosing.TabIndex = 4;
@@ -186,7 +189,7 @@
             // trackBar1
             // 
             trackBar1.LargeChange = 250;
-            trackBar1.Location = new Point(157, 128);
+            trackBar1.Location = new Point(259, 80);
             trackBar1.Maximum = 1000;
             trackBar1.Name = "trackBar1";
             trackBar1.Size = new Size(230, 45);
@@ -252,7 +255,7 @@
             // 
             // numericCashier
             // 
-            numericCashier.Location = new Point(308, 80);
+            numericCashier.Location = new Point(305, 31);
             numericCashier.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericCashier.Name = "numericCashier";
             numericCashier.Size = new Size(120, 23);
@@ -261,7 +264,7 @@
             // 
             // numericTechnician
             // 
-            numericTechnician.Location = new Point(459, 80);
+            numericTechnician.Location = new Point(459, 31);
             numericTechnician.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericTechnician.Name = "numericTechnician";
             numericTechnician.Size = new Size(120, 23);
@@ -271,7 +274,7 @@
             // numericReplications
             // 
             numericReplications.Increment = new decimal(new int[] { 1000000, 0, 0, 0 });
-            numericReplications.Location = new Point(157, 80);
+            numericReplications.Location = new Point(157, 31);
             numericReplications.Maximum = new decimal(new int[] { 1410065408, 2, 0, 0 });
             numericReplications.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericReplications.Name = "numericReplications";
@@ -499,11 +502,41 @@
             labelAverageWaitingForTakeOver.TabIndex = 524;
             labelAverageWaitingForTakeOver.Text = "Priemerná veľkosť radu na prevzatie: ";
             // 
+            // labelCash
+            // 
+            labelCash.AutoSize = true;
+            labelCash.Location = new Point(305, 12);
+            labelCash.Name = "labelCash";
+            labelCash.Size = new Size(128, 15);
+            labelCash.TabIndex = 525;
+            labelCash.Text = "Počet pracovníkov sk.1";
+            // 
+            // labelTech
+            // 
+            labelTech.AutoSize = true;
+            labelTech.Location = new Point(459, 12);
+            labelTech.Name = "labelTech";
+            labelTech.Size = new Size(128, 15);
+            labelTech.TabIndex = 526;
+            labelTech.Text = "Počet pracovníkov sk.2";
+            // 
+            // labelNumberOfReplications
+            // 
+            labelNumberOfReplications.AutoSize = true;
+            labelNumberOfReplications.Location = new Point(157, 12);
+            labelNumberOfReplications.Name = "labelNumberOfReplications";
+            labelNumberOfReplications.Size = new Size(87, 15);
+            labelNumberOfReplications.TabIndex = 527;
+            labelNumberOfReplications.Text = "Počet replikácií";
+            // 
             // FormSTK
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1476, 775);
+            Controls.Add(labelNumberOfReplications);
+            Controls.Add(labelTech);
+            Controls.Add(labelCash);
             Controls.Add(labelAverageWaitingForTakeOver);
             Controls.Add(groupBox1);
             Controls.Add(button3);
@@ -594,5 +627,8 @@
         private GroupBox groupBox1;
         private Label labelAverageWaitingForTakeOver;
         private Label labelGlobalAveragePeopleWaitingForTakeOver;
+        private Label labelCash;
+        private Label labelTech;
+        private Label labelNumberOfReplications;
     }
 }

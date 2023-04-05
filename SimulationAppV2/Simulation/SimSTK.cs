@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SimulationAppV2.Simulation.SimObject.STK;
 using SimulationAppV2.Statistics;
 using System.Collections;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace SimulationAppV2.Simulation
 {
@@ -161,10 +162,22 @@ namespace SimulationAppV2.Simulation
 
         public override void AfterReplication()
         {
+            #region Statistics of people left in system
+            foreach (var customer in CustomersInSystem)
+            {
+                AverageTimeInSystem.Add(CurrentTime - customer.Value.Arrival);
+            }
+            foreach (var customer in Customers) 
+            { 
+                TakeOverWaiting.Add(CurrentTime - customer.Arrival);
+            }
             AveragePeopleWaitingForTakeOver.Add(Customers.Count(), CurrentTime);
             AverageFreeTechnician.Add(AvailableTechnicians.Count(), CurrentTime);
             AverageFreeCashier.Add(AvailableCashiers.Count(), CurrentTime);
             AveragePeopleInSystem.Add(CustomersInSystem.Count(), CurrentTime);
+            #endregion
+
+            #region Global statistics
             GlobalAverageTimeInSystem.Add(AverageTimeInSystem.getActualAverage());
             GlobalAverageVisits.Add(Arrived);
             GlobalLeftInSystem.Add(Arrived - Left);
@@ -175,6 +188,8 @@ namespace SimulationAppV2.Simulation
             GlobalAverageFreeCashier.Add(AverageFreeCashier.getWeightedAverage());
             GlobalAverageFreeTechnician.Add(AverageFreeTechnician.getWeightedAverage());
             GlobalAveragePeopleWaitingForTakeOver.Add(AveragePeopleWaitingForTakeOver.getWeightedAverage());
+            #endregion
+
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
             {
                 refreshGlobalStatOnGui();
@@ -269,12 +284,12 @@ namespace SimulationAppV2.Simulation
 
     internal class SimulationDetailsEventArgs : EventArgs
     {
-        public double Time { get; set; }
-        public int CheckInQueue { get; set; }
-        public int InspectionParkingLot { get; set; }
-        public int PaymentQueue { get; set; }
-        public int FreeCashiers { get; set; }
-        public int FreeTechnicians { get; set; }
+        public double Time { get; }
+        public int CheckInQueue { get; }
+        public int InspectionParkingLot { get; }
+        public int PaymentQueue { get; }
+        public int FreeCashiers { get; }
+        public int FreeTechnicians { get; }
         public TechnicianSTK[] Technicians { get; }
         public CashierSTK[] Cashier { get; }
         public Dictionary<int, CustomerSTK> customersInSystem { get; }
@@ -309,15 +324,15 @@ namespace SimulationAppV2.Simulation
 
     internal class GlobalDetailsEventArgs : EventArgs
     {
-        public double GlobalAverage { get; set; }
-        public int NumberOfReplication { get; set; }
-        public double GlobalVisits { get; set; }
-        public double GlobalLeftInSystem { get; set; }
-        public double GlobalTakeOverWaiting { get; set; }
-        public double GlobalAveragePeopleInSystem { get; set; }
-        public double GlobalAverageFreeCashiers { get; set; }
-        public double GlobalAverageFreeTechnicians { get; set; }
-        public double GlobalAveragePeopleWaitingForTakeOver { get; set; }
+        public double GlobalAverage { get; }
+        public int NumberOfReplication { get; }
+        public double GlobalVisits { get; }
+        public double GlobalLeftInSystem { get; }
+        public double GlobalTakeOverWaiting { get; }
+        public double GlobalAveragePeopleInSystem { get; }
+        public double GlobalAverageFreeCashiers { get; }
+        public double GlobalAverageFreeTechnicians { get; }
+        public double GlobalAveragePeopleWaitingForTakeOver { get; }
         public GlobalDetailsEventArgs(double globalAverage,
                                       int numberOfReplication,
                                       double globalVisits,
@@ -342,10 +357,10 @@ namespace SimulationAppV2.Simulation
 
     internal class AfterSimulationDetailsEventArgs : EventArgs
     {
-        public double CITimeInSystemLeft { get; set; }
-        public double CITimeInSystemRight { get; set; }
-        public double CIAverageCustomersLeft { get; set; }
-        public double CIAverageCustomersRight { get; set; }
+        public double CITimeInSystemLeft { get; }
+        public double CITimeInSystemRight { get; }
+        public double CIAverageCustomersLeft { get; }
+        public double CIAverageCustomersRight { get; }
         public AfterSimulationDetailsEventArgs(ConfidenceInterval confidenceTimeInSystem, ConfidenceInterval confidenceAverageCustomers)
         {
             confidenceTimeInSystem.setStandardDeviation();
