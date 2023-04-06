@@ -33,10 +33,10 @@ namespace SimulationAppV2
             InitializeComponent();
             simSTK.GlobalDetails += GlobalDetailsHandler;
             formsPlot1.Plot.YLabel("Priemerný počet čakajúcich na prebratie auta");
-            formsPlot1.Plot.XLabel("Počet pracovníkov sk1. (sk.2 = 17)");
+            formsPlot1.Plot.XLabel("Počet pracovníkov sk.1");
             formsPlot1.Plot.Title("Závislosť priemerného počtu čakajúcich na prebratie auta od pracovníkov sk.1");
             formsPlot2.Plot.YLabel("Priemerná dĺžka pobytu v prevádzke");
-            formsPlot2.Plot.XLabel("Počet pracovníkov sk.2 (sk.1 = 4)");
+            formsPlot2.Plot.XLabel("Počet pracovníkov sk.2");
             formsPlot2.Plot.Title("Závislosť priemernej dĺžky pobytu zákazníka v systéme od pracovníkov sk.2");
         }
 
@@ -57,22 +57,22 @@ namespace SimulationAppV2
         public async void doTests()
         {
             cts = new CancellationTokenSource();
-            simSTK.NumberOfTechnicians = 17;
+            simSTK.NumberOfTechnicians = (int)numericUpDown2.Value;
             doingCashiers = true;
             for (int i = 1; i <= 15; i++)
             {
                 simSTK.NumberOfCashier = i;
-                await Task.Run(() => simSTK.Simulate(100000, cts.Token));
+                await Task.Run(() => simSTK.Simulate(1000, cts.Token));
                 highestIndex++;
             }
             highestIndex = 0;
 
             doingCashiers = false;
-            simSTK.NumberOfCashier = 4;
+            simSTK.NumberOfCashier = (int)numericUpDown1.Value;
             for (int i = 10; i <= 25; i++)
             {
                 simSTK.NumberOfTechnicians = i;
-                await Task.Run(() => simSTK.Simulate(100000, cts.Token));
+                await Task.Run(() => simSTK.Simulate(1000, cts.Token));
                 highestIndex++;
             }
             RefreshGraph();
@@ -100,6 +100,8 @@ namespace SimulationAppV2
             yValuesTechnicians = new double[16];
             SignalPlotCashiers = formsPlot1.Plot.AddSignalXY(xValuesCashiers, yValuesCashiers);
             SignalPlotCashiers = formsPlot2.Plot.AddSignalXY(xValuesTechnicians, yValuesTechnicians);
+            formsPlot1.Plot.XLabel("Počet pracovníkov sk1. (sk.2 =" + numericUpDown2.Value + ")");
+            formsPlot2.Plot.XLabel("Počet pracovníkov sk.2 (sk.1 =" + numericUpDown1.Value + ")");
         }
     }
 }
