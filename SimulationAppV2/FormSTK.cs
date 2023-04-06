@@ -67,8 +67,8 @@ namespace SimulationAppV2
         }
         private void AfterSimulationHandler(object? sender, AfterSimulationDetailsEventArgs e)
         {
-            conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme: <" + e.CITimeInSystemLeft + "," + e.CITimeInSystemRight + ">";
-            conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme: <" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
+            conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme(min): <" + e.CITimeInSystemLeft + "," + e.CITimeInSystemRight + ">";
+            conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:"+ new string(' ', 11)+ "<" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
             this.Invoke(new Action(() => RefreshIntervals()));
             this.Invoke(new Action(() => button1.Enabled = true));
         }
@@ -79,15 +79,15 @@ namespace SimulationAppV2
         }
         private void GlobalDetailsHandler(object? sender, GlobalDetailsEventArgs e)
         {
-            globalAverageActual = "Priemerný čas strávený v prevádzke: " + new string(' ', 49) + e.GlobalAverage;
+            globalAverageActual = "Priemerný čas strávený v prevádzke(min): " + new string(' ', 49) + e.GlobalAverage;
             numberOfReplication = "Replikácia no. " + e.NumberOfReplication;
-            globalAverageVisits = "Priemerný počet ľudí za deň: " + new string(' ', 60) + e.GlobalVisits;
-            leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + new string(' ', 34) + e.GlobalLeftInSystem;
-            globalWaitingTakeOver = "Priemerné čakanie na odovzdanie auta: " + new string(' ', 43) + e.GlobalTakeOverWaiting;
-            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme: " + new string(' ', 56) + e.GlobalAveragePeopleInSystem;
-            globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + new string(' ', 38) + e.GlobalAverageFreeCashiers;
-            globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + new string(' ', 38) + e.GlobalAverageFreeTechnicians;
-            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: " + new string(' ', 47) + e.GlobalAveragePeopleWaitingForTakeOver;
+            globalAverageVisits = "Priemerný počet ľudí za deň: " + new string(' ', 68) + e.GlobalVisits;
+            leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: " + new string(' ', 42) + e.GlobalLeftInSystem;
+            globalWaitingTakeOver = "Priemerné čakanie na odovzdanie auta(min): " + new string(' ', 43) + e.GlobalTakeOverWaiting;
+            globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme: " + new string(' ', 64) + e.GlobalAveragePeopleInSystem;
+            globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + new string(' ', 46) + e.GlobalAverageFreeCashiers;
+            globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + new string(' ', 46) + e.GlobalAverageFreeTechnicians;
+            globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: " + new string(' ', 55) + e.GlobalAveragePeopleWaitingForTakeOver;
             this.Invoke(new Action(() => RefreshGlobal()));
         }
 
@@ -116,8 +116,8 @@ namespace SimulationAppV2
             cashierSTKs = e.Cashier;
             customersInSystem = e.customersInSystem;
             customersInShop = "Počet zákazníkov v systéme: " + customersInSystem.Count();
-            averageActual = "Priemerný čas strávený v prevádzke: " + e.AverageActual;
-            averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: " + e.AverageTakeOverWaiting;
+            averageActual = "Priemerný čas strávený v prevádzke(min): " + e.AverageActual;
+            averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie(min): " + e.AverageTakeOverWaiting;
             averagePeopleInSystem = "Priemerný počet ľudí v systéme: " + e.AveragePeopleInSystem;
             averageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + e.AverageFreeCashiers;
             averageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + e.AverageFreeTechnician;
@@ -235,19 +235,19 @@ namespace SimulationAppV2
 
             freeCashiers = "Počet voľných pokladníkov(Pracovníci 1): ";
 
-            averageActual = "Priemerný čas strávený v prevádzke: ";
-            averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie: ";
+            averageActual = "Priemerný čas strávený v prevádzke(min): ";
+            averageWaitingTakeOver = "Priemerný čas čakania v rade na prevzatie(min): ";
             averagePeopleInSystem = "Priemerný počet ľudí v systéme: ";
             averagePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: ";
 
             numberOfReplication = "Replikácia no. ";
             globalAverageVisits = "Priemerný počet ľudí za deň: ";
             leftInSystem = "Priemerný počet ľudí v systéme po uzávierke: ";
-            globalWaitingTakeOver = "Priemerné čakanie na odovzdanie auta: ";
-            globalAverageActual = "Priemerný čas strávený v prevádzke: ";
+            globalWaitingTakeOver = "Priemerné čakanie na odovzdanie auta(min): ";
+            globalAverageActual = "Priemerný čas strávený v prevádzke(min): ";
             globalAveragePeopleInSystem = "Priemerný počet ľudí v systéme: ";
             globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: ";
-            conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme:";
+            conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme(min):";
             conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:";
             /*technicianSTKs = new TechnicianSTK[1];
             cashierSTKs = new CashierSTK[1];
