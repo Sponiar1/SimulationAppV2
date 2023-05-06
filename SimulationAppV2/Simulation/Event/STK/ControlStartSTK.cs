@@ -15,6 +15,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
+            myCore.AverageControlWaiting.Add(Time - customer.WaitingStartAt);
             technicianSTK.StartWork(customer.ID, customer.Car);
             customer.Status = Status.Controlling;
             ControlEndSTK controlEndSTK = new ControlEndSTK(myCore, customer, technicianSTK);
@@ -27,6 +28,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 myCore.AveragePeopleWaitingForTakeOver.Add(myCore.Customers.Count(), myCore.CurrentTime);
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), myCore.AvailableCashiers.Dequeue());
                 takeOver.Time = myCore.CurrentTime;
+                myCore.AverageFreeSpots.Add(myCore.AvailableSpots, Time);
                 myCore.AvailableSpots--;
                 myCore.addEvent(takeOver);
             }

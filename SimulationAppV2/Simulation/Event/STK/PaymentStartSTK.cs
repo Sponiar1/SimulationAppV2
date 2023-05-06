@@ -15,6 +15,7 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
+            myCore.AveragePaymentWaiting.Add(Time - customer.WaitingStartAt);
             customer.Status = Status.Paying;
             cashier.BeginPayment(customer.ID);
             PaymentEndSTK paymentEndSTK = new PaymentEndSTK(myCore, customer, cashier);

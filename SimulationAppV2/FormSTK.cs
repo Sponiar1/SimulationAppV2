@@ -68,7 +68,7 @@ namespace SimulationAppV2
         private void AfterSimulationHandler(object? sender, AfterSimulationDetailsEventArgs e)
         {
             conIntervalTimeInSystem = "90 % Interval spoľahlivosti pre priemerný strávený čas v systéme(min): <" + e.CITimeInSystemLeft + "," + e.CITimeInSystemRight + ">";
-            conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:"+ new string(' ', 11)+ "<" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
+            conIntervalPeopleInSystem = "95 % Interval spoľahlivosti pre priemerný počet ľudí v systéme:" + new string(' ', 11) + "<" + e.CIAverageCustomersLeft + "," + e.CIAverageCustomersRight + ">";
             this.Invoke(new Action(() => RefreshIntervals()));
             this.Invoke(new Action(() => button1.Enabled = true));
         }
@@ -88,7 +88,13 @@ namespace SimulationAppV2
             globalAverageFreeCashiers = "Priemerný počet voľných pracovníkov sk.1: " + new string(' ', 46) + e.GlobalAverageFreeCashiers;
             globalAverageFreeTechnicians = "Priemerný počet voľných pracovníkov sk.2: " + new string(' ', 46) + e.GlobalAverageFreeTechnicians;
             globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: " + new string(' ', 55) + e.GlobalAveragePeopleWaitingForTakeOver;
+
             this.Invoke(new Action(() => RefreshGlobal()));
+            this.Invoke(new Action(() => label2.Text = "Priemerná dĺžka radu na platenie: " + e.GlobalAveragePaymentQueue));
+            this.Invoke(new Action(() => label3.Text = "Priemerná dĺžka čakania na platenie: " + e.GlobalAveragePaymentWaiting));
+            this.Invoke(new Action(() => label4.Text = "Priemerná dĺžka radu na kontrolu: " + e.GlobalAverageControlQueue));
+            this.Invoke(new Action(() => label5.Text = "Priemerná dĺžka čakania na kontrolu: " + e.GlobalAverageControlWaiting));
+            this.Invoke(new Action(() => label6.Text = "Priemerná obsadenie parkoviska: " + e.GlobalAverageEmptySpots));
         }
 
         public void RefreshGlobal()

@@ -15,8 +15,10 @@ namespace SimulationAppV2.Simulation.Event.STK
 
         public override void Exec()
         {
+            customer.WaitingStartAt = Time;
             if(myCore.PaymentQueue.Count() > 0) 
             {
+                myCore.AveragePaymentQueue.Add(myCore.PaymentQueue.Count(), Time);
                 PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, myCore.PaymentQueue.Dequeue(), cashier);
                 paymentStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(paymentStartSTK);
@@ -27,6 +29,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 TakeOverStartSTK takeOver = new TakeOverStartSTK(myCore, myCore.Customers.Dequeue(), cashier);
                 takeOver.Time = myCore.CurrentTime;
                 myCore.addEvent(takeOver);
+                myCore.AverageFreeSpots.Add(myCore.AvailableSpots, Time);
                 myCore.AvailableSpots--;
             }
             else
@@ -42,10 +45,12 @@ namespace SimulationAppV2.Simulation.Event.STK
                 ControlStartSTK controlStartSTK = new ControlStartSTK(myCore, customer, myCore.AvailableTechnicians.Dequeue());
                 controlStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(controlStartSTK);
+                myCore.AverageFreeSpots.Add(myCore.AvailableSpots, Time);
                 myCore.AvailableSpots++;
             }
             else
             {
+                myCore.AverageControlQueue.Add(myCore.ControlWaiting.Count(), Time);
                 customer.Status = Status.WaitingControlling;
                 myCore.ControlWaiting.Enqueue(customer);
             }

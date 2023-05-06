@@ -37,7 +37,7 @@ namespace SimulationAppV2.Simulation
         {
             return serviceProb.getValue();
         }
-        public override void BeforeSimulation()
+        public override void BeforeReplication()
         {
             Event.Event helpEvent;
             helpEvent = new ArrivalEvent(this, new Customer());

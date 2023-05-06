@@ -68,12 +68,17 @@
             labelGlobalAverageFreeTechnicians = new Label();
             button3 = new Button();
             groupBox1 = new GroupBox();
+            label6 = new Label();
+            label3 = new Label();
+            label2 = new Label();
             labelGlobalAveragePeopleWaitingForTakeOver = new Label();
             labelAverageWaitingForTakeOver = new Label();
             labelCash = new Label();
             labelTech = new Label();
             labelNumberOfReplications = new Label();
             label1 = new Label();
+            label4 = new Label();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -287,7 +292,7 @@
             // 
             labelGlobalTimeSpent.AutoSize = true;
             labelGlobalTimeSpent.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGlobalTimeSpent.Location = new Point(6, 283);
+            labelGlobalTimeSpent.Location = new Point(4, 372);
             labelGlobalTimeSpent.Name = "labelGlobalTimeSpent";
             labelGlobalTimeSpent.Size = new Size(248, 20);
             labelGlobalTimeSpent.TabIndex = 505;
@@ -297,7 +302,7 @@
             // 
             labelAverageVisits.AutoSize = true;
             labelAverageVisits.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelAverageVisits.Location = new Point(6, 105);
+            labelAverageVisits.Location = new Point(4, 194);
             labelAverageVisits.Name = "labelAverageVisits";
             labelAverageVisits.Size = new Size(202, 20);
             labelAverageVisits.TabIndex = 506;
@@ -307,7 +312,7 @@
             // 
             labelLeftInSystem.AutoSize = true;
             labelLeftInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelLeftInSystem.Location = new Point(6, 135);
+            labelLeftInSystem.Location = new Point(4, 224);
             labelLeftInSystem.Name = "labelLeftInSystem";
             labelLeftInSystem.Size = new Size(310, 20);
             labelLeftInSystem.TabIndex = 507;
@@ -316,7 +321,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(12, 224);
+            checkBox1.Location = new Point(131, 120);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(57, 19);
             checkBox1.TabIndex = 508;
@@ -336,7 +341,7 @@
             // checkBoxWorker2
             // 
             checkBoxWorker2.AutoSize = true;
-            checkBoxWorker2.Location = new Point(12, 279);
+            checkBoxWorker2.Location = new Point(131, 175);
             checkBoxWorker2.Name = "checkBoxWorker2";
             checkBoxWorker2.Size = new Size(191, 19);
             checkBoxWorker2.TabIndex = 510;
@@ -347,7 +352,7 @@
             // checkBoxWorker1
             // 
             checkBoxWorker1.AutoSize = true;
-            checkBoxWorker1.Location = new Point(12, 249);
+            checkBoxWorker1.Location = new Point(131, 145);
             checkBoxWorker1.Name = "checkBoxWorker1";
             checkBoxWorker1.Size = new Size(191, 19);
             checkBoxWorker1.TabIndex = 511;
@@ -358,7 +363,7 @@
             // checkBoxCustomers
             // 
             checkBoxCustomers.AutoSize = true;
-            checkBoxCustomers.Location = new Point(12, 309);
+            checkBoxCustomers.Location = new Point(131, 205);
             checkBoxCustomers.Name = "checkBoxCustomers";
             checkBoxCustomers.Size = new Size(185, 19);
             checkBoxCustomers.TabIndex = 512;
@@ -370,7 +375,7 @@
             // 
             labelGlobalTakeOver.AutoSize = true;
             labelGlobalTakeOver.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGlobalTakeOver.Location = new Point(6, 163);
+            labelGlobalTakeOver.Location = new Point(4, 252);
             labelGlobalTakeOver.Name = "labelGlobalTakeOver";
             labelGlobalTakeOver.Size = new Size(272, 20);
             labelGlobalTakeOver.TabIndex = 513;
@@ -380,7 +385,7 @@
             // 
             labelCITimeInSystem.AutoSize = true;
             labelCITimeInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCITimeInSystem.Location = new Point(6, 311);
+            labelCITimeInSystem.Location = new Point(4, 400);
             labelCITimeInSystem.Name = "labelCITimeInSystem";
             labelCITimeInSystem.Size = new Size(435, 20);
             labelCITimeInSystem.TabIndex = 514;
@@ -390,7 +395,7 @@
             // 
             labelCIPeopleInSystem.AutoSize = true;
             labelCIPeopleInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelCIPeopleInSystem.Location = new Point(6, 379);
+            labelCIPeopleInSystem.Location = new Point(6, 450);
             labelCIPeopleInSystem.Name = "labelCIPeopleInSystem";
             labelCIPeopleInSystem.Size = new Size(418, 20);
             labelCIPeopleInSystem.TabIndex = 515;
@@ -400,7 +405,7 @@
             // 
             labelGlobalAveragePeopleInSystem.AutoSize = true;
             labelGlobalAveragePeopleInSystem.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGlobalAveragePeopleInSystem.Location = new Point(6, 349);
+            labelGlobalAveragePeopleInSystem.Location = new Point(6, 420);
             labelGlobalAveragePeopleInSystem.Name = "labelGlobalAveragePeopleInSystem";
             labelGlobalAveragePeopleInSystem.Size = new Size(216, 20);
             labelGlobalAveragePeopleInSystem.TabIndex = 516;
@@ -437,7 +442,7 @@
             // 
             labelGlobalAverageFreeCashiers.AutoSize = true;
             labelGlobalAverageFreeCashiers.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGlobalAverageFreeCashiers.Location = new Point(6, 191);
+            labelGlobalAverageFreeCashiers.Location = new Point(4, 280);
             labelGlobalAverageFreeCashiers.Name = "labelGlobalAverageFreeCashiers";
             labelGlobalAverageFreeCashiers.Size = new Size(287, 20);
             labelGlobalAverageFreeCashiers.TabIndex = 520;
@@ -447,7 +452,7 @@
             // 
             labelGlobalAverageFreeTechnicians.AutoSize = true;
             labelGlobalAverageFreeTechnicians.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGlobalAverageFreeTechnicians.Location = new Point(6, 221);
+            labelGlobalAverageFreeTechnicians.Location = new Point(4, 310);
             labelGlobalAverageFreeTechnicians.Name = "labelGlobalAverageFreeTechnicians";
             labelGlobalAverageFreeTechnicians.Size = new Size(287, 20);
             labelGlobalAverageFreeTechnicians.TabIndex = 521;
@@ -465,6 +470,11 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(labelGlobalAveragePeopleWaitingForTakeOver);
             groupBox1.Controls.Add(labelGlobalAverageFreeCashiers);
             groupBox1.Controls.Add(labelGlobalAverageFreeTechnicians);
@@ -477,18 +487,48 @@
             groupBox1.Controls.Add(labelGlobalTimeSpent);
             groupBox1.Controls.Add(labelCITimeInSystem);
             groupBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(12, 354);
+            groupBox1.Location = new Point(12, 283);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(700, 409);
+            groupBox1.Size = new Size(700, 480);
             groupBox1.TabIndex = 523;
             groupBox1.TabStop = false;
             groupBox1.Text = "Globálne štatistiky";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(6, 115);
+            label6.Name = "label6";
+            label6.Size = new Size(50, 20);
+            label6.TabIndex = 531;
+            label6.Text = "label6";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(6, 165);
+            label3.Name = "label3";
+            label3.Size = new Size(50, 20);
+            label3.TabIndex = 524;
+            label3.Text = "label3";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(6, 137);
+            label2.Name = "label2";
+            label2.Size = new Size(50, 20);
+            label2.TabIndex = 523;
+            label2.Text = "label2";
             // 
             // labelGlobalAveragePeopleWaitingForTakeOver
             // 
             labelGlobalAveragePeopleWaitingForTakeOver.AutoSize = true;
             labelGlobalAveragePeopleWaitingForTakeOver.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            labelGlobalAveragePeopleWaitingForTakeOver.Location = new Point(8, 251);
+            labelGlobalAveragePeopleWaitingForTakeOver.Location = new Point(6, 340);
             labelGlobalAveragePeopleWaitingForTakeOver.Name = "labelGlobalAveragePeopleWaitingForTakeOver";
             labelGlobalAveragePeopleWaitingForTakeOver.Size = new Size(255, 20);
             labelGlobalAveragePeopleWaitingForTakeOver.TabIndex = 522;
@@ -538,6 +578,26 @@
             label1.Size = new Size(72, 15);
             label1.TabIndex = 528;
             label1.Text = "+ Rýchlosť -";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(6, 95);
+            label4.Name = "label4";
+            label4.Size = new Size(50, 20);
+            label4.TabIndex = 529;
+            label4.Text = "label4";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(6, 75);
+            label5.Name = "label5";
+            label5.Size = new Size(50, 20);
+            label5.TabIndex = 530;
+            label5.Text = "label5";
             // 
             // FormSTK
             // 
@@ -642,5 +702,10 @@
         private Label labelTech;
         private Label labelNumberOfReplications;
         private Label label1;
+        private Label label3;
+        private Label label2;
+        private Label label6;
+        private Label label4;
+        private Label label5;
     }
 }

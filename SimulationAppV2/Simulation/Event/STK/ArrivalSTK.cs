@@ -45,6 +45,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                     takeOver.Time = myCore.STKDetails.Opening;
                 }
                 myCore.addEvent(takeOver);
+                myCore.AverageFreeSpots.Add(myCore.AvailableSpots, Time);
                 myCore.AvailableSpots--;
 
             }

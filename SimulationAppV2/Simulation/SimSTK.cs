@@ -72,6 +72,17 @@ namespace SimulationAppV2.Simulation
 
         public ConfidenceInterval CIAverageTimeInSystem { get; set; }
         public ConfidenceInterval CIAverageNumberOfCustomers { get; set; }
+
+        public Average AveragePaymentWaiting { get; set; }
+        public Average GlobalAveragePaymentWaiting { get; set; }
+        public WeightedAverage AveragePaymentQueue { get; set; }
+        public Average GlobalAveragePaymentQueue { get; set; }
+        public WeightedAverage AverageControlQueue { get; set; }
+        public Average GlobalAverageControlQueue { get; set; }
+        public WeightedAverage AverageFreeSpots { get; set; }
+        public Average GlobalAverageFreeSpots { get; set; }
+        public Average AverageControlWaiting { get; set; }
+        public Average GlobalAverageControlWaiting { get; set; }
         #endregion
 
         public STKDetails STKDetails { get; set; }
@@ -109,6 +120,12 @@ namespace SimulationAppV2.Simulation
             GlobalAveragePeopleWaitingForTakeOver = new Average();
             CIAverageTimeInSystem = new ConfidenceInterval();
             CIAverageNumberOfCustomers = new ConfidenceInterval();
+
+            GlobalAveragePaymentWaiting = new Average();
+            GlobalAveragePaymentQueue = new Average();
+            GlobalAverageFreeSpots = new Average();
+            GlobalAverageControlQueue = new Average();
+            GlobalAverageControlWaiting = new Average();
             #endregion
         }
 
@@ -127,6 +144,12 @@ namespace SimulationAppV2.Simulation
             AverageFreeCashier = new WeightedAverage(CurrentTime);
             AverageFreeTechnician = new WeightedAverage(CurrentTime);
             AveragePeopleWaitingForTakeOver = new WeightedAverage(CurrentTime);
+
+            AveragePaymentWaiting = new Average();
+            AveragePaymentQueue = new WeightedAverage(CurrentTime);
+            AverageControlQueue = new WeightedAverage(CurrentTime);
+            AverageControlWaiting = new Average();
+            AverageFreeSpots = new WeightedAverage(CurrentTime);
             #endregion
 
             #region StartingEvent
@@ -163,10 +186,11 @@ namespace SimulationAppV2.Simulation
         public override void AfterReplication()
         {
             #region Statistics of people left in system
+            /*
             foreach (var customer in CustomersInSystem)
             {
                 AverageTimeInSystem.Add(CurrentTime - customer.Value.Arrival);
-            }
+            }*/
             foreach (var customer in Customers) 
             { 
                 TakeOverWaiting.Add(CurrentTime - customer.Arrival);
@@ -175,6 +199,18 @@ namespace SimulationAppV2.Simulation
             AverageFreeTechnician.Add(AvailableTechnicians.Count(), CurrentTime);
             AverageFreeCashier.Add(AvailableCashiers.Count(), CurrentTime);
             AveragePeopleInSystem.Add(CustomersInSystem.Count(), CurrentTime);
+
+            AveragePaymentQueue.Add(PaymentQueue.Count(), CurrentTime);
+            foreach (var customer in PaymentQueue)
+            {
+                AveragePaymentWaiting.Add(CurrentTime - customer.WaitingStartAt);
+            }
+            foreach (var customer in ControlWaiting)
+            {
+                AverageControlWaiting.Add(CurrentTime - customer.WaitingStartAt);
+            }
+            AverageControlQueue.Add(controlWaiting.Count(), CurrentTime);
+            AverageFreeSpots.Add(AvailableSpots, CurrentTime);
             #endregion
 
             #region Global statistics
@@ -190,6 +226,12 @@ namespace SimulationAppV2.Simulation
                 GlobalAverageFreeCashier.Add(AverageFreeCashier.getWeightedAverage());
                 GlobalAverageFreeTechnician.Add(AverageFreeTechnician.getWeightedAverage());
                 GlobalAveragePeopleWaitingForTakeOver.Add(AveragePeopleWaitingForTakeOver.getWeightedAverage());
+
+                GlobalAveragePaymentQueue.Add(AveragePaymentQueue.getWeightedAverage());
+                GlobalAveragePaymentWaiting.Add(AveragePaymentWaiting.getActualAverage());
+                GlobalAverageControlQueue.Add(AverageControlQueue.getWeightedAverage());
+                GlobalAverageControlWaiting.Add(AverageControlWaiting.getActualAverage());
+                GlobalAverageFreeSpots.Add(AverageFreeSpots.getWeightedAverage());
             }
             #endregion
             if (!Turbo || ((ReplicationsDone+1) % (NumberOfReplications*0.01) == 0))
@@ -201,6 +243,9 @@ namespace SimulationAppV2.Simulation
         public override void AfterSimulation()
         {
             AfterSimulationDetails?.Invoke(this, new AfterSimulationDetailsEventArgs(CIAverageTimeInSystem, CIAverageNumberOfCustomers));
+            string nameOfFile = NumberOfCashier + "-" + NumberOfTechnicians + "-" + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss");
+            string filePath = Path.Combine(Application.StartupPath, nameOfFile);
+            WriteToCsv(filePath);
         }
 
         public double GetArrivalTime()
@@ -258,7 +303,12 @@ namespace SimulationAppV2.Simulation
                                                                     GlobalAveragePeopleInSystem.getActualAverage(),
                                                                     GlobalAverageFreeCashier.getActualAverage(),
                                                                     GlobalAverageFreeTechnician.getActualAverage(),
-                                                                    GlobalAveragePeopleWaitingForTakeOver.getActualAverage()
+                                                                    GlobalAveragePeopleWaitingForTakeOver.getActualAverage(),
+                                                                    GlobalAveragePaymentWaiting.getActualAverage(),
+                                                                    GlobalAveragePaymentQueue.getActualAverage(),
+                                                                    GlobalAverageControlQueue.getActualAverage(),
+                                                                    GlobalAverageControlWaiting.getActualAverage(),
+                                                                    GlobalAverageFreeSpots.getActualAverage()
                                                                     ));
         }
         public override void RefreshGui()
@@ -281,6 +331,73 @@ namespace SimulationAppV2.Simulation
                                                                     //Arrived,
                                                                     //Left
                                                                     )) ; 
+        }
+
+        public void WriteToCsv(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.Write("Average daily visits;");
+                writer.Write(GlobalAverageVisits.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average people left in system;");
+                writer.Write(GlobalLeftInSystem.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average waiting for takeover;");
+                writer.Write(GlobalTakeOverWaiting.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average takeover queue;");
+                writer.Write(GlobalAveragePeopleWaitingForTakeOver.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average waiting for control;");
+                writer.Write(GlobalAverageControlWaiting.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average control queue;");
+                writer.Write(GlobalAverageControlQueue.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average empty spot;");
+                writer.Write(GlobalAverageFreeSpots.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average payment waiting;");
+                writer.Write(GlobalAveragePaymentWaiting.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average payment queue;");
+                writer.Write(GlobalAveragePaymentQueue.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average free cashier;");
+                writer.Write(GlobalAverageFreeCashier.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average free technician;");
+                writer.Write(GlobalAverageFreeTechnician.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average customers in system;");
+                writer.Write(GlobalAveragePeopleInSystem.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Confidence Interval for average customers in system;");
+                writer.Write(CIAverageNumberOfCustomers.getLeftSideNinetyFive() + "," + CIAverageNumberOfCustomers.getRightSideNinetyFive());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Average time spent in system;");
+                writer.Write(GlobalAverageTimeInSystem.getActualAverage());
+                writer.Write(";");
+                writer.WriteLine();
+                writer.Write("Confidence Interval for average customers in system;");
+                writer.Write(CIAverageTimeInSystem.getLeftSideNinety() + "," + CIAverageTimeInSystem.getRightSideNinety());
+                writer.Write(";");
+                writer.WriteLine();
+            }
         }
     }
 
@@ -335,6 +452,13 @@ namespace SimulationAppV2.Simulation
         public double GlobalAverageFreeCashiers { get; }
         public double GlobalAverageFreeTechnicians { get; }
         public double GlobalAveragePeopleWaitingForTakeOver { get; }
+
+        public double GlobalAveragePaymentWaiting { get; }
+        public double GlobalAveragePaymentQueue { get; }
+        public double GlobalAverageControlQueue { get; }
+        public double GlobalAverageControlWaiting { get; }
+        public double GlobalAverageEmptySpots { get; }
+
         public GlobalDetailsEventArgs(double globalAverage,
                                       int numberOfReplication,
                                       double globalVisits,
@@ -343,7 +467,12 @@ namespace SimulationAppV2.Simulation
                                       double globalAveragePeopleInSystem,
                                       double globalAverageFreeCashiers,
                                       double globalAverageFreeTechnicians,
-                                      double globalAveragePeopleWaitingForTakeOver)
+                                      double globalAveragePeopleWaitingForTakeOver,
+                                      double globalAveragePaymentWaiting,
+                                      double globalAveragePaymentQueue,
+                                      double globalAverageControlQueue,
+                                      double globalAverageControlWaiting,
+                                      double globalAverageEmptySpots)
         {
             NumberOfReplication = numberOfReplication;
             GlobalAverage = globalAverage;
@@ -354,6 +483,11 @@ namespace SimulationAppV2.Simulation
             GlobalAverageFreeCashiers = globalAverageFreeCashiers;
             GlobalAverageFreeTechnicians = globalAverageFreeTechnicians;
             GlobalAveragePeopleWaitingForTakeOver = globalAveragePeopleWaitingForTakeOver;
+            GlobalAveragePaymentWaiting = globalAveragePaymentWaiting;
+            GlobalAveragePaymentQueue = globalAveragePaymentQueue;
+            GlobalAverageControlQueue = globalAverageControlQueue;
+            GlobalAverageControlWaiting = globalAverageControlWaiting;
+            GlobalAverageEmptySpots = globalAverageEmptySpots;
         }
     }
 

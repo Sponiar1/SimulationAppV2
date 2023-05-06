@@ -26,6 +26,7 @@ namespace SimulationAppV2
             SimNewspaper simPaper = new SimNewspaper();
             //simPaper.BeforeSimulation();
             simPaper.MaxTime = 10000;
+            simPaper.Turbo = true;
             simPaper.Simulate(1,cancellationTokenSource.Token);
             //simPaper.Replication();
             label1.Text = simPaper.getStats().ToString();

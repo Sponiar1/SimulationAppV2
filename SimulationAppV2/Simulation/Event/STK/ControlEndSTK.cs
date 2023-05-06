@@ -18,9 +18,11 @@ namespace SimulationAppV2.Simulation.Event.STK
         {
             if(myCore.ControlWaiting.Count() > 0)
             {
+                myCore.AverageControlQueue.Add(myCore.ControlWaiting.Count(), Time);
                 ControlStartSTK controlStartSTK = new ControlStartSTK(myCore, myCore.ControlWaiting.Dequeue(), technicianSTK);
                 controlStartSTK.Time = myCore.CurrentTime;
                 myCore.addEvent(controlStartSTK);
+                myCore.AverageFreeSpots.Add(myCore.AvailableSpots, Time);
                 myCore.AvailableSpots++;
                 technicianSTK.ControlledCar = customer.Car;
             }
@@ -31,6 +33,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 technicianSTK.TechnicianBreak();
             }
 
+            customer.WaitingStartAt = Time;
             if(myCore.PaymentQueue.Count() == 0 && myCore.AvailableCashiers.Count() > 0)
             {
                 myCore.AverageFreeCashier.Add(myCore.AvailableCashiers.Count(), myCore.CurrentTime);
@@ -40,6 +43,7 @@ namespace SimulationAppV2.Simulation.Event.STK
             }
             else
             {
+                myCore.AveragePaymentQueue.Add(myCore.PaymentQueue.Count(), myCore.CurrentTime);
                 customer.Status = Status.WaitingPaying;
                 myCore.PaymentQueue.Enqueue(customer);
             }

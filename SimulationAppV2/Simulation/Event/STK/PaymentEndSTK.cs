@@ -17,6 +17,7 @@ namespace SimulationAppV2.Simulation.Event.STK
         {
             if(myCore.PaymentQueue.Count() > 0)
             {
+                myCore.AveragePaymentQueue.Add(myCore.PaymentQueue.Count(), Time);
                 PaymentStartSTK paymentStartSTK = new PaymentStartSTK(myCore, myCore.PaymentQueue.Dequeue(), cashier);
                 paymentStartSTK.Time = this.Time;
                 myCore.addEvent(paymentStartSTK);
@@ -27,6 +28,7 @@ namespace SimulationAppV2.Simulation.Event.STK
                 TakeOverStartSTK takeOverStartSTK = new TakeOverStartSTK(myCore,myCore.Customers.Dequeue(), cashier);
                 takeOverStartSTK.Time = this.Time;
                 myCore.addEvent(takeOverStartSTK);
+                myCore.AverageFreeSpots.Add(myCore.AvailableSpots, Time);
                 myCore.AvailableSpots--;
             }
             else
