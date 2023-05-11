@@ -12,4 +12,10 @@
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.61" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ABACore">
+      <HintPath>..\..\..\AgentNewspaperStand\AgentNewspaperStand\ABACore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

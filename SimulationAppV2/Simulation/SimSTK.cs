@@ -9,6 +9,7 @@ using SimulationAppV2.Simulation.SimObject.STK;
 using SimulationAppV2.Statistics;
 using System.Collections;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using OSPStat;
 
 namespace SimulationAppV2.Simulation
 {
@@ -83,6 +84,7 @@ namespace SimulationAppV2.Simulation
         public Average GlobalAverageFreeSpots { get; set; }
         public Average AverageControlWaiting { get; set; }
         public Average GlobalAverageControlWaiting { get; set; }
+
         #endregion
 
         public STKDetails STKDetails { get; set; }
@@ -181,10 +183,12 @@ namespace SimulationAppV2.Simulation
             }
             #endregion
 
+
         }
 
         public override void AfterReplication()
         {
+            CurrentTime = STKDetails.Closing;
             #region Statistics of people left in system
             /*
             foreach (var customer in CustomersInSystem)
@@ -212,7 +216,6 @@ namespace SimulationAppV2.Simulation
             AverageControlQueue.Add(controlWaiting.Count(), CurrentTime);
             AverageFreeSpots.Add(AvailableSpots, CurrentTime);
             #endregion
-
             #region Global statistics
             if (!base.CancellationToken.IsCancellationRequested)
             {
@@ -242,6 +245,7 @@ namespace SimulationAppV2.Simulation
 
         public override void AfterSimulation()
         {
+            double myStat = GlobalAveragePeopleInSystem.getActualAverage();
             AfterSimulationDetails?.Invoke(this, new AfterSimulationDetailsEventArgs(CIAverageTimeInSystem, CIAverageNumberOfCustomers));
             string nameOfFile = NumberOfCashier + "-" + NumberOfTechnicians + "-" + DateTime.Now.ToString("MM-dd-yyyy_HH-mm-ss");
             string filePath = Path.Combine(Application.StartupPath, nameOfFile);
