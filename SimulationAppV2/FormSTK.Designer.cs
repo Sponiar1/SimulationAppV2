@@ -68,7 +68,8 @@
             labelGlobalAverageFreeTechnicians = new Label();
             button3 = new Button();
             groupBox1 = new GroupBox();
-            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             labelGlobalAveragePeopleWaitingForTakeOver = new Label();
@@ -77,8 +78,6 @@
             labelTech = new Label();
             labelNumberOfReplications = new Label();
             label1 = new Label();
-            label4 = new Label();
-            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -471,7 +470,6 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
@@ -494,15 +492,25 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Globálne štatistiky";
             // 
-            // label6
+            // label5
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(6, 115);
-            label6.Name = "label6";
-            label6.Size = new Size(50, 20);
-            label6.TabIndex = 531;
-            label6.Text = "label6";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(6, 85);
+            label5.Name = "label5";
+            label5.Size = new Size(251, 20);
+            label5.TabIndex = 530;
+            label5.Text = "Priemerná dĺžka čakania na kontrolu:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(6, 111);
+            label4.Name = "label4";
+            label4.Size = new Size(231, 20);
+            label4.TabIndex = 529;
+            label4.Text = "Priemerná dĺžka radu na kontrolu:";
             // 
             // label3
             // 
@@ -510,9 +518,9 @@
             label3.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label3.Location = new Point(6, 165);
             label3.Name = "label3";
-            label3.Size = new Size(50, 20);
+            label3.Size = new Size(250, 20);
             label3.TabIndex = 524;
-            label3.Text = "label3";
+            label3.Text = "Priemerná dĺžka čakania na platenie:";
             // 
             // label2
             // 
@@ -520,9 +528,9 @@
             label2.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(6, 137);
             label2.Name = "label2";
-            label2.Size = new Size(50, 20);
+            label2.Size = new Size(230, 20);
             label2.TabIndex = 523;
-            label2.Text = "label2";
+            label2.Text = "Priemerná dĺžka radu na platenie:";
             // 
             // labelGlobalAveragePeopleWaitingForTakeOver
             // 
@@ -578,26 +586,6 @@
             label1.Size = new Size(72, 15);
             label1.TabIndex = 528;
             label1.Text = "+ Rýchlosť -";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(6, 95);
-            label4.Name = "label4";
-            label4.Size = new Size(50, 20);
-            label4.TabIndex = 529;
-            label4.Text = "label4";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(6, 75);
-            label5.Name = "label5";
-            label5.Size = new Size(50, 20);
-            label5.TabIndex = 530;
-            label5.Text = "label5";
             // 
             // FormSTK
             // 
@@ -704,7 +692,6 @@
         private Label label1;
         private Label label3;
         private Label label2;
-        private Label label6;
         private Label label4;
         private Label label5;
     }

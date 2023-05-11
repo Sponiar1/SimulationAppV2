@@ -90,11 +90,11 @@ namespace SimulationAppV2
             globalAveragePeopleWaitingForTakeOver = "Priemerná veľkosť radu na prevzatie: " + new string(' ', 55) + e.GlobalAveragePeopleWaitingForTakeOver;
 
             this.Invoke(new Action(() => RefreshGlobal()));
-            this.Invoke(new Action(() => label2.Text = "Priemerná dĺžka radu na platenie: " + e.GlobalAveragePaymentQueue));
-            this.Invoke(new Action(() => label3.Text = "Priemerná dĺžka čakania na platenie: " + e.GlobalAveragePaymentWaiting));
-            this.Invoke(new Action(() => label4.Text = "Priemerná dĺžka radu na kontrolu: " + e.GlobalAverageControlQueue));
-            this.Invoke(new Action(() => label5.Text = "Priemerná dĺžka čakania na kontrolu: " + e.GlobalAverageControlWaiting));
-            this.Invoke(new Action(() => label6.Text = "Priemerná obsadenie parkoviska: " + e.GlobalAverageEmptySpots));
+            this.Invoke(new Action(() => label2.Text = "Priemerná dĺžka radu na platenie: " + new string(' ',60) + e.GlobalAveragePaymentQueue));
+            this.Invoke(new Action(() => label3.Text = "Priemerná dĺžka čakania na platenie: " + new string(' ', 55) + e.GlobalAveragePaymentWaiting));
+            this.Invoke(new Action(() => label4.Text = "Priemerná dĺžka radu na kontrolu: " + new string(' ', 60) + e.GlobalAverageControlQueue));
+            this.Invoke(new Action(() => label5.Text = "Priemerná dĺžka čakania na kontrolu: " + new string(' ', 55) + e.GlobalAverageControlWaiting));
+            //this.Invoke(new Action(() => label6.Text = "Priemerná obsadenie parkoviska: " + e.GlobalAverageEmptySpots));
         }
 
         public void RefreshGlobal()
